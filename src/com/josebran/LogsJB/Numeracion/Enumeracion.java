@@ -1,0 +1,29 @@
+package com.josebran.LogsJB.Numeracion;
+
+public enum Enumeracion {
+    /**
+     * DEBUG , REALIZA LA DEPURACION DE LA APLICACION.
+     */
+    DEBUG,
+    /**
+     * INFO, BRINDA INFORMACION DEL PROGESO Y ESTADO DE LA APLICACION.
+     */
+    INFO,
+    /**
+     * WARNING. BRINDA  UNA ADVERTENCIA DE UN EVENTO INESPERADO     DE LA APLICACION
+     */
+    WARNING,
+    /**
+     * ERROR, NOTIFICA UN  ERROR GRAVE QUE DEBE VERIFICARSE.
+     */
+    ERROR,
+    /**
+     * FATAL, NOTIFICA UN FUNCIONAMIENTO ERRONEO EN LA APLICACION.
+     */
+    FATAL,
+    /**
+     * TRACE, NOTIFICA O MUESTRA UN DETALLE MAYOR QUE DEBUG.
+     */
+    TRACE
+
+}

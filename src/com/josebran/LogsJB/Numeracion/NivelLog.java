@@ -1,6 +1,6 @@
 package com.josebran.LogsJB.Numeracion;
 
-public enum Enumeracion {
+public enum NivelLog {
     /**
      * DEBUG , REALIZA LA DEPURACION DE LA APLICACION.
      */

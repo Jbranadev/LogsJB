@@ -10,13 +10,13 @@ public class pruebas {
 
     public static void main(String[] args)
         {
-            executor(NivelLog.INFO, "Ruta donde se esta escribiendo el log: "+getRuta());
-            executor(NivelLog.DEBUG, "Primer comentario grado Debug");
-            executor(NivelLog.ERROR, "Primer comentario grado Error");
-            executor(NivelLog.FATAL, "Primer comentario grado Fatal");
-            executor(NivelLog.INFO, "Primer comentario grado Info");
-            executor(NivelLog.TRACE, "Primer comentario grado Trace");
-            executor(NivelLog.WARNING, "Primer comentario grado Warning");
+            executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
+            debug( "Primer comentario grado Debug");
+            error( "Primer comentario grado Error");
+            fatal( "Primer comentario grado Fatal");
+            info( "Primer comentario grado Info");
+            trace( "Primer comentario grado Trace");
+            warning( "Primer comentario grado Warning");
 
 
 

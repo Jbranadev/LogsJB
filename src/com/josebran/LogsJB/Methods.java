@@ -24,6 +24,7 @@ public class Methods {
 
     private static String clase;
 
+
     private static String metodo;
 
 

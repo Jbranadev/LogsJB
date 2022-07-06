@@ -10,6 +10,7 @@ public class pruebas {
 
     public static void main(String[] args)
         {
+            //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
             executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
             debug( "Primer comentario grado Debug");
             error( "Primer comentario grado Error");
@@ -17,6 +18,7 @@ public class pruebas {
             info( "Primer comentario grado Info");
             trace( "Primer comentario grado Trace");
             warning( "Primer comentario grado Warning");
+            debug("Jbran");
 
 
 

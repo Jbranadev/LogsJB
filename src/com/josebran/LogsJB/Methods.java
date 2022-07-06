@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-class Methods {
+public class Methods {
     //Obtengo el Usuario de Windows
     private static String usuario=System.getProperty("user.name");
 
@@ -92,7 +92,7 @@ class Methods {
      * imprime en consola el texto que sera agregado al Log
      * @param Texto Texto que deseamos que almacene en el Log
      */
-    public static void writeLog(NivelLog nivelLog, String Texto){
+    public static synchronized void writeLog(NivelLog nivelLog, String Texto){
         try{
             String tab = "\u0009";
             //Aumenta la Cantidad de Veces que se a escrito el Log

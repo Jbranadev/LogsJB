@@ -1,19 +1,18 @@
-package com.josebran.LogsJB;
+package com.josebran.LogsJB.Executores;
 
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
-import static com.josebran.LogsJB.Methods.*;
+import static com.josebran.LogsJB.Methods.writeLog;
 
-public class Execute extends Thread{
+class ExecutorTxt extends Thread{
+
+
     private String mensaje;
     private NivelLog nivellog;
 
 
-
     public void run(){
-        //Ejecuta las acciones asociadas a los logs en paralelo
-
-        //Primero la escritura en el archivo Log
+        //Ejecuta la escritura en el archivo Log
         writeLog(getNivellog(), getMensaje());
 
     }
@@ -33,6 +32,5 @@ public class Execute extends Thread{
     public void setNivellog(NivelLog nivellog) {
         this.nivellog = nivellog;
     }
-
 
 }

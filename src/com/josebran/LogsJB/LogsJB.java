@@ -1,12 +1,11 @@
 package com.josebran.LogsJB;
 
+import com.josebran.LogsJB.Executores.Execute;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
 import java.lang.reflect.Field;
 
 public  class LogsJB extends Methods{
-
-
 
     protected static void executor(NivelLog nivelLog, String Texto){
         try{
@@ -21,6 +20,24 @@ public  class LogsJB extends Methods{
                 clase = elements[2].getClassName();
                 metodo = elements[2].getMethodName();
             }
+            Methods.setClase(clase);
+            Methods.setMetodo(metodo);
+            Execute writer= new Execute();
+            writer.setMensaje(Texto);
+            writer.setNivellog(nivelLog);
+            writer.start();
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al Executor encargado de llamar al proceso asincrono " +nivelLog.toString()+": "+e.getMessage());
+        }
+
+
+    }
+
+
+    protected static void executor(NivelLog nivelLog, String Texto, String clase, String metodo){
+        try{
+            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
+            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
             Methods.setClase(clase);
             Methods.setMetodo(metodo);
             Execute writer= new Execute();
@@ -64,10 +81,15 @@ public  class LogsJB extends Methods{
         return Methods.getRuta();
     }
 
-    public static void setRuta(String Ruta) throws NoSuchFieldException, IllegalAccessException {
-        Field field = Methods.class.getDeclaredField("ruta");
-        field.setAccessible(true);
-        field.set(null, Ruta);
+    public static void setRuta(String Ruta) {
+        try{
+            Field field = Methods.class.getDeclaredField("ruta");
+            field.setAccessible(true);
+            field.set(null, Ruta);
+
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
+        }
 
     }
 }

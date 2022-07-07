@@ -2,9 +2,6 @@ package com.josebran.LogsJB.Executores;
 
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
-import static com.josebran.LogsJB.Executores.ExecutorTxt.*;
-import static com.josebran.LogsJB.Methods.*;
-
 public class Execute extends Thread{
 
 

@@ -3,10 +3,54 @@ package com.josebran.LogsJB;
 import com.josebran.LogsJB.Executores.Execute;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
+import java.io.File;
 import java.lang.reflect.Field;
 
 public  class LogsJB extends Methods{
 
+    public static void main(String[] args) throws InterruptedException {
+        //Rutas de archivos
+        File fichero = new File(getRuta());
+        File directorio = new File(fichero.getParent());
+        File[] lista = directorio.listFiles();
+        int cuenta= 0;
+        while(cuenta<3){
+            //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
+            executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
+            debug( "Primer comentario grado Debug");
+            error( "Primer comentario grado Error");
+            fatal( "Primer comentario grado Fatal");
+            info( "Primer comentario grado Info");
+            trace( "Primer comentario grado Trace");
+            warning( "Primer comentario grado Warning");
+            debug("Jbran");
+            Thread.sleep(750);
+            lista = directorio.listFiles();
+            cuenta= lista.length;
+        }
+
+        /*LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
+        executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
+        debug( "Primer comentario grado Debug");
+        error( "Primer comentario grado Error");
+        fatal( "Primer comentario grado Fatal");
+        info( "Primer comentario grado Info");
+        trace( "Primer comentario grado Trace");
+        warning( "Primer comentario grado Warning");
+        debug("Jbran");
+         */
+
+
+    }
+
+    /**/
+
+    /***
+     * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
+     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal
+     * @param nivelLog NivelLog del mensaje que queremos almacenar en el Log.
+     * @param Texto Texto que se desea escribir en el Log.
+     */
     protected static void executor(NivelLog nivelLog, String Texto){
         try{
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
@@ -33,7 +77,14 @@ public  class LogsJB extends Methods{
 
     }
 
-
+    /***
+     * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
+     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal
+     * @param nivelLog NivelLog del mensaje que queremos almacenar en el Log.
+     * @param Texto Texto que se desea escribir en el Log.
+     * @param clase Clase a la que pertenece el metodo desde el que se desea escribir el Log.
+     * @param metodo Metodo desde el que se llama la escritura del Log.
+     */
     protected static void executor(NivelLog nivelLog, String Texto, String clase, String metodo){
         try{
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
@@ -55,32 +106,66 @@ public  class LogsJB extends Methods{
     }
 
 
+    /***
+     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Informacion.
+     * @param Texto Texto que se desea escribir en el Log.
+     */
     public static void info(String Texto){
         executor(NivelLog.INFO, Texto);
     }
 
+    /***
+     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Debug.
+     * @param Texto Texto que se desea escribir en el Log.
+     */
     public static void debug(String Texto){
         executor(NivelLog.DEBUG, Texto);
     }
-
+    /***
+     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Trace, la cual es un seguimiento mayor a Debug.
+     * @param Texto Texto que se desea escribir en el Log.
+     */
     public static void trace(String Texto){
         executor(NivelLog.TRACE, Texto);
     }
+
+    /***
+     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Advertencia.
+     * @param Texto Texto que se desea escribir en el Log.
+     */
     public static void warning(String Texto){
         executor(NivelLog.WARNING, Texto);
     }
+
+    /***
+     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria Fatal lo cual indica un error del cual no es posible recuperarse.
+     * @param Texto Texto que se desea escribir en el Log.
+     */
     public static void fatal(String Texto){
         executor(NivelLog.FATAL, Texto);
     }
+
+    /***
+     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Error, lo cual indica que capturo un error.
+     * @param Texto Texto que se desea escribir en el Log.
+     */
     public static void error(String Texto){
         executor(NivelLog.ERROR, Texto);
     }
 
 
+    /***
+     * Obtiene la ruta donde se estara escribiendo el Log.
+     * @return Retorna un String con la ruta del archivo .Txt donde se estara escribiendo el Log.
+     */
     public static String getRuta() {
         return Methods.getRuta();
     }
 
+    /**
+     * Setea la ruta en la cual se desea que escriba el Log.
+     * @param Ruta Ruta del archivo .Txt donde se desea escribir el Log.
+     */
     public static void setRuta(String Ruta) {
         try{
             Field field = Methods.class.getDeclaredField("ruta");

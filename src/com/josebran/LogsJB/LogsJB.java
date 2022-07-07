@@ -1,3 +1,19 @@
+/***
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ *
+ * Con licencia de Apache License, Versión 2.0 (la "Licencia");
+ * no puede usar este archivo excepto de conformidad con la Licencia.
+ * Puede obtener una copia de la Licencia en
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * A menos que lo exija la ley aplicable o se acuerde por escrito, el software
+ * distribuido bajo la Licencia se distribuye "TAL CUAL",
+ * SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
+ * Consulte la Licencia para conocer el idioma específico que rige los permisos y
+ * limitaciones bajo la Licencia.
+ */
+
 package com.josebran.LogsJB;
 
 import com.josebran.LogsJB.Executores.Execute;
@@ -8,6 +24,7 @@ import java.lang.reflect.Field;
 
 public  class LogsJB extends Methods{
 
+    /*
     public static void main(String[] args) throws InterruptedException {
         //Rutas de archivos
         File fichero = new File(getRuta());
@@ -29,21 +46,10 @@ public  class LogsJB extends Methods{
             cuenta= lista.length;
         }
 
-        /*LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
-        executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-        debug( "Primer comentario grado Debug");
-        error( "Primer comentario grado Error");
-        fatal( "Primer comentario grado Fatal");
-        info( "Primer comentario grado Info");
-        trace( "Primer comentario grado Trace");
-        warning( "Primer comentario grado Warning");
-        debug("Jbran");
-         */
-
 
     }
 
-    /**/
+    */
 
     /***
      * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue

@@ -1,3 +1,19 @@
+/***
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ *
+ * Con licencia de Apache License, Versión 2.0 (la "Licencia");
+ * no puede usar este archivo excepto de conformidad con la Licencia.
+ * Puede obtener una copia de la Licencia en
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * A menos que lo exija la ley aplicable o se acuerde por escrito, el software
+ * distribuido bajo la Licencia se distribuye "TAL CUAL",
+ * SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
+ * Consulte la Licencia para conocer el idioma específico que rige los permisos y
+ * limitaciones bajo la Licencia.
+ */
+
 package com.josebran.LogsJB;
 
 import com.josebran.LogsJB.Numeracion.NivelLog;
@@ -92,6 +108,10 @@ public class Methods {
     }
 
 
+    /***
+     * Verifica el tamaño del fichero de log actual, cuando este alcance los 5MB le asignara el nombre
+     * LOG_dd-MM-YYYY_HH-MM-SSS.txt donde la fecha y hora que se le coloca, corresponde a la fecha y hora de creación del archivo
+     */
     private static synchronized void verificarSizeFichero(){
         try {
             File logactual = new File(getRuta());
@@ -165,6 +185,7 @@ public class Methods {
             }
             
             /////Esta seccion se encarga de Crear y escribir en el Log/////
+            //Verifica si el tamaño del fichero es menor a 5MB
             verificarSizeFichero();
 
             /*Si es un nuevo Test se ejecuta el siguiente codigo, tomando en cuenta que sea el primer

@@ -16,6 +16,7 @@
 
 package com.josebran.LogsJB;
 
+
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
 import java.io.BufferedWriter;

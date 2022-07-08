@@ -16,40 +16,31 @@
 
 package com.josebran.LogsJB;
 
-import com.josebran.LogsJB.Executores.Execute;
+
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
-import java.io.File;
 import java.lang.reflect.Field;
+import com.josebran.LogsJB.Executores.Execute;
 
 public  class LogsJB extends Methods{
 
-    /*
+/*
     public static void main(String[] args) throws InterruptedException {
-        //Rutas de archivos
-        File fichero = new File(getRuta());
-        File directorio = new File(fichero.getParent());
-        File[] lista = directorio.listFiles();
-        int cuenta= 0;
-        while(cuenta<3){
-            //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
-            executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-            debug( "Primer comentario grado Debug");
-            error( "Primer comentario grado Error");
-            fatal( "Primer comentario grado Fatal");
-            info( "Primer comentario grado Info");
-            trace( "Primer comentario grado Trace");
-            warning( "Primer comentario grado Warning");
-            debug("Jbran");
-            Thread.sleep(750);
-            lista = directorio.listFiles();
-            cuenta= lista.length;
-        }
+
+        //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
+        executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
+        debug( "Primer comentario grado Debug");
+        error( "Primer comentario grado Error");
+        fatal( "Primer comentario grado Fatal");
+        info( "Primer comentario grado Info");
+        trace( "Primer comentario grado Trace");
+        warning( "Primer comentario grado Warning");
+        debug("Jbran");
 
 
     }
 
-    */
+ */
 
     /***
      * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue

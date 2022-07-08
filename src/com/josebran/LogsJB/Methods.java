@@ -35,6 +35,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+
 public class Methods {
     //Obtengo el Usuario de Windows
     private static String usuario=System.getProperty("user.name");

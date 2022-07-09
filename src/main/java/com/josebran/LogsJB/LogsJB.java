@@ -17,30 +17,96 @@
 package com.josebran.LogsJB;
 
 
+import com.josebran.LogsJB.Executores.Execute;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
+import java.io.File;
 import java.lang.reflect.Field;
-import com.josebran.LogsJB.Executores.Execute;
+
+import static com.josebran.LogsJB.Executores.Execute.getInstance;
 
 public  class LogsJB extends Methods{
 
-/*
-    public static void main(String[] args) throws InterruptedException {
+/**/
+    public static void main(String[] args) {
+        try{
+            int archivos=0;
+            File archivo = new File(getRuta());
+            while(archivos<3){
+                try{
+                    //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
+                    executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
 
-        //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
-        executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-        debug( "Primer comentario grado Debug");
-        error( "Primer comentario grado Error");
-        fatal( "Primer comentario grado Fatal");
-        info( "Primer comentario grado Info");
-        trace( "Primer comentario grado Trace");
-        warning( "Primer comentario grado Warning");
-        debug("Jbran");
+                    debug( "Primer comentario grado Debug");
+
+                    error( "Primer comentario grado Error");
+
+                    fatal( "Primer comentario grado Fatal");
+
+                    info( "Primer comentario grado Info");
+
+                    trace( "Primer comentario grado Trace");
+
+                    warning( "Primer comentario grado Warning");
+
+                    debug("Jbran");
+
+                    //Thread.sleep(100);
+                    File carpeta = new File(archivo.getParent());
+                    File[] listado;
+                    listado = carpeta.listFiles();
+                    archivos=listado.length;
+
+                    //System.out.println("Cantida de archivos: "+archivos);
+                    if(archivos>1){
+                        return;
+                    }
+
+                    //archivos=new File(getRuta()).list().length;
+                    //System.out.println("Cantida de archivos: "+archivos);
+                }catch (Exception e){
+                    System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+                }
+
+
+            }
+            System.out.println("Salio del While: "+archivos);
+        }catch (Exception e){
+            System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+        }
 
 
     }
 
- */
+
+
+/*
+    public static void main(String[] args) {
+    try{
+
+            ///LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
+        executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
+
+        debug( "Primer comentario grado Debug");
+
+        error( "Primer comentario grado Error");
+
+        fatal( "Primer comentario grado Fatal");
+
+        info( "Primer comentario grado Info");
+
+        trace( "Primer comentario grado Trace");
+
+        warning( "Primer comentario grado Warning");
+
+        debug("Jbran");
+        //System.exit(100);
+
+    }catch (Exception e){
+        System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+    }
+}
+*/
 
     /***
      * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
@@ -63,10 +129,22 @@ public  class LogsJB extends Methods{
             }
             Methods.setClase(clase);
             Methods.setMetodo(metodo);
-            Execute writer= new Execute();
-            writer.setMensaje(Texto);
-            writer.setNivellog(nivelLog);
-            writer.start();
+            /*
+            MensajeWrite mensaje=new MensajeWrite();
+            mensaje.setTexto(Texto);
+            mensaje.setNivelLog(nivelLog);
+            getListadoExecutor().addDato(mensaje);
+            */
+            getInstance().setNivelLog(nivelLog);
+            getInstance().setTexto(Texto);
+
+            //getMensajes().add(mensaje);
+            if(getInstance().getState()!= Thread.State.RUNNABLE){
+                Execute writer= getInstance();
+            }else{
+                //System.out.println("El hilo execute esta corriendo");
+            }
+
         }catch (Exception e){
             System.out.println("Excepcion capturada al Executor encargado de llamar al proceso asincrono " +nivelLog.toString()+": "+e.getMessage());
         }
@@ -81,7 +159,7 @@ public  class LogsJB extends Methods{
      * @param Texto Texto que se desea escribir en el Log.
      * @param clase Clase a la que pertenece el metodo desde el que se desea escribir el Log.
      * @param metodo Metodo desde el que se llama la escritura del Log.
-     */
+     *//*
     protected static void executor(NivelLog nivelLog, String Texto, String clase, String metodo){
         try{
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
@@ -102,7 +180,7 @@ public  class LogsJB extends Methods{
 
     }
 
-
+*/
     /***
      * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Informacion.
      * @param Texto Texto que se desea escribir en el Log.

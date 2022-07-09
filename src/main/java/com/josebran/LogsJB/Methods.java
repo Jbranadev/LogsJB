@@ -118,17 +118,19 @@ public class Methods {
     private static synchronized void verificarSizeFichero(){
         try {
             File logactual = new File(getRuta());
-            //Devuelve el tamaño del fichero en Kb
-            long sizeFichero=(logactual.length())/1024;
+            //Devuelve el tamaño del fichero en Mb
+            //long sizeFichero=((logactual.length())/1024)/1024;
+            long sizeFichero=((logactual.length())/1024);
             //System.out.println("Tamaño del archivo en Kb: " +sizeFichero);
 
-            //5120Kb es la cantidad maxima de quilobytes de un archivo TXT
-            if(sizeFichero>5000){//Dejamos 120Kb de margen
+            //4GB es la cantidad maxima de GIGAS de un archivo TXT 4096MB
+            if(sizeFichero>5000){//Dejamos 1GB de margen
                 BasicFileAttributes attributes = null;
                 String fechaformateada="";
                 int numeroaleatorio=0;
                 try { attributes = Files.readAttributes(logactual.toPath(), BasicFileAttributes.class);
-                    FileTime time = attributes.creationTime();
+                    //FileTime time = attributes.creationTime();
+                    FileTime time = attributes.lastModifiedTime();
 
                     String pattern = "dd-MM-yyyy HH:mm:ss SS";
                     numeroaleatorio = (int) Math.floor(Math.random()*(9-0+1)+0);
@@ -149,6 +151,8 @@ public class Methods {
                 if(logactual.renameTo(newfile)){
                     System.out.println("Archivo renombrado: " +newrute);
                     logactual.delete();
+                    //Thread.sleep(5000);
+                    logactual.createNewFile();
                 }else{
                     System.out.println(logactual.toPath()+" No se pudo renombrar el archivo: " +newrute);
                 }
@@ -164,7 +168,7 @@ public class Methods {
      * imprime en consola el texto que sera agregado al Log
      * @param Texto Texto que deseamos que almacene en el Log
      */
-    public static synchronized void writeLog(NivelLog nivelLog, String Texto){
+    public static void writeLog(NivelLog nivelLog, String Texto){
         try{
             String tab = "\u0009";
             //Aumenta la Cantidad de Veces que se a escrito el Log

@@ -23,31 +23,50 @@ import static com.josebran.LogsJB.Methods.writeLog;
 
 class ExecutorTxt extends Thread{
 
+    private static ListaMensajesTxt listado=new ListaMensajesTxt();
 
-    private String mensaje;
-    private NivelLog nivellog;
+
+    private static final ExecutorTxt instance = new ExecutorTxt();
+
+    private ExecutorTxt() {
+        //this.setPriority(Thread.MAX_PRIORITY);
+        this.start();
+    }
+
+    public static ExecutorTxt getInstance() {
+        return instance;
+    }
+
+
+    public static ListaMensajesTxt getListado() {
+        return listado;
+    }
+
+    public static void setListado(ListaMensajesTxt listado) {
+        ExecutorTxt.listado = listado;
+    }
 
 
     public void run(){
-        //Ejecuta la escritura en el archivo Log
-        writeLog(getNivellog(), getMensaje());
 
+        while(true){
+            //Ejecuta la escritura en el archivo Log
+            //System.out.println("Cantidad de mensajes ExecutorTxt: "+getListado().getSize());
+            int tareas=getListado().getSize();
+            if(tareas==0){
+                this.stop();
+            }
+            MensajeWrite Mensaje= null;
+            try {
+                Mensaje = getListado().getDato();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            String mensaje=Mensaje.getTexto();
+            NivelLog nivellog=Mensaje.getNivelLog();
+            writeLog(nivellog, mensaje);
+
+
+        }
     }
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-
-    public NivelLog getNivellog() {
-        return nivellog;
-    }
-
-    public void setNivellog(NivelLog nivellog) {
-        this.nivellog = nivellog;
-    }
-
 }

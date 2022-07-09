@@ -19,46 +19,106 @@ package com.josebran.LogsJB.Executores;
 
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
+
+
 public class Execute extends Thread{
 
 
-    private String mensaje;
-    private NivelLog nivellog;
+    private  String Texto;
+    private  NivelLog nivelLog;
 
 
-    private void writeTxtLog(NivelLog nivelLog, String Texto){
-        ExecutorTxt writer=new ExecutorTxt();
-        writer.setMensaje(Texto);
-        writer.setNivellog(nivelLog);
-        writer.start();
-        while(writer.getState()!= Thread.State.TERMINATED){
+    private static final Execute instance = new Execute();
+
+    public static ListaMensajesTxt getListaTxt(){
+        return ExecutorTxt.getListado();
+    }
+
+    private Execute() {
+        //this.setPriority(Thread.MIN_PRIORITY);
+        this.start();
+    }
+
+    public static Execute getInstance() {
+        return instance;
+    }
+
+
+    public static int getSizeExecutorTXT(){
+        return ExecutorTxt.getListado().getSize();
+    }
+
+
+
+    public void run(){
+        //Ejecuta la escritura en el archivo Log
+        String temporal="";
+        String temporal2="";
+        NivelLog niveltemporal;
+        while(true){
+            temporal2=getTexto();
+            niveltemporal=getNivelLog();
+            //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
+
+
+            //System.out.println("NivelLog: "+niveltemporal);
+            //System.out.println("Texto: "+temporal2);
+            //System.out.println("Temporal: "+temporal);
+            if(!temporal.equals(temporal2)){
+                //System.out.println("Texto es diferente: "+temporal2);
+                MensajeWrite Mensaje= new MensajeWrite();
+                Mensaje.setNivelLog(niveltemporal);
+                Mensaje.setTexto(temporal2);
+                getListaTxt().addDato(Mensaje);
+            }else{
+                int tareas=getListaTxt().getSize();
+                if(tareas==0){
+                    this.stop();
+                }
+            }
+            temporal=temporal2;
+
 
         }
     }
 
-    public void run(){
-        //Ejecuta las acciones asociadas a los logs en paralelo
+    public synchronized String getTexto() {
+        notify();
+        return Texto;
+    }
 
-        //Primero la escritura en el archivo Log
-        writeTxtLog(getNivellog(), getMensaje());
+    public synchronized void setTexto(String texto) {
+        try{
+            /*
+            Field field = Execute.class.getDeclaredField("Texto");
+            field.setAccessible(true);
+            field.set(null, texto);*/
+            if(getInstance().getState()!= Thread.State.RUNNABLE){
+                 Execute ejecutor=Execute.getInstance();
+            }
+            this.Texto=texto;
+            wait();
+
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear el texto a escribir en el Log: " +Texto);
+        }
 
     }
 
-    public String getMensaje() {
-        return mensaje;
+    public  NivelLog getNivelLog() {
+        return nivelLog;
     }
 
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
+    public  void setNivelLog(NivelLog NnivelLog) {
+        try{/*
+            Field field = Execute.class.getDeclaredField("nivelLog");
+            field.setAccessible(true);
+            field.set(null, NnivelLog);*/
+            this.nivelLog= NnivelLog;
+
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear el nivel del log " +NnivelLog);
+        }
+        //this.nivelLog = nivelLog;
     }
-
-    public NivelLog getNivellog() {
-        return nivellog;
-    }
-
-    public void setNivellog(NivelLog nivellog) {
-        this.nivellog = nivellog;
-    }
-
-
 }

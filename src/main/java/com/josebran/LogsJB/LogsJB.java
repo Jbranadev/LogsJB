@@ -122,7 +122,7 @@ public  class LogsJB extends Methods{
         }
     }
 
-/**/
+/*
     public static void main(String[] args) {
         try{
             int archivos=0;
@@ -172,10 +172,10 @@ public  class LogsJB extends Methods{
 
 
     }
+*/
 
 
-
-/*
+/**/
     public static void main(String[] args) {
     try{
 
@@ -204,7 +204,7 @@ public  class LogsJB extends Methods{
     }
 }
 
-*/
+
     /***
      * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
      * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal

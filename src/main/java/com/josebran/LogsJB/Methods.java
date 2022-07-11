@@ -174,7 +174,7 @@ public class Methods {
      * imprime en consola el texto que sera agregado al Log
      * @param Texto Texto que deseamos que almacene en el Log
      */
-    public static void writeLog(NivelLog nivelLog, String Texto){
+    public synchronized static void writeLog(NivelLog nivelLog, String Texto){
         try{
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             String tab = "\u0009";
@@ -223,12 +223,12 @@ public class Methods {
             }else{
                 if(getLogtext()==1){
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
-                    //bw.write("*"+ "\n");
-                    //bw.write("*"+ "\n");
-                    //bw.write("*"+ "\n");
-                    //bw.write("*"+ "\n");
-                    //bw.write("*"+ "\n");
-                    bw.write("\n");
+                    bw.write("*"+ "\n");
+                    bw.write("*"+ "\n");
+                    bw.write("*"+ "\n");
+                    bw.write("*"+ "\n");
+                    bw.write("*"+ "\n");
+                    //bw.write("\n");
                     bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");                    bw.close();
                     //System.out.println("*"+ "\n");
                     //System.out.println("*"+ "\n");

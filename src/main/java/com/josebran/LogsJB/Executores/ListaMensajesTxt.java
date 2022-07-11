@@ -13,15 +13,17 @@ public class ListaMensajesTxt {
             ExecutorTxt ejecutor= ExecutorTxt.getInstance();
 
         }*/
+        //System.out.println("Agrega el msj a la lista: "+dato.getTexto()+" "+dato.getNivelLog());
         mensajes.add(dato);
-        notify();
+        //notify();
 
     }
 
     public synchronized MensajeWrite getDato()  {
         try{
             if (mensajes.size()==0){
-                this.wait();
+                return null;
+                //this.wait();
                 //if(!Execute.getInstance().getExecutor().isShutdown()){
                 //Execute.getInstance().getExecutor().shutdown();
                 //}
@@ -29,6 +31,7 @@ public class ListaMensajesTxt {
             }else{
                 MensajeWrite dato = mensajes.get(0);
                 mensajes.remove(0);
+                //System.out.println("Quita el msj a la lista: "+dato.getTexto()+" "+dato.getNivelLog());
                 return dato;
             }
         }catch (Exception e){

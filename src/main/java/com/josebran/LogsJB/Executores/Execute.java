@@ -82,6 +82,7 @@ public class Execute {
                 //NivelLog logtemporal=Execute.getInstance().getNivelLog();
                 MensajeWrite mensajetemp=null;
                 mensajetemp=getListado().getDato();
+                //System.out.println("Mensaje en Execute: "+mensajetemp.getTexto()+" "+mensajetemp.getNivelLog());
                 if(Objects.isNull(mensajetemp)){
                     band=false;
                     break;
@@ -97,6 +98,8 @@ public class Execute {
                 if(logtemporal.getGradeLog()>=nivel.getGradeLog()){
                     if(!temporal.equals(Mensaje)){
                         verificarSizeFichero();
+                        //System.out.println("NivelLog: "+logtemporal);
+                        //System.out.println("Texto: "+Mensaje);
                         writeLog(logtemporal, Mensaje);
                         //writeTXT(Mensaje, logtemporal);
                     }else{
@@ -105,6 +108,7 @@ public class Execute {
                     temporal=Mensaje;
 
                 }
+                //System.out.println("Cantidad de mensajes Por limpiar: "+getListado().getSize());
                 if(getListado().getSize()==0){
                     //getExecutorTxt().shutdown();
                     band=false;
@@ -114,9 +118,7 @@ public class Execute {
             return;
         };
 
-
         ExecutorService executorPrincipal = Executors.newFixedThreadPool(1);
-
         executorPrincipal.submit(EscritorPrincipal);
         executorPrincipal.shutdown();
         //getExecutorPrincipal().shutdown();
@@ -126,8 +128,8 @@ public class Execute {
 
     private void writeTXT( String Mensaje, NivelLog logtemporal){
         //System.out.println("El valor es igual o mayor al nivel de la aplicación: "+intniveltemporal);
-        //System.out.println("NivelLog: "+niveltemporal);
-        //System.out.println("Texto: "+temporal2);
+        System.out.println("NivelLog 2: "+logtemporal);
+        System.out.println("Texto 2: "+Mensaje);
         //System.out.println("Temporal: "+temporal);
 
             Runnable verificarTxt= ()->{

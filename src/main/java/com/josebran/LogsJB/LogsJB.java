@@ -17,15 +17,110 @@
 package com.josebran.LogsJB;
 
 
-import com.josebran.LogsJB.Executores.Execute;
+import com.josebran.LogsJB.Executores.MensajeWrite;
 import com.josebran.LogsJB.Numeracion.NivelLog;
+import com.josebran.LogsJB.Numeracion.SizeLog;
 
 import java.io.File;
 import java.lang.reflect.Field;
 
 import static com.josebran.LogsJB.Executores.Execute.getInstance;
+import static com.josebran.LogsJB.Executores.Execute.getListado;
 
 public  class LogsJB extends Methods{
+
+
+    /***
+     * Obtiene la ruta donde se estara escribiendo el Log.
+     * @return Retorna un String con la ruta del archivo .Txt donde se estara escribiendo el Log.
+     */
+    public static String getRuta() {
+        return Methods.ruta;
+    }
+
+    /**
+     * Setea la ruta en la cual se desea que escriba el Log.
+     * @param Ruta Ruta del archivo .Txt donde se desea escribir el Log.
+     */
+    public static void setRuta(String Ruta) {
+        try{
+            Field field = Methods.class.getDeclaredField("ruta");
+            field.setAccessible(true);
+            field.set(null, Ruta);
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
+        }
+    }
+
+
+    /***
+     * Obtiene el grado del log, sobre el cual se estara realizando el seguimiento de los mensajes que se
+     * escriben en las bitacoras de Log de la aplicación actual.
+     * Trace = 200,
+     * Debug = 400,
+     * Info = 500,
+     * Warning = 600,
+     * Error = 800,
+     * Fatal = 1000.
+     * @return Retorna un NivelLog el cual expresa el Nivel Log desde el cual se estara reportando al Log y sus
+     * superiores, El valor por defaul es Info.
+     */
+    public static NivelLog getGradeLog() {
+        return Methods.gradeLog;
+    }
+
+    /***
+     * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
+     * @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
+     *      * Trace = 200,
+     *      * Debug = 400,
+     *      * Info = 500,
+     *      * Warning = 600,
+     *      * Error = 800,
+     *      * Fatal = 1000.
+     * El valor por defaul es Info.
+     */
+    public static void setGradeLog(NivelLog GradeLog) {
+        try{
+            Field field = Methods.class.getDeclaredField("gradeLog");
+            field.setAccessible(true);
+            field.set(null, GradeLog);
+            //Methods.metodo = metodo;
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
+        }
+    }
+
+    /****
+     * Obtiene el tamaño maximo actual definido para el fichero de Log sobre el cual se estara escribiendo.
+     * @return Retorna un SizeLog que representa el tamaño configurado para el archivo log de la aplicación,
+     * El valor por defaul es Little_Little.
+     */
+    public static SizeLog getSizeLog() {
+        return Methods.sizeLog;
+    }
+
+    /***
+     * Setea el tamaño maximo para el archivo Log de la aplicación actual.
+     * @param SizeLog Tamaño maximo del archivo sobre el cual se estara escribiendo el Log.
+     *      * Little_Little = 125Mb,
+     *      * Little = 250Mb,
+     *      * Small_Medium = 500Mb,
+     *      * Medium = 1,000Mb,
+     *      * Small_Large = 2,000Mb,
+     *      * Large = 4,000Mb.
+     * El valor por defaul es Little_Little.
+     */
+    public static void setSizeLog(SizeLog SizeLog) {
+        try{
+            Field field = Methods.class.getDeclaredField("sizeLog");
+            field.setAccessible(true);
+            field.set(null, SizeLog);
+            //Methods.metodo = metodo;
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
+        }
+    }
 
 /**/
     public static void main(String[] args) {
@@ -86,28 +181,30 @@ public  class LogsJB extends Methods{
 
             ///LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
         executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-
+        //Thread.sleep(1);
         debug( "Primer comentario grado Debug");
-
+        //Thread.sleep(1);
         error( "Primer comentario grado Error");
-
+        //Thread.sleep(1);
         fatal( "Primer comentario grado Fatal");
-
+        //Thread.sleep(1);
         info( "Primer comentario grado Info");
-
+        //Thread.sleep(1);
         trace( "Primer comentario grado Trace");
-
+        //Thread.sleep(1);
         warning( "Primer comentario grado Warning");
-
+        //Thread.sleep(1);
         debug("Jbran");
+        //Thread.sleep(1);
         //System.exit(100);
+        return;
 
     }catch (Exception e){
         System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
     }
 }
-*/
 
+*/
     /***
      * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
      * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal
@@ -115,7 +212,7 @@ public  class LogsJB extends Methods{
      * @param Texto Texto que se desea escribir en el Log.
      */
     protected static void executor(NivelLog nivelLog, String Texto){
-        try{
+        //try{
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
             String clase = null;
@@ -129,25 +226,33 @@ public  class LogsJB extends Methods{
             }
             Methods.setClase(clase);
             Methods.setMetodo(metodo);
-            /*
+
             MensajeWrite mensaje=new MensajeWrite();
             mensaje.setTexto(Texto);
             mensaje.setNivelLog(nivelLog);
-            getListadoExecutor().addDato(mensaje);
-            */
-            getInstance().setNivelLog(nivelLog);
-            getInstance().setTexto(Texto);
+            //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
+            getListado().addDato(mensaje);
+            //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
+            getInstance().run();
+            //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
+            //getInstance().setNivelLog(nivelLog);
+            //getInstance().setTexto(Texto);
 
             //getMensajes().add(mensaje);
-            if(getInstance().getState()!= Thread.State.RUNNABLE){
-                Execute writer= getInstance();
-            }else{
+            //if(getInstance().getState()!= Thread.State.RUNNABLE){
+                //Execute writer= getInstance();
+                /*
+                if(Execute.getInstance().isAlive()){
+                    System.out.println("Despertara el Execute: "+Thread.currentThread().getName());
+                    Execute.getInstance().resume();
+                }*/
+            //}else{
                 //System.out.println("El hilo execute esta corriendo");
-            }
+           //}
 
-        }catch (Exception e){
-            System.out.println("Excepcion capturada al Executor encargado de llamar al proceso asincrono " +nivelLog.toString()+": "+e.getMessage());
-        }
+        //}catch (Exception e){
+         //   System.out.println("Excepcion capturada al Executor encargado de llamar al proceso asincrono " +nivelLog.toString()+": "+e.getMessage());
+        //}
 
 
     }
@@ -229,27 +334,5 @@ public  class LogsJB extends Methods{
     }
 
 
-    /***
-     * Obtiene la ruta donde se estara escribiendo el Log.
-     * @return Retorna un String con la ruta del archivo .Txt donde se estara escribiendo el Log.
-     */
-    public static String getRuta() {
-        return Methods.getRuta();
-    }
 
-    /**
-     * Setea la ruta en la cual se desea que escriba el Log.
-     * @param Ruta Ruta del archivo .Txt donde se desea escribir el Log.
-     */
-    public static void setRuta(String Ruta) {
-        try{
-            Field field = Methods.class.getDeclaredField("ruta");
-            field.setAccessible(true);
-            field.set(null, Ruta);
-
-        }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
-        }
-
-    }
 }

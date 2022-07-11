@@ -18,6 +18,7 @@ package com.josebran.LogsJB;
 
 
 import com.josebran.LogsJB.Numeracion.NivelLog;
+import com.josebran.LogsJB.Numeracion.SizeLog;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -35,6 +36,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.josebran.LogsJB.LogsJB.getRuta;
+import static com.josebran.LogsJB.LogsJB.getSizeLog;
 
 
 public class Methods {
@@ -43,12 +46,15 @@ public class Methods {
 
     private static int logtext =0;
 
-    private static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+    static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
 
-    private static String clase;
+    private static String clase="";
+    private static String metodo="";
 
 
-    private static String metodo;
+    static NivelLog gradeLog=NivelLog.TRACE;
+
+    static SizeLog sizeLog=SizeLog.Little_Little;
 
 
     /***
@@ -115,16 +121,16 @@ public class Methods {
      * Verifica el tamaño del fichero de log actual, cuando este alcance los 5MB le asignara el nombre
      * LOG_dd-MM-YYYY_HH-MM-SSS.txt donde la fecha y hora que se le coloca, corresponde a la fecha y hora de creación del archivo
      */
-    private static synchronized void verificarSizeFichero(){
+    public static synchronized void verificarSizeFichero(){
         try {
+            //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             File logactual = new File(getRuta());
             //Devuelve el tamaño del fichero en Mb
-            //long sizeFichero=((logactual.length())/1024)/1024;
-            long sizeFichero=((logactual.length())/1024);
+            long sizeFichero=((logactual.length())/1024)/1024;
+            //long sizeFichero=((logactual.length())/1024);
             //System.out.println("Tamaño del archivo en Kb: " +sizeFichero);
 
-            //4GB es la cantidad maxima de GIGAS de un archivo TXT 4096MB
-            if(sizeFichero>5000){//Dejamos 1GB de margen
+            if(sizeFichero>getSizeLog().getSizeLog()){
                 BasicFileAttributes attributes = null;
                 String fechaformateada="";
                 int numeroaleatorio=0;
@@ -170,6 +176,7 @@ public class Methods {
      */
     public static void writeLog(NivelLog nivelLog, String Texto){
         try{
+            //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             String tab = "\u0009";
             //Aumenta la Cantidad de Veces que se a escrito el Log
             setLogtext(getLogtext()+1);
@@ -192,8 +199,7 @@ public class Methods {
             }
             
             /////Esta seccion se encarga de Crear y escribir en el Log/////
-            //Verifica si el tamaño del fichero es menor a 5MB
-            verificarSizeFichero();
+            //verificarSizeFichero();
 
             /*Si es un nuevo Test se ejecuta el siguiente codigo, tomando en cuenta que sea el primer
              * TestCase del Test actual*/
@@ -201,12 +207,6 @@ public class Methods {
             //Si el fichero no Existe, lo creara y agregara el siguiente texto
             if(!fichero.exists()){
                 BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
-                System.out.println("*"+ "\n");
-                System.out.println("*"+ "\n");
-                System.out.println("*"+ "\n");
-                System.out.println("*"+ "\n");
-                System.out.println("*"+ "\n");
-                System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                 bw.write("*"+ "\n");
                 bw.write("*"+ "\n");
                 bw.write("*"+ "\n");
@@ -214,23 +214,29 @@ public class Methods {
                 bw.write("*"+ "\n");
                 bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                 bw.close();
+                System.out.println("*"+ "\n");
+                System.out.println("*"+ "\n");
+                System.out.println("*"+ "\n");
+                System.out.println("*"+ "\n");
+                System.out.println("*"+ "\n");
+                System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
             }else{
                 if(getLogtext()==1){
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
-                    System.out.println("*"+ "\n");
-                    System.out.println("*"+ "\n");
-                    System.out.println("*"+ "\n");
-                    System.out.println("*"+ "\n");
-                    System.out.println("*"+ "\n");
+                    //bw.write("*"+ "\n");
+                    //bw.write("*"+ "\n");
+                    //bw.write("*"+ "\n");
+                    //bw.write("*"+ "\n");
+                    //bw.write("*"+ "\n");
+                    bw.write("\n");
+                    bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");                    bw.close();
+                    //System.out.println("*"+ "\n");
+                    //System.out.println("*"+ "\n");
+                    //System.out.println("*"+ "\n");
+                    //System.out.println("*"+ "\n");
+                    //System.out.println("*"+ "\n");
                     System.out.println("\n");
                     System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
-                    bw.write("*"+ "\n");
-                    bw.write("*"+ "\n");
-                    bw.write("*"+ "\n");
-                    bw.write("*"+ "\n");
-                    bw.write("*"+ "\n");
-                    //bw.write("\n");
-                    bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");                    bw.close();
                 }else{
                     //Agrega en el fichero el Log
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
@@ -338,29 +344,7 @@ public class Methods {
 
 
 
-    /***
-     * Obtiene la ruta donde se estara escribiendo el Log.
-     * @return Retorna un String con la ruta del archivo .Txt donde se estara escribiendo el Log.
-     */
-    public static String getRuta() {
-        return ruta;
-    }
 
-    /**
-     * Setea la ruta en la cual se desea que escriba el Log.
-     * @param Ruta Ruta del archivo .Txt donde se desea escribir el Log.
-     */
-    public static void setRuta(String Ruta) {
-        try{
-            Field field = Methods.class.getDeclaredField("ruta");
-            field.setAccessible(true);
-            field.set(null, Ruta);
-            //Methods.ruta = Ruta;
-        }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
-        }
-
-    }
 
     /***
      * Obtiene el nombre de la clase que actualmente esta llamando al Log
@@ -408,4 +392,6 @@ public class Methods {
         }
 
     }
+
+
 }

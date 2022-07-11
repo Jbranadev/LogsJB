@@ -18,28 +18,57 @@ package com.josebran.LogsJB.Numeracion;
 
 public enum NivelLog {
     /**
-     * DEBUG , REALIZA LA DEPURACION DE LA APLICACION.
+     * TRACE, NOTIFICA O MUESTRA UN DETALLE MAYOR QUE DEBUG.
+     * El grado de este nivel de log es 200.
      */
-    DEBUG,
+    TRACE(200),
+
+    /**
+     * DEBUG , REALIZA LA DEPURACION DE LA APLICACION.
+     * El grado de este nivel de log es 400.
+     */
+    DEBUG(400),
     /**
      * INFO, BRINDA INFORMACION DEL PROGESO Y ESTADO DE LA APLICACION.
+     * El grado de este nivel de log es 500.
      */
-    INFO,
+    INFO(500),
     /**
      * WARNING. BRINDA  UNA ADVERTENCIA DE UN EVENTO INESPERADO DE LA APLICACION
+     * El grado de este nivel de log es 600.
      */
-    WARNING,
+    WARNING(600),
     /**
      * ERROR, NOTIFICA UN  ERROR GRAVE QUE DEBE VERIFICARSE.
+     * El grado de este nivel de log es 800.
      */
-    ERROR,
+    ERROR(800),
     /**
      * FATAL, NOTIFICA UN FUNCIONAMIENTO ERRONEO EN LA APLICACION.
+     * El grado de este nivel de log es 1000.
      */
-    FATAL,
-    /**
-     * TRACE, NOTIFICA O MUESTRA UN DETALLE MAYOR QUE DEBUG.
+    FATAL(1000);
+
+    private int gradeLog;
+
+    private NivelLog(int GradeLog){
+        this.gradeLog=GradeLog;
+    }
+
+
+    /***
+     * Obtiene el grado del log, sobre el cual se estara realizando el seguimiento de los mensajes que se
+     * escriben en las bitacoras de Log de la aplicación actual.
+     * Trace = 200,
+     * Debug = 400,
+     * Info = 500,
+     * Warning = 600,
+     * Error = 800,
+     * Fatal = 1000.
+     * @return retorna un entero que representa el gradeLog correspondiente a la numeración.
      */
-    TRACE
+    public int getGradeLog(){
+        return gradeLog;
+    }
 
 }

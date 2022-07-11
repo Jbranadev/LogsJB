@@ -17,26 +17,40 @@
 package com.josebran.LogsJB.Executores;
 
 
+import com.josebran.LogsJB.LogsJB;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
+import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import static com.josebran.LogsJB.Methods.verificarSizeFichero;
+import static com.josebran.LogsJB.Methods.writeLog;
 
 
-public class Execute extends Thread{
+public class Execute {
 
 
     private  String Texto;
     private  NivelLog nivelLog;
 
 
-    private static final Execute instance = new Execute();
 
+    private static Execute instance = new Execute();
+
+    private static ListaMensajesTxt listado=new ListaMensajesTxt();
+
+    /*
     public static ListaMensajesTxt getListaTxt(){
         return ExecutorTxt.getListado();
-    }
+    }*/
+
 
     private Execute() {
+        //inicializarhilo();
         //this.setPriority(Thread.MIN_PRIORITY);
-        this.start();
+
+        //this.start();
     }
 
     public static Execute getInstance() {
@@ -44,43 +58,154 @@ public class Execute extends Thread{
     }
 
 
-    public static int getSizeExecutorTXT(){
-        return ExecutorTxt.getListado().getSize();
+
+    public static ListaMensajesTxt getListado() {
+        return listado;
     }
 
-
+    public static void setListado(ListaMensajesTxt listado) {
+        Execute.listado = listado;
+    }
 
     public void run(){
-        //Ejecuta la escritura en el archivo Log
-        String temporal="";
-        String temporal2="";
-        NivelLog niveltemporal;
-        while(true){
-            temporal2=getTexto();
-            niveltemporal=getNivelLog();
-            //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
+        writePrincipal();
 
+    }
 
-            //System.out.println("NivelLog: "+niveltemporal);
-            //System.out.println("Texto: "+temporal2);
-            //System.out.println("Temporal: "+temporal);
-            if(!temporal.equals(temporal2)){
-                //System.out.println("Texto es diferente: "+temporal2);
-                MensajeWrite Mensaje= new MensajeWrite();
-                Mensaje.setNivelLog(niveltemporal);
-                Mensaje.setTexto(temporal2);
-                getListaTxt().addDato(Mensaje);
-            }else{
-                int tareas=getListaTxt().getSize();
-                if(tareas==0){
-                    this.stop();
+    public void writePrincipal(){
+        Runnable EscritorPrincipal= ()->{
+            String temporal="";
+            boolean band=true;
+            while(band){
+                NivelLog nivel=LogsJB.getGradeLog();
+                //String Mensaje=Execute.getInstance().getTexto();
+                //NivelLog logtemporal=Execute.getInstance().getNivelLog();
+                MensajeWrite mensajetemp=null;
+                mensajetemp=getListado().getDato();
+                if(Objects.isNull(mensajetemp)){
+                    band=false;
+                    break;
+                    //return;
+                }
+                String Mensaje=mensajetemp.getTexto();
+                NivelLog logtemporal=mensajetemp.getNivelLog();
+
+                //System.out.println("NivelLog definido: "+nivelaplicación);
+                //System.out.println("NivelLog temporal: "+intniveltemporal);
+                //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
+                //Verifica que el nivel de Log a escribir sea igual o mayor al nivel predefinido.
+                if(logtemporal.getGradeLog()>=nivel.getGradeLog()){
+                    if(!temporal.equals(Mensaje)){
+                        verificarSizeFichero();
+                        writeLog(logtemporal, Mensaje);
+                        //writeTXT(Mensaje, logtemporal);
+                    }else{
+
+                    }
+                    temporal=Mensaje;
+
+                }
+                if(getListado().getSize()==0){
+                    //getExecutorTxt().shutdown();
+                    band=false;
+                    break;
                 }
             }
-            temporal=temporal2;
+            return;
+        };
 
 
-        }
+        ExecutorService executorPrincipal = Executors.newFixedThreadPool(1);
+
+        executorPrincipal.submit(EscritorPrincipal);
+        executorPrincipal.shutdown();
+        //getExecutorPrincipal().shutdown();
+
     }
+
+
+    private void writeTXT( String Mensaje, NivelLog logtemporal){
+        //System.out.println("El valor es igual o mayor al nivel de la aplicación: "+intniveltemporal);
+        //System.out.println("NivelLog: "+niveltemporal);
+        //System.out.println("Texto: "+temporal2);
+        //System.out.println("Temporal: "+temporal);
+
+            Runnable verificarTxt= ()->{
+                //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
+                verificarSizeFichero();
+                //Ejecuta la escritura en el archivo Log
+                //System.out.println("Cantidad de mensajes ExecutorTxt: "+getListado().getSize());
+            };
+            Runnable writeTxt= ()->{
+                //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
+                writeLog(logtemporal, Mensaje);
+                //Ejecuta la escritura en el archivo Log
+                //System.out.println("Cantidad de mensajes ExecutorTxt: "+getListado().getSize());
+            };
+            ExecutorService executorTxt = Executors.newFixedThreadPool(1);
+            ExecutorService verificarsize = Executors.newFixedThreadPool(1);
+            verificarsize.submit(verificarTxt);
+            executorTxt.submit(writeTxt);
+            verificarsize.shutdown();
+            executorTxt.shutdown();
+            //getExecutorTxt().shutdown();
+            return;
+    }
+
+
+/*
+    public void run(){
+        try{
+            //Ejecuta la escritura en el archivo Log
+            String temporal="";
+            String temporal2="";
+            NivelLog niveltemporal=NivelLog.TRACE;
+            while(true){
+                temporal2=getTexto();
+                niveltemporal=getNivelLog();
+                int intniveltemporal=niveltemporal.getGradeLog();
+                int nivelaplicación=LogsJB.getGradeLog().getGradeLog();
+                //System.out.println("NivelLog definido: "+nivelaplicación);
+                //System.out.println("NivelLog temporal: "+intniveltemporal);
+                //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
+                //Verifica que el nivel de Log a escribir sea igual o mayor al nivel predefinido.
+                if(intniveltemporal>=nivelaplicación){
+                    //System.out.println("El valor es igual o mayor al nivel de la aplicación: "+intniveltemporal);
+                    //System.out.println("NivelLog: "+niveltemporal);
+                    //System.out.println("Texto: "+temporal2);
+                    //System.out.println("Temporal: "+temporal);
+
+                    if(!temporal.equals(temporal2)){
+                        //System.out.println("Texto es diferente: "+temporal2);
+                        MensajeWrite Mensaje= new MensajeWrite();
+                        Mensaje.setNivelLog(niveltemporal);
+                        Mensaje.setTexto(temporal2);
+                        //Verifica si el tamaño del fichero es menor a 5MB
+                        verificarSizeFichero();
+                        getListaTxt().addDato(Mensaje);
+                        //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
+                    }else{
+
+                    }
+                }
+
+                temporal=temporal2;
+                //Verifica si no es la primera vez que corre el hilo
+                /
+                if(!Objects.isNull(temporal)){
+                    int tareas=getListaTxt().getSize();
+                    if(tareas==0){
+
+                    }
+                }
+
+            }
+
+        }catch (Exception e){
+            System.out.println("Excepcion capturada en el metodo run Execute: " +e.getMessage());
+        }
+
+    }*/
 
     public synchronized String getTexto() {
         notify();
@@ -89,15 +214,15 @@ public class Execute extends Thread{
 
     public synchronized void setTexto(String texto) {
         try{
-            /*
-            Field field = Execute.class.getDeclaredField("Texto");
-            field.setAccessible(true);
-            field.set(null, texto);*/
-            if(getInstance().getState()!= Thread.State.RUNNABLE){
+            //if(getInstance().getState()!= Thread.State.RUNNABLE){
                  Execute ejecutor=Execute.getInstance();
-            }
+                /*if(Execute.getInstance().isAlive()){
+                    System.out.println("Despertara el Execute: "+Thread.currentThread().getName());
+                    Execute.getInstance().resume();
+                }*/
+            //}
             this.Texto=texto;
-            wait();
+            //wait();
 
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el texto a escribir en el Log: " +Texto);
@@ -105,20 +230,22 @@ public class Execute extends Thread{
 
     }
 
-    public  NivelLog getNivelLog() {
+    public NivelLog getNivelLog() {
         return nivelLog;
     }
 
-    public  void setNivelLog(NivelLog NnivelLog) {
-        try{/*
-            Field field = Execute.class.getDeclaredField("nivelLog");
-            field.setAccessible(true);
-            field.set(null, NnivelLog);*/
+    public synchronized void setNivelLog(NivelLog NnivelLog) {
+        try{
+            //if(getInstance().getState()!= Thread.State.RUNNABLE){
+                //Execute ejecutor=Execute.getInstance();
+            //}
             this.nivelLog= NnivelLog;
-
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el nivel del log " +NnivelLog);
         }
-        //this.nivelLog = nivelLog;
+
     }
+
+
+
 }

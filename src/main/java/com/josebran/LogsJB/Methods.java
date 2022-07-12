@@ -48,12 +48,7 @@ public class Methods {
 
     static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
 
-    private static String clase="";
-    private static String metodo="";
-
-
-    static NivelLog gradeLog=NivelLog.TRACE;
-
+    static NivelLog gradeLog=NivelLog.INFO;
     static SizeLog sizeLog=SizeLog.Little_Little;
 
 
@@ -63,11 +58,20 @@ public class Methods {
      */
     private static String convertir_fecha(){
         String temp=null;
-        //DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        //DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss SSS");
-        //convertir_fecha()
-        temp=formater.format(LocalDateTime.now());
+        try{
+            //DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            //DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss SSS");
+            //convertir_fecha()
+            temp=formater.format(LocalDateTime.now());
+
+        }catch (Exception e){
+            System.out.println("Exepcion capturada en el metodo Metodo que Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS");
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+        }
         return temp;
     }
 
@@ -77,9 +81,20 @@ public class Methods {
      * @return Retorna una cadena de texto con la fecha obtenida en el formato especificado.
      */
     private static String convertir_fecha(String formato){
+
         String temp=null;
-        DateTimeFormatter formater = DateTimeFormatter.ofPattern(formato);
-        temp=formater.format(LocalDateTime.now());
+        try{
+            DateTimeFormatter formater = DateTimeFormatter.ofPattern(formato);
+            temp=formater.format(LocalDateTime.now());
+
+        }catch (Exception e){
+            System.out.println("Exepcion capturada en el metodo Metodo que Obtiene la fecha en el formato indicado");
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+        }
+
         return temp;
     }
 
@@ -97,22 +112,33 @@ public class Methods {
         //Minima tabulacion es una
         String result = "";
         String tab = "\u0009";
-        //Si la cadena es menor a 8, retornara 4 tabs
-        if(cadena.length()<8){
-            for(int i=0;i<4;i++){
-                result=result+tab;
+        try{
+            //Si la cadena es menor a 8, retornara 4 tabs
+            if(cadena.length()<8){
+                for(int i=0;i<4;i++){
+                    result=result+tab;
+                }
+                //Si la cadena es menor a 17, retornara 3 tabs
+            }else if(cadena.length()<17){
+                for(int i=0;i<3;i++){
+                    result=result+tab;
+                }
+                //Si la cadena es menor a 25, retornara 2 tabs
+            }else if(cadena.length()>16){
+                for(int i=0;i<2;i++){
+                    result=result+tab;
+                }
             }
-            //Si la cadena es menor a 17, retornara 3 tabs
-        }else if(cadena.length()<17){
-            for(int i=0;i<3;i++){
-                result=result+tab;
-            }
-            //Si la cadena es menor a 25, retornara 2 tabs
-        }else if(cadena.length()>16){
-            for(int i=0;i<2;i++){
-                result=result+tab;
-            }
+
+        }catch (Exception e){
+            System.out.println("Exepcion capturada en el metodo Metodo que retorna la cantidad de tabulaciones para el siguiente texto en la misma linea conforme\n" +
+                    "     * al la longitud de la cadena actual:");
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
         }
+
         return result;
     }
 
@@ -165,7 +191,11 @@ public class Methods {
             }
 
         }catch (Exception e){
-            System.out.println("Excepcion capturada al verificar el tamaño del archivo: " +getRuta());
+            System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se verifica el tamaño del archivo: " +getRuta());
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
         }
     }
 
@@ -174,7 +204,7 @@ public class Methods {
      * imprime en consola el texto que sera agregado al Log
      * @param Texto Texto que deseamos que almacene en el Log
      */
-    public synchronized static void writeLog(NivelLog nivelLog, String Texto){
+    public synchronized static void writeLog(NivelLog nivelLog, String Texto, String Clase, String Metodo){
         try{
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             String tab = "\u0009";
@@ -182,7 +212,7 @@ public class Methods {
             setLogtext(getLogtext()+1);
 
 
-            //System.out.println("clase: " + getClase() + " metodo: " + getMetodo());
+            //System.out.println("clase: " + Clase + " metodo: " + Metodo);
 
             //Rutas de archivos
             File fichero = new File(getRuta());
@@ -212,14 +242,14 @@ public class Methods {
                 bw.write("*"+ "\n");
                 bw.write("*"+ "\n");
                 bw.write("*"+ "\n");
-                bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                 bw.close();
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
-                System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
             }else{
                 if(getLogtext()==1){
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
@@ -229,29 +259,34 @@ public class Methods {
                     bw.write("*"+ "\n");
                     bw.write("*"+ "\n");
                     //bw.write("\n");
-                    bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");                    bw.close();
+                    bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    bw.close();
                     //System.out.println("*"+ "\n");
                     //System.out.println("*"+ "\n");
                     //System.out.println("*"+ "\n");
                     //System.out.println("*"+ "\n");
                     //System.out.println("*"+ "\n");
                     System.out.println("\n");
-                    System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                 }else{
                     //Agrega en el fichero el Log
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
                     bw.write("\n");
-                    bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                     bw.close();
                     System.out.println("\n");
-                    System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ getClase() +getTabs(getClase())+ getMetodo() +getTabs(getMetodo())+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
 
                 }
             }
             //writeLogRegistrador(nivelLog, Texto, clase);
 
-        }catch (Exception ex){
-            System.out.println("Excepcion capturada al escribir el log del Text " +nivelLog.toString()+": "+ex.getMessage());
+        }catch (Exception e){
+            System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se escribir el log del Text");
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
     }
@@ -313,6 +348,10 @@ public class Methods {
             field.set(null, Usuario);
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
     }
@@ -338,60 +377,13 @@ public class Methods {
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el contador de las veces que se a escrito en " +
                     "el log " +Logtext);
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
     }
 
-
-
-
-
-    /***
-     * Obtiene el nombre de la clase que actualmente esta llamando al Log
-     * @return Retorna el nombre de la clase que esta invocando la escritura del Log
-     */
-    public static String getClase() {
-        return clase;
-    }
-
-    /***
-     * Setea el nombre de la clase que esta haciendo el llamado al metodo que escribe el Log.
-     * @param Clase Nombre de la clase que llama al metodo que escribe el Log.
-     */
-    public static void setClase(String Clase){
-        try{
-            Field field = Methods.class.getDeclaredField("clase");
-            field.setAccessible(true);
-            field.set(null, Clase);
-            //Methods.clase = clase;
-        }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear la clase que llama el log " +Clase);
-        }
-    }
-
-    /**
-     * Obtiene el nombre del metodo que actualmente esta llamando al Log
-     * @return Retorna el nombre del metodo que esta invocando la escritura del Log
-     */
-    public static String getMetodo() {
-        return metodo;
-    }
-
-    /**
-     * Setea el nombre del metodo que esta haciendo el llamado al metodo que escribe el Log.
-     * @param Metodo Nombre del metodo que llama al metodo que escribe el Log.
-     */
-    public static void setMetodo(String Metodo){
-        try{
-            Field field = Methods.class.getDeclaredField("metodo");
-            field.setAccessible(true);
-            field.set(null, Metodo);
-            //Methods.metodo = metodo;
-        }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el metodo que llama el log " +Metodo);
-        }
-
-    }
-
-
+    
 }

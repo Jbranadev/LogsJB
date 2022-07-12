@@ -1,4 +1,20 @@
-package com.josebran.LogsJB.Executores;
+/***
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ *
+ * Con licencia de Apache License, Versión 2.0 (la "Licencia");
+ * no puede usar este archivo excepto de conformidad con la Licencia.
+ * Puede obtener una copia de la Licencia en
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * A menos que lo exija la ley aplicable o se acuerde por escrito, el software
+ * distribuido bajo la Licencia se distribuye "TAL CUAL",
+ * SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas.
+ * Consulte la Licencia para conocer el idioma específico que rige los permisos y
+ * limitaciones bajo la Licencia.
+ */
+
+package com.josebran.LogsJB.Mensajes;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,11 +24,6 @@ public class ListaMensajesTxt {
 
     public synchronized void addDato(MensajeWrite dato)
     {
-        /*
-        if(ExecutorTxt.getInstance().getState()!= Thread.State.RUNNABLE){
-            ExecutorTxt ejecutor= ExecutorTxt.getInstance();
-
-        }*/
         //System.out.println("Agrega el msj a la lista: "+dato.getTexto()+" "+dato.getNivelLog());
         mensajes.add(dato);
         //notify();
@@ -23,11 +34,6 @@ public class ListaMensajesTxt {
         try{
             if (mensajes.size()==0){
                 return null;
-                //this.wait();
-                //if(!Execute.getInstance().getExecutor().isShutdown()){
-                //Execute.getInstance().getExecutor().shutdown();
-                //}
-                //Execute.getInstance().getExecutor().shutdown();
             }else{
                 MensajeWrite dato = mensajes.get(0);
                 mensajes.remove(0);

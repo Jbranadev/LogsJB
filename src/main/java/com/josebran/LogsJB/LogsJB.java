@@ -17,15 +17,14 @@
 package com.josebran.LogsJB;
 
 
-import com.josebran.LogsJB.Executores.MensajeWrite;
+import com.josebran.LogsJB.Mensajes.MensajeWrite;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.josebran.LogsJB.Numeracion.SizeLog;
 
-import java.io.File;
 import java.lang.reflect.Field;
 
-import static com.josebran.LogsJB.Executores.Execute.getInstance;
-import static com.josebran.LogsJB.Executores.Execute.getListado;
+import static com.josebran.LogsJB.Execute.getInstance;
+import static com.josebran.LogsJB.Execute.getListado;
 
 public  class LogsJB extends Methods{
 
@@ -172,8 +171,8 @@ public  class LogsJB extends Methods{
 
 
     }
-*/
 
+*/
 
 /**/
     public static void main(String[] args) {
@@ -181,21 +180,21 @@ public  class LogsJB extends Methods{
 
             ///LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
         executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-        //Thread.sleep(1);
+        Thread.sleep(5);
         debug( "Primer comentario grado Debug");
-        //Thread.sleep(1);
+        Thread.sleep(5);
         error( "Primer comentario grado Error");
-        //Thread.sleep(1);
+        Thread.sleep(5);
         fatal( "Primer comentario grado Fatal");
-        //Thread.sleep(1);
+        Thread.sleep(5);
         info( "Primer comentario grado Info");
-        //Thread.sleep(1);
+        Thread.sleep(5);
         trace( "Primer comentario grado Trace");
-        //Thread.sleep(1);
+        Thread.sleep(5);
         warning( "Primer comentario grado Warning");
-        //Thread.sleep(1);
+        Thread.sleep(5);
         debug("Jbran");
-        //Thread.sleep(1);
+        Thread.sleep(5);
         //System.exit(100);
         return;
 
@@ -206,13 +205,13 @@ public  class LogsJB extends Methods{
 
 
     /***
-     * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
+     * Metodo encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
      * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal
      * @param nivelLog NivelLog del mensaje que queremos almacenar en el Log.
      * @param Texto Texto que se desea escribir en el Log.
      */
-    protected static void executor(NivelLog nivelLog, String Texto){
-        //try{
+    private static void executor(NivelLog nivelLog, String Texto){
+        try{
             //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
             String clase = null;
@@ -224,35 +223,29 @@ public  class LogsJB extends Methods{
                 clase = elements[2].getClassName();
                 metodo = elements[2].getMethodName();
             }
-            Methods.setClase(clase);
-            Methods.setMetodo(metodo);
 
             MensajeWrite mensaje=new MensajeWrite();
             mensaje.setTexto(Texto);
             mensaje.setNivelLog(nivelLog);
+            mensaje.setClase(clase);
+            mensaje.setMetodo(metodo);
             //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
             getListado().addDato(mensaje);
             //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
             getInstance().run();
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
-            //getInstance().setNivelLog(nivelLog);
-            //getInstance().setTexto(Texto);
 
-            //getMensajes().add(mensaje);
-            //if(getInstance().getState()!= Thread.State.RUNNABLE){
-                //Execute writer= getInstance();
-                /*
-                if(Execute.getInstance().isAlive()){
-                    System.out.println("Despertara el Execute: "+Thread.currentThread().getName());
-                    Execute.getInstance().resume();
-                }*/
-            //}else{
-                //System.out.println("El hilo execute esta corriendo");
-           //}
 
-        //}catch (Exception e){
-         //   System.out.println("Excepcion capturada al Executor encargado de llamar al proceso asincrono " +nivelLog.toString()+": "+e.getMessage());
-        //}
+
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
+                    "     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal");
+            System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+        }
 
 
     }

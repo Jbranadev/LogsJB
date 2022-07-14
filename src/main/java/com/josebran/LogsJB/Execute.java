@@ -25,8 +25,8 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.josebran.LogsJB.Methods.verificarSizeFichero;
-import static com.josebran.LogsJB.Methods.writeLog;
+import static com.josebran.LogsJB.MethodsTxt.verificarSizeFichero;
+import static com.josebran.LogsJB.MethodsTxt.writeLog;
 
 
 class Execute {

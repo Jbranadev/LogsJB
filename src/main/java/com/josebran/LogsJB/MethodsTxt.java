@@ -40,7 +40,7 @@ import static com.josebran.LogsJB.LogsJB.getRuta;
 import static com.josebran.LogsJB.LogsJB.getSizeLog;
 
 
-public class Methods {
+public class MethodsTxt {
     //Obtengo el Usuario de Windows
     private static String usuario=System.getProperty("user.name");
 
@@ -343,7 +343,7 @@ public class Methods {
      */
     public static void setUsuario(String Usuario){
         try{
-            Field field = Methods.class.getDeclaredField("usuario");
+            Field field = MethodsTxt.class.getDeclaredField("usuario");
             field.setAccessible(true);
             field.set(null, Usuario);
         }catch (Exception e){
@@ -370,7 +370,7 @@ public class Methods {
      */
     private static void setLogtext(int Logtext) {
         try{
-            Field field = Methods.class.getDeclaredField("logtext");
+            Field field = MethodsTxt.class.getDeclaredField("logtext");
             field.setAccessible(true);
             field.set(null, Logtext);
             //logtext = logtext;

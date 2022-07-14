@@ -26,7 +26,7 @@ import java.lang.reflect.Field;
 import static com.josebran.LogsJB.Execute.getInstance;
 import static com.josebran.LogsJB.Execute.getListado;
 
-public  class LogsJB extends Methods{
+public  class LogsJB extends MethodsTxt {
 
 
     /***
@@ -34,7 +34,7 @@ public  class LogsJB extends Methods{
      * @return Retorna un String con la ruta del archivo .Txt donde se estara escribiendo el Log.
      */
     public static String getRuta() {
-        return Methods.ruta;
+        return MethodsTxt.ruta;
     }
 
     /**
@@ -43,7 +43,7 @@ public  class LogsJB extends Methods{
      */
     public static void setRuta(String Ruta) {
         try{
-            Field field = Methods.class.getDeclaredField("ruta");
+            Field field = MethodsTxt.class.getDeclaredField("ruta");
             field.setAccessible(true);
             field.set(null, Ruta);
         }catch (Exception e){
@@ -65,7 +65,7 @@ public  class LogsJB extends Methods{
      * superiores, El valor por defaul es Info.
      */
     public static NivelLog getGradeLog() {
-        return Methods.gradeLog;
+        return MethodsTxt.gradeLog;
     }
 
     /***
@@ -81,7 +81,7 @@ public  class LogsJB extends Methods{
      */
     public static void setGradeLog(NivelLog GradeLog) {
         try{
-            Field field = Methods.class.getDeclaredField("gradeLog");
+            Field field = MethodsTxt.class.getDeclaredField("gradeLog");
             field.setAccessible(true);
             field.set(null, GradeLog);
             //Methods.metodo = metodo;
@@ -96,7 +96,7 @@ public  class LogsJB extends Methods{
      * El valor por defaul es Little_Little.
      */
     public static SizeLog getSizeLog() {
-        return Methods.sizeLog;
+        return MethodsTxt.sizeLog;
     }
 
     /***
@@ -112,7 +112,7 @@ public  class LogsJB extends Methods{
      */
     public static void setSizeLog(SizeLog SizeLog) {
         try{
-            Field field = Methods.class.getDeclaredField("sizeLog");
+            Field field = MethodsTxt.class.getDeclaredField("sizeLog");
             field.setAccessible(true);
             field.set(null, SizeLog);
             //Methods.metodo = metodo;
@@ -174,7 +174,7 @@ public  class LogsJB extends Methods{
 
 */
 
-/**/
+/*
     public static void main(String[] args) {
     try{
 
@@ -203,7 +203,7 @@ public  class LogsJB extends Methods{
     }
 }
 
-
+*/
     /***
      * Metodo encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
      * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal

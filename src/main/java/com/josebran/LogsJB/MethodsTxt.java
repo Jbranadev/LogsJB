@@ -356,6 +356,7 @@ public class MethodsTxt {
 
     }
 
+
     /***
      * Obtiene la cantidad de veces que se a escrito en el Txt En la ejecución actual
      * @return Retorna la cantidad de veces que se a escrito en el Log.

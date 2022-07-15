@@ -16,6 +16,10 @@
 
 package com.josebran.LogsJB.Numeracion;
 
+/****
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Numeración que sirve para indicar el NivelLog del Mensaje.
+ */
 public enum NivelLog {
     /**
      * TRACE, NOTIFICA O MUESTRA UN DETALLE MAYOR QUE DEBUG.

@@ -26,6 +26,17 @@ import java.lang.reflect.Field;
 import static com.josebran.LogsJB.Execute.getInstance;
 import static com.josebran.LogsJB.Execute.getListado;
 
+/****
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Clase que proporciona los metodos de configuración y entrada para la escritura de los Logs en segundo plano.
+ * Los metodos de entrada son:
+ *      trace()
+ *      debug()
+ *      info()
+ *      warning()
+ *      fatal()
+ *      error()
+ */
 public  class LogsJB extends MethodsTxt {
 
 
@@ -224,16 +235,18 @@ public  class LogsJB extends MethodsTxt {
                 metodo = elements[2].getMethodName();
             }
 
-            MensajeWrite mensaje=new MensajeWrite();
-            mensaje.setTexto(Texto);
-            mensaje.setNivelLog(nivelLog);
-            mensaje.setClase(clase);
-            mensaje.setMetodo(metodo);
-            //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
-            getListado().addDato(mensaje);
-            //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
-            getInstance().run();
-            //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
+            if(nivelLog.getGradeLog()>= getGradeLog().getGradeLog()){
+                MensajeWrite mensaje=new MensajeWrite();
+                mensaje.setTexto(Texto);
+                mensaje.setNivelLog(nivelLog);
+                mensaje.setClase(clase);
+                mensaje.setMetodo(metodo);
+                //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
+                getListado().addDato(mensaje);
+                //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
+                getInstance().run();
+                //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
+            }
 
 
 

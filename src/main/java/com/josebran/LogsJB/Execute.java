@@ -17,7 +17,7 @@
 package com.josebran.LogsJB;
 
 
-import com.josebran.LogsJB.Mensajes.ListaMensajesTxt;
+import com.josebran.LogsJB.Mensajes.ListaMensajes;
 import com.josebran.LogsJB.Mensajes.MensajeWrite;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
@@ -28,13 +28,17 @@ import java.util.concurrent.Executors;
 import static com.josebran.LogsJB.MethodsTxt.verificarSizeFichero;
 import static com.josebran.LogsJB.MethodsTxt.writeLog;
 
-
+/****
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Clase encargada de recuperar los mensajes de la lista compartida por el Proceso Principal
+ * e iniciar un SubProceso encargado de leer los mensajes de la lista y escribirlos en el LogTxt.
+ */
 class Execute {
 
     /***
      * Lista que funciona como la cola de peticiones que llegan al Ejecutor
      */
-    private static ListaMensajesTxt listado=new ListaMensajesTxt();
+    private static ListaMensajes listado=new ListaMensajes();
 
     /***
      * Se utiliza el patron Singleton, para asegurarnos que sea una unica instancia la que se encargue de
@@ -60,7 +64,7 @@ class Execute {
      * Proporciona el acceso a la lista que sirve como cola de las peticiones
      * @return Retorna una lista de MensajeWrite, la cual lleva la información que se desea registrar en los Logs
      */
-    protected static ListaMensajesTxt getListado() {
+    protected static ListaMensajes getListado() {
         return listado;
     }
 
@@ -111,17 +115,19 @@ class Execute {
                     //System.out.println("NivelLog temporal: "+intniveltemporal);
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
                     //Verifica que el nivel de Log a escribir sea igual o mayor al nivel predefinido.
-                    if(logtemporal.getGradeLog()>=nivel.getGradeLog()){
-                        if(!temporal.equals(Mensaje)){
-                            //verificarSizeFichero();
-                            //writeLog(logtemporal, Mensaje, Clase, Metodo);
-                            writeTXT(logtemporal, Mensaje, Clase, Metodo);
-                        }else{
+                    /*if(logtemporal.getGradeLog()>=nivel.getGradeLog()){
 
-                        }
-                        temporal=Mensaje;
+                    }*/
+                    if(!temporal.equals(Mensaje)){
+                        //verificarSizeFichero();
+                        //writeLog(logtemporal, Mensaje, Clase, Metodo);
+                        writeTXT(logtemporal, Mensaje, Clase, Metodo);
+                    }else{
 
                     }
+                    temporal=Mensaje;
+
+
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListado().getSize());
                     if(getListado().getSize()==0){
                         band=false;

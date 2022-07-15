@@ -19,6 +19,15 @@ package com.josebran.LogsJB.Mensajes;
 
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
+/***
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Clase que representa lo que es un mensaje en la escritura de los Logs, por el momento un objeto de esta clase
+ * contiene:
+ *  Un String Texto que es el mensaje que se desea escribir.
+ *  Un NivelLog nivelLog que representa el grado de log del mensaje.
+ *  Un String Clase que representa la clase en la cual se mando a llamar la escritura del Log.
+ *  Un String Metodo que representa el metodo desde el cual se llama la escritura del Log.
+ */
 public class MensajeWrite {
     private String Texto;
     private NivelLog nivelLog;
@@ -27,18 +36,35 @@ public class MensajeWrite {
 
     private String Metodo;
 
+    /***
+     * Obtiene el texto del cuerpo del Mensaje
+     * @return Retorna un String que representa el mensaje que deseamos sea escrito.
+     */
     public String getTexto() {
         return Texto;
     }
 
+    /***
+     * Setea el texto del Mensaje.
+     * @param texto String que representa el mensaje que deseamos sea escrito.
+     */
     public void setTexto(String texto) {
         Texto = texto;
     }
 
+
+    /***
+     * Obtiene el NivelLog del Mensaje.
+     * @return Retorna un NivelLog que representa el grado de log del mensaje.
+     */
     public NivelLog getNivelLog() {
         return nivelLog;
     }
 
+    /****
+     * Setea el NivelLog del Mensaje.
+     * @param nivelLog NivelLog que representa el grado de log del mensaje.
+     */
     public void setNivelLog(NivelLog nivelLog) {
         this.nivelLog = nivelLog;
     }

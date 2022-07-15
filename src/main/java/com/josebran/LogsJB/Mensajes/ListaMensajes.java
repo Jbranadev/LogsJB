@@ -19,9 +19,18 @@ package com.josebran.LogsJB.Mensajes;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ListaMensajesTxt {
+/***
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Esta clase sirve como acople entre el proceso de ejecución principal que se encarga de agregar un mensaje
+ * por escribir a la lista, mientras que el proceso de ejecución secundario se encarga de escribir los mensajes.
+ */
+public class ListaMensajes {
     private List<MensajeWrite> mensajes=new LinkedList<>();
 
+    /***
+     * Agrega un mensaje a la lista para que este luego sea escrito.
+     * @param dato Mensaje que se desea agregar a la lista.
+     */
     public synchronized void addDato(MensajeWrite dato)
     {
         //System.out.println("Agrega el msj a la lista: "+dato.getTexto()+" "+dato.getNivelLog());
@@ -30,6 +39,12 @@ public class ListaMensajesTxt {
 
     }
 
+    /***
+     * Retorna el primer mensaje en la cola que encuentra por medio del algoritmo FIFO, si en dado caso no hay mensajes en la cola, retorna
+     * null.
+     * @return Restorna el proximo mensaje en la cola a ser escrito, basado en el algoritmo FIFO, si no hay mensajes
+     * retorna null.
+     */
     public synchronized MensajeWrite getDato()  {
         try{
             if (mensajes.size()==0){
@@ -46,6 +61,10 @@ public class ListaMensajesTxt {
         return null;
     }
 
+    /***
+     * Retorna la cantidad de mensajes que tiene la lista actualmente.
+     * @return Retorna un entero que representa la cantidad de mensajes que actualmente tiene la lista.
+     */
     public synchronized int getSize(){
         return mensajes.size();
     }

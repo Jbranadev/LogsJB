@@ -29,13 +29,18 @@ import static com.josebran.LogsJB.Execute.getListado;
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
  * Clase que proporciona los metodos de configuración y entrada para la escritura de los Logs en segundo plano.
+ * Los metodos de configuración son:
+ *      setRuta(Ruta);
+ *      setGradeLog(NivelLog);
+ *      setSizeLog(SizeLog);
+ *
  * Los metodos de entrada son:
- *      trace()
- *      debug()
- *      info()
- *      warning()
- *      fatal()
- *      error()
+ *      trace(Texto);
+ *      debug(Texto);
+ *      info(Texto);
+ *      warning(Texto);
+ *      fatal(Texto);
+ *      error(Texto);
  */
 public  class LogsJB extends MethodsTxt {
 
@@ -188,8 +193,6 @@ public  class LogsJB extends MethodsTxt {
 /*
     public static void main(String[] args) {
     try{
-
-            ///LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
         executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
         Thread.sleep(5);
         debug( "Primer comentario grado Debug");
@@ -213,8 +216,8 @@ public  class LogsJB extends MethodsTxt {
         System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
     }
 }
-
 */
+
     /***
      * Metodo encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
      * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal

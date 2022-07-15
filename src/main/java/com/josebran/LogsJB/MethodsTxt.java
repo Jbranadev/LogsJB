@@ -39,14 +39,29 @@ import java.util.logging.Logger;
 import static com.josebran.LogsJB.LogsJB.getRuta;
 import static com.josebran.LogsJB.LogsJB.getSizeLog;
 
-
+/****
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Clase que almacena los metodos necesarios para poder escribir el LogTxt
+ */
 public class MethodsTxt {
-    //Obtengo el Usuario de Windows
+
+    /***
+     * Obtiene el usuario actual del sistema operativo
+     */
     private static String usuario=System.getProperty("user.name");
 
-    private static int logtext =0;
+    /***
+     * Contador que expresa la cantidad de veces que se a escrito en la ejecución actual de la aplicación
+     *
+     */
+    private static long logtext =0;
 
+    /***
+     * Ruta donde se estara escribiendo el log por default, la cual sería:
+     *  ContexAplicación/Logs/fecha_hoy/Log.txt
+     */
     static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+
 
     static NivelLog gradeLog=NivelLog.INFO;
     static SizeLog sizeLog=SizeLog.Little_Little;
@@ -360,7 +375,7 @@ public class MethodsTxt {
      * Obtiene la cantidad de veces que se a escrito en el Txt En la ejecución actual
      * @return Retorna la cantidad de veces que se a escrito en el Log.
      */
-    private static int getLogtext() {
+    private static long getLogtext() {
         return logtext;
     }
 
@@ -368,7 +383,7 @@ public class MethodsTxt {
      * Setea la cantidad de veces que se a escrito en el Log actual.
      * @param Logtext Numero de veces que se a escrito en el Log.
      */
-    private static void setLogtext(int Logtext) {
+    private static void setLogtext(long Logtext) {
         try{
             Field field = MethodsTxt.class.getDeclaredField("logtext");
             field.setAccessible(true);

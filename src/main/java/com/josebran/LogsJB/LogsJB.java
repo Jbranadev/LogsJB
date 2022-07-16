@@ -42,7 +42,7 @@ import static com.josebran.LogsJB.Execute.getListado;
  *      fatal(Texto);
  *      error(Texto);
  */
-public  class LogsJB extends MethodsTxt {
+public  class LogsJB {
 
 
     /***

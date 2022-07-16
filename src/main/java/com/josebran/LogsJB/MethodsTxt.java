@@ -63,7 +63,17 @@ public class MethodsTxt {
     static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
 
 
+    /****
+     * NivelLog desde el grado configurado hacía arriba se estara escribiendo el Log
+     * El NivelLog por default es INFO.
+     */
     static NivelLog gradeLog=NivelLog.INFO;
+
+    /****
+     * Tamaño maximo del archivo LogTxt diario que se estara escribiendo, si se supera el tamaño se modificara
+     * el nombre del archivo a LOG_dd-MM-YYYY_HH-MM-SSS.txt, e iniciara la escritura del archivo Log.txt
+     * con el nuevo registro.
+     */
     static SizeLog sizeLog=SizeLog.Little_Little;
 
 
@@ -119,8 +129,8 @@ public class MethodsTxt {
      * si la cadena es  igual o menor a 7 da 4 tabulaciones
      * si la cadena es igual o menor a 16 da 3 tabulaciones
      * si la cadena es  mayor a 16 da 2 tabulaciones.
-     * @param cadena texto a evaluar para obtener la separcion de tabulaciones de acuerdo al algoritmo definido.
-     * @return retorna un string con la cantidad de tabulaciones respecto al siguiente texto en la misma linea.
+     * @param cadena Texto a evaluar para obtener la separcion de tabulaciones de acuerdo al algoritmo definido.
+     * @return Retorna un string con la cantidad de tabulaciones respecto al siguiente texto en la misma linea.
      */
     private static String getTabs(String cadena) {
         //Reglas del negocio, maximas tabulaciones son 4
@@ -217,7 +227,10 @@ public class MethodsTxt {
     /***
      * Metodo para escribir en el Log, lo que esta sucediendo dentro de la prueba,
      * imprime en consola el texto que sera agregado al Log
-     * @param Texto Texto que deseamos que almacene en el Log
+     * @param nivelLog nivelLog que representa el grado de log del mensaje.
+     * @param Texto Texto que es el mensaje que se desea escribir.
+     * @param Clase Clase que representa la clase en la cual se mando a llamar la escritura del Log.
+     * @param Metodo Metodo que representa el metodo desde el cual se llama la escritura del Log.
      */
     public synchronized static void writeLog(NivelLog nivelLog, String Texto, String Clase, String Metodo){
         try{

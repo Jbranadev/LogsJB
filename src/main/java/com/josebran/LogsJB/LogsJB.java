@@ -25,6 +25,7 @@ import java.lang.reflect.Field;
 
 import static com.josebran.LogsJB.Execute.getInstance;
 import static com.josebran.LogsJB.Execute.getListado;
+import static com.josebran.LogsJB.MethodsTxt.convertir_fecha;
 
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
@@ -137,6 +138,35 @@ public  class LogsJB {
         }
     }
 
+
+    /***
+     * Obtiene el usuario del sistema sobre el cual corre la aplicación
+     * @return Retorna un String con el nombre del usuario actual.
+     */
+    public static String getUsuario() {
+        return MethodsTxt.usuario;
+    }
+
+    /***
+     * Setea el nombre del usuario del sistema sobre el cual corre la aplicación
+     * @param Usuario Usuario actual del sistema que se desea indicar al Log.
+     */
+    public static void setUsuario(String Usuario){
+        try{
+            Field field = MethodsTxt.class.getDeclaredField("usuario");
+            field.setAccessible(true);
+            field.set(null, Usuario);
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+        }
+
+    }
+
+
 /*
     public static void main(String[] args) {
         try{
@@ -146,21 +176,21 @@ public  class LogsJB {
                 try{
                     //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
                     executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-
+                    //Thread.sleep(2);
                     debug( "Primer comentario grado Debug");
-
+                    //Thread.sleep(2);
                     error( "Primer comentario grado Error");
-
+                    //Thread.sleep(2);
                     fatal( "Primer comentario grado Fatal");
-
+                    //Thread.sleep(2);
                     info( "Primer comentario grado Info");
-
+                    //Thread.sleep(2);
                     trace( "Primer comentario grado Trace");
-
+                    //Thread.sleep(2);
                     warning( "Primer comentario grado Warning");
-
+                    //Thread.sleep(2);
                     debug("Jbran");
-
+                    //Thread.sleep(2);
                     //Thread.sleep(100);
                     File carpeta = new File(archivo.getParent());
                     File[] listado;
@@ -187,36 +217,36 @@ public  class LogsJB {
 
 
     }
-
 */
+
 
 /*
     public static void main(String[] args) {
     try{
         executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-        Thread.sleep(5);
+        //Thread.sleep(2);
         debug( "Primer comentario grado Debug");
-        Thread.sleep(5);
+        //Thread.sleep(2);
         error( "Primer comentario grado Error");
-        Thread.sleep(5);
+        //Thread.sleep(2);
         fatal( "Primer comentario grado Fatal");
-        Thread.sleep(5);
+        //Thread.sleep(2);
         info( "Primer comentario grado Info");
-        Thread.sleep(5);
+        //Thread.sleep(2);
         trace( "Primer comentario grado Trace");
-        Thread.sleep(5);
+        //Thread.sleep(2);
         warning( "Primer comentario grado Warning");
-        Thread.sleep(5);
+        //Thread.sleep(2);
         debug("Jbran");
-        Thread.sleep(5);
+        //Thread.sleep(2);
         //System.exit(100);
         return;
 
     }catch (Exception e){
         System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
     }
-}
-*/
+}*/
+
 
     /***
      * Metodo encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
@@ -244,15 +274,14 @@ public  class LogsJB {
                 mensaje.setNivelLog(nivelLog);
                 mensaje.setClase(clase);
                 mensaje.setMetodo(metodo);
+                mensaje.setFecha(convertir_fecha());
                 //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
                 getListado().addDato(mensaje);
                 //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
                 getInstance().run();
                 //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
+                Thread.sleep(2);
             }
-
-
-
         }catch (Exception e){
             System.out.println("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
                     "     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal");

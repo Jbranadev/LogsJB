@@ -36,6 +36,8 @@ public class MensajeWrite {
 
     private String Metodo;
 
+    private String fecha;
+
     /***
      * Obtiene el texto del cuerpo del Mensaje
      * @return Retorna un String que representa el mensaje que deseamos sea escrito.
@@ -95,5 +97,21 @@ public class MensajeWrite {
      */
     public void setMetodo(String metodo) {
         Metodo = metodo;
+    }
+
+    /***
+     * Obtiene la fecha de escritura del Log.
+     * @return Retorna un string con la fecha de escritura del Log.
+     */
+    public String getFecha() {
+        return fecha;
+    }
+
+    /**
+     * Setea la fecha de escritura del Log.
+     * @param fecha String que representa el momento en el que fue mandado a llamar el Log.
+     */
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }

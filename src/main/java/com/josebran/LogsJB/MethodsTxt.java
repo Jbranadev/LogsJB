@@ -36,19 +36,18 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.josebran.LogsJB.LogsJB.getRuta;
-import static com.josebran.LogsJB.LogsJB.getSizeLog;
+import static com.josebran.LogsJB.LogsJB.*;
 
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
  * Clase que almacena los metodos necesarios para poder escribir el LogTxt
  */
-public class MethodsTxt {
+class MethodsTxt {
 
     /***
      * Obtiene el usuario actual del sistema operativo
      */
-    private static String usuario=System.getProperty("user.name");
+    static String usuario=System.getProperty("user.name");
 
     /***
      * Contador que expresa la cantidad de veces que se a escrito en la ejecución actual de la aplicación
@@ -81,7 +80,7 @@ public class MethodsTxt {
      * Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS
      * @return Retorna una cadena de texto con la fecha obtenida
      */
-    private static String convertir_fecha(){
+    static String convertir_fecha(){
         String temp=null;
         try{
             //DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -132,7 +131,7 @@ public class MethodsTxt {
      * @param cadena Texto a evaluar para obtener la separcion de tabulaciones de acuerdo al algoritmo definido.
      * @return Retorna un string con la cantidad de tabulaciones respecto al siguiente texto en la misma linea.
      */
-    private static String getTabs(String cadena) {
+    public static String getTabs(String cadena) {
         //Reglas del negocio, maximas tabulaciones son 4
         //Minima tabulacion es una
         String result = "";
@@ -172,7 +171,7 @@ public class MethodsTxt {
      * Verifica el tamaño del fichero de log actual, cuando este alcance los 5MB le asignara el nombre
      * LOG_dd-MM-YYYY_HH-MM-SSS.txt donde la fecha y hora que se le coloca, corresponde a la fecha y hora de creación del archivo
      */
-    public static synchronized void verificarSizeFichero(){
+    static synchronized void verificarSizeFichero(){
         try {
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             File logactual = new File(getRuta());
@@ -231,8 +230,9 @@ public class MethodsTxt {
      * @param Texto Texto que es el mensaje que se desea escribir.
      * @param Clase Clase que representa la clase en la cual se mando a llamar la escritura del Log.
      * @param Metodo Metodo que representa el metodo desde el cual se llama la escritura del Log.
+     * @param fecha fecha y hora de la escritura del Log.
      */
-    public synchronized static void writeLog(NivelLog nivelLog, String Texto, String Clase, String Metodo){
+    synchronized static void writeLog(NivelLog nivelLog, String Texto, String Clase, String Metodo, String fecha){
         try{
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             String tab = "\u0009";
@@ -270,14 +270,14 @@ public class MethodsTxt {
                 bw.write("*"+ "\n");
                 bw.write("*"+ "\n");
                 bw.write("*"+ "\n");
-                bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                 bw.close();
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
-                System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
             }else{
                 if(getLogtext()==1){
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
@@ -287,7 +287,7 @@ public class MethodsTxt {
                     bw.write("*"+ "\n");
                     bw.write("*"+ "\n");
                     //bw.write("\n");
-                    bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                     bw.close();
                     //System.out.println("*"+ "\n");
                     //System.out.println("*"+ "\n");
@@ -295,20 +295,18 @@ public class MethodsTxt {
                     //System.out.println("*"+ "\n");
                     //System.out.println("*"+ "\n");
                     System.out.println("\n");
-                    System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                 }else{
                     //Agrega en el fichero el Log
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
                     bw.write("\n");
-                    bw.write(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                     bw.close();
                     System.out.println("\n");
-                    System.out.println(convertir_fecha()+getTabs(convertir_fecha())+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
 
                 }
             }
-            //writeLogRegistrador(nivelLog, Texto, clase);
-
         }catch (Exception e){
             System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se escribir el log del Text");
             System.out.println("Tipo de Excepción : "+e.getClass());
@@ -356,33 +354,6 @@ public class MethodsTxt {
         }
     }
 
-
-    /***
-     * Obtiene el usuario del sistema sobre el cual corre la aplicación
-     * @return Retorna un String con el nombre del usuario actual.
-     */
-    public static String getUsuario() {
-        return usuario;
-    }
-
-    /***
-     * Setea el nombre del usuario del sistema sobre el cual corre la aplicación
-     * @param Usuario Usuario actual del sistema que se desea indicar al Log.
-     */
-    public static void setUsuario(String Usuario){
-        try{
-            Field field = MethodsTxt.class.getDeclaredField("usuario");
-            field.setAccessible(true);
-            field.set(null, Usuario);
-        }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
-        }
-
-    }
 
     /***
      * Obtiene la cantidad de veces que se a escrito en el Txt En la ejecución actual

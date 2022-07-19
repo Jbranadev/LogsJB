@@ -85,7 +85,9 @@ LogsJB.setRuta(Ruta);
 ~~~
 
 
-- Modificar el tamaño máximo diario que puede tener su archivo de registros.
+- Modificar el tamaño máximo que puede tener su archivo de registros.
+
+Usted puede modificar el tamaño que desea que tenga cada archivo de registros de su implementación.
 ~~~
 /***
  * Setea el tamaño maximo para el archivo Log de la aplicación actual.
@@ -100,7 +102,7 @@ LogsJB.setRuta(Ruta);
  */
 LogsJB.setSizeLog(SizeLog.Little_Little);
 ~~~
-Usted puede modificar el tamaño que desea que tenga cada archivo de registros de su implementación.
+
 
 - Modificar el grado de registros que se estarán reportando.
 ~~~
@@ -139,8 +141,8 @@ para hacer un System.out.println(mensaje).
 * Se puede hacer el llamado invocando al método estático de las siguientes dos maneras:
 * LogsJB.debug(Mensaje);
 * debug(Mensaje);
-* @param Mensaje es un String que indica el mensaje que queremos registrar en la salida de la terminal, como en
-* el archivo Logs.txt
+* @param Mensaje es un String que indica el mensaje que queremos registrar en la salida de la terminal,
+*como en el archivo Logs.txt
 */
  
 //Comentario grado Trace

@@ -17,7 +17,7 @@
 package com.josebran.LogsJB;
 
 
-import com.josebran.LogsJB.Mensajes.ListaMensajesTxt;
+import com.josebran.LogsJB.Mensajes.ListaMensajes;
 import com.josebran.LogsJB.Mensajes.MensajeWrite;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
@@ -28,13 +28,19 @@ import java.util.concurrent.Executors;
 import static com.josebran.LogsJB.MethodsTxt.verificarSizeFichero;
 import static com.josebran.LogsJB.MethodsTxt.writeLog;
 
-
+/****
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Clase encargada de recuperar los mensajes de la lista compartida por el Proceso Principal
+ * e iniciar un SubProceso encargado de leer los mensajes de la lista y escribirlos en el LogTxt.
+ */
 class Execute {
 
     /***
      * Lista que funciona como la cola de peticiones que llegan al Ejecutor
      */
-    private static ListaMensajesTxt listado=new ListaMensajesTxt();
+    private static ListaMensajes listado=new ListaMensajes();
+
+
 
     /***
      * Se utiliza el patron Singleton, para asegurarnos que sea una unica instancia la que se encargue de
@@ -60,7 +66,7 @@ class Execute {
      * Proporciona el acceso a la lista que sirve como cola de las peticiones
      * @return Retorna una lista de MensajeWrite, la cual lleva la información que se desea registrar en los Logs
      */
-    protected static ListaMensajesTxt getListado() {
+    protected static ListaMensajes getListado() {
         return listado;
     }
 
@@ -71,7 +77,6 @@ class Execute {
     protected void run(){
         try{
             writePrincipal();
-
         }catch (Exception e){
             System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
             System.out.println("Tipo de Excepción : "+e.getClass());
@@ -106,22 +111,25 @@ class Execute {
                     NivelLog logtemporal=mensajetemp.getNivelLog();
                     String Clase= mensajetemp.getClase();
                     String Metodo= mensajetemp.getMetodo();
+                    String fecha= mensajetemp.getFecha();
 
                     //System.out.println("NivelLog definido: "+nivelaplicación);
                     //System.out.println("NivelLog temporal: "+intniveltemporal);
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
                     //Verifica que el nivel de Log a escribir sea igual o mayor al nivel predefinido.
-                    if(logtemporal.getGradeLog()>=nivel.getGradeLog()){
-                        if(!temporal.equals(Mensaje)){
-                            //verificarSizeFichero();
-                            //writeLog(logtemporal, Mensaje, Clase, Metodo);
-                            writeTXT(logtemporal, Mensaje, Clase, Metodo);
-                        }else{
+                    /*if(logtemporal.getGradeLog()>=nivel.getGradeLog()){
 
-                        }
-                        temporal=Mensaje;
+                    }*/
+                    if(!temporal.equals(Mensaje)){
+                        //verificarSizeFichero();
+                        //writeLog(logtemporal, Mensaje, Clase, Metodo);
+                        writeTXT(logtemporal, Mensaje, Clase, Metodo, fecha);
+                    }else{
 
                     }
+                    temporal=Mensaje;
+
+
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListado().getSize());
                     if(getListado().getSize()==0){
                         band=false;
@@ -152,8 +160,9 @@ class Execute {
      * @param Mensaje Texto que se desea escribir en el Log.
      * @param Clase Clase a la que pertenece el metodo el cual inicia el proceso de registro del Log.
      * @param Metodo Metodo desde que se manda a llamar el Log.
+     * @param fecha fecha y hora de la escritura del Log.
      */
-    private void writeTXT(NivelLog logtemporal, String Mensaje, String Clase, String Metodo){
+    private void writeTXT(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha){
         try{
             //System.out.println("El valor es igual o mayor al nivel de la aplicación: "+intniveltemporal);
             //System.out.println("NivelLog 2: "+logtemporal);
@@ -172,7 +181,7 @@ class Execute {
             Runnable writeTxt= ()->{
                 //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
                 //Ejecuta la escritura en el archivo Log
-                writeLog(logtemporal, Mensaje, Clase, Metodo);
+                writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
 
             };
             ExecutorService executorTxt = Executors.newFixedThreadPool(1);

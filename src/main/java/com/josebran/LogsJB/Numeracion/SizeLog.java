@@ -17,6 +17,10 @@
 
 package com.josebran.LogsJB.Numeracion;
 
+/****
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Numeración que sirve para indicar el tamaño maximo del LogTxt que se escribira por día.
+ */
 public enum SizeLog {
 
     /***

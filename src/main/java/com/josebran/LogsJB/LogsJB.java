@@ -21,12 +21,30 @@ import com.josebran.LogsJB.Mensajes.MensajeWrite;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.josebran.LogsJB.Numeracion.SizeLog;
 
+
 import java.lang.reflect.Field;
 
 import static com.josebran.LogsJB.Execute.getInstance;
 import static com.josebran.LogsJB.Execute.getListado;
+import static com.josebran.LogsJB.MethodsTxt.convertir_fecha;
 
-public  class LogsJB extends MethodsTxt {
+/****
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Clase que proporciona los metodos de configuración y entrada para la escritura de los Logs en segundo plano.
+ * Los metodos de configuración son:
+ *      setRuta(Ruta);
+ *      setGradeLog(NivelLog);
+ *      setSizeLog(SizeLog);
+ *
+ * Los metodos de entrada son:
+ *      trace(Texto);
+ *      debug(Texto);
+ *      info(Texto);
+ *      warning(Texto);
+ *      fatal(Texto);
+ *      error(Texto);
+ */
+public  class LogsJB {
 
 
     /***
@@ -68,6 +86,8 @@ public  class LogsJB extends MethodsTxt {
         return MethodsTxt.gradeLog;
     }
 
+
+
     /***
      * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
      * @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
@@ -77,7 +97,7 @@ public  class LogsJB extends MethodsTxt {
      *      * Warning = 600,
      *      * Error = 800,
      *      * Fatal = 1000.
-     * El valor por defaul es Info.
+     * El valor por defaul es Info. Lo cual hace que se reporten los Logs de grado Info, Warning, Error y Fatal.
      */
     public static void setGradeLog(NivelLog GradeLog) {
         try{
@@ -121,6 +141,35 @@ public  class LogsJB extends MethodsTxt {
         }
     }
 
+
+    /***
+     * Obtiene el usuario del sistema sobre el cual corre la aplicación
+     * @return Retorna un String con el nombre del usuario actual.
+     */
+    public static String getUsuario() {
+        return MethodsTxt.usuario;
+    }
+
+    /***
+     * Setea el nombre del usuario del sistema sobre el cual corre la aplicación
+     * @param Usuario Usuario actual del sistema que se desea indicar al Log.
+     */
+    public static void setUsuario(String Usuario){
+        try{
+            Field field = MethodsTxt.class.getDeclaredField("usuario");
+            field.setAccessible(true);
+            field.set(null, Usuario);
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+        }
+
+    }
+
+
 /*
     public static void main(String[] args) {
         try{
@@ -130,21 +179,21 @@ public  class LogsJB extends MethodsTxt {
                 try{
                     //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
                     executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-
+                    //Thread.sleep(2);
                     debug( "Primer comentario grado Debug");
-
+                    //Thread.sleep(2);
                     error( "Primer comentario grado Error");
-
+                    //Thread.sleep(2);
                     fatal( "Primer comentario grado Fatal");
-
+                    //Thread.sleep(2);
                     info( "Primer comentario grado Info");
-
+                    //Thread.sleep(2);
                     trace( "Primer comentario grado Trace");
-
+                    //Thread.sleep(2);
                     warning( "Primer comentario grado Warning");
-
+                    //Thread.sleep(2);
                     debug("Jbran");
-
+                    //Thread.sleep(2);
                     //Thread.sleep(100);
                     File carpeta = new File(archivo.getParent());
                     File[] listado;
@@ -171,39 +220,37 @@ public  class LogsJB extends MethodsTxt {
 
 
     }
-
 */
+
 
 /*
     public static void main(String[] args) {
     try{
 
-            ///LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
-        executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-        Thread.sleep(5);
-        debug( "Primer comentario grado Debug");
-        Thread.sleep(5);
-        error( "Primer comentario grado Error");
-        Thread.sleep(5);
-        fatal( "Primer comentario grado Fatal");
-        Thread.sleep(5);
-        info( "Primer comentario grado Info");
-        Thread.sleep(5);
+        //LogsJB.debug( "Primer comentario grado Debug");
+
+        //Comentario grado Trace
         trace( "Primer comentario grado Trace");
-        Thread.sleep(5);
+        //Comentario grado Debug
+        debug( "Primer comentario grado Debug");
+        //Comentario grado Info
+        info( "Primer comentario grado Info");
+        //Comentario grado Warning
         warning( "Primer comentario grado Warning");
-        Thread.sleep(5);
-        debug("Jbran");
-        Thread.sleep(5);
-        //System.exit(100);
+        //Comentario grado Error
+        error( "Primer comentario grado Error");
+        //Comentario grado Fatal
+        fatal( "Primer comentario grado Fatal");
+
         return;
 
     }catch (Exception e){
         System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
     }
 }
-
 */
+
+
     /***
      * Metodo encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
      * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal
@@ -224,19 +271,20 @@ public  class LogsJB extends MethodsTxt {
                 metodo = elements[2].getMethodName();
             }
 
-            MensajeWrite mensaje=new MensajeWrite();
-            mensaje.setTexto(Texto);
-            mensaje.setNivelLog(nivelLog);
-            mensaje.setClase(clase);
-            mensaje.setMetodo(metodo);
-            //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
-            getListado().addDato(mensaje);
-            //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
-            getInstance().run();
-            //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
-
-
-
+            if(nivelLog.getGradeLog()>= getGradeLog().getGradeLog()){
+                MensajeWrite mensaje=new MensajeWrite();
+                mensaje.setTexto(Texto);
+                mensaje.setNivelLog(nivelLog);
+                mensaje.setClase(clase);
+                mensaje.setMetodo(metodo);
+                mensaje.setFecha(convertir_fecha());
+                //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
+                getListado().addDato(mensaje);
+                //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
+                getInstance().run();
+                //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
+                Thread.sleep(2);
+            }
         }catch (Exception e){
             System.out.println("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
                     "     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal");

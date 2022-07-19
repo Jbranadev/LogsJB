@@ -21,7 +21,6 @@ import com.josebran.LogsJB.Mensajes.MensajeWrite;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.josebran.LogsJB.Numeracion.SizeLog;
 
-
 import java.lang.reflect.Field;
 
 import static com.josebran.LogsJB.Execute.getInstance;

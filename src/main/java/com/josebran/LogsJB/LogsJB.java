@@ -21,6 +21,7 @@ import com.josebran.LogsJB.Mensajes.MensajeWrite;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.josebran.LogsJB.Numeracion.SizeLog;
 
+
 import java.lang.reflect.Field;
 
 import static com.josebran.LogsJB.Execute.getInstance;
@@ -85,6 +86,8 @@ public  class LogsJB {
         return MethodsTxt.gradeLog;
     }
 
+
+
     /***
      * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
      * @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
@@ -94,7 +97,7 @@ public  class LogsJB {
      *      * Warning = 600,
      *      * Error = 800,
      *      * Fatal = 1000.
-     * El valor por defaul es Info.
+     * El valor por defaul es Info. Lo cual hace que se reporten los Logs de grado Info, Warning, Error y Fatal.
      */
     public static void setGradeLog(NivelLog GradeLog) {
         try{
@@ -223,29 +226,29 @@ public  class LogsJB {
 /*
     public static void main(String[] args) {
     try{
-        executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-        //Thread.sleep(2);
-        debug( "Primer comentario grado Debug");
-        //Thread.sleep(2);
-        error( "Primer comentario grado Error");
-        //Thread.sleep(2);
-        fatal( "Primer comentario grado Fatal");
-        //Thread.sleep(2);
-        info( "Primer comentario grado Info");
-        //Thread.sleep(2);
+
+        //LogsJB.debug( "Primer comentario grado Debug");
+
+        //Comentario grado Trace
         trace( "Primer comentario grado Trace");
-        //Thread.sleep(2);
+        //Comentario grado Debug
+        debug( "Primer comentario grado Debug");
+        //Comentario grado Info
+        info( "Primer comentario grado Info");
+        //Comentario grado Warning
         warning( "Primer comentario grado Warning");
-        //Thread.sleep(2);
-        debug("Jbran");
-        //Thread.sleep(2);
-        //System.exit(100);
+        //Comentario grado Error
+        error( "Primer comentario grado Error");
+        //Comentario grado Fatal
+        fatal( "Primer comentario grado Fatal");
+
         return;
 
     }catch (Exception e){
         System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
     }
-}*/
+}
+*/
 
 
     /***

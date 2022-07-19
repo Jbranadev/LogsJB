@@ -142,7 +142,7 @@ para hacer un System.out.println(mensaje).
 * LogsJB.debug(Mensaje);
 * debug(Mensaje);
 * @param Mensaje es un String que indica el mensaje que queremos registrar en la salida de la terminal,
-*como en el archivo Logs.txt
+* como en el archivo Logs.txt
 */
  
 //Comentario grado Trace

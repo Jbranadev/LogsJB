@@ -85,6 +85,8 @@ public  class LogsJB {
         return MethodsTxt.gradeLog;
     }
 
+
+
     /***
      * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
      * @param GradeLog Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten

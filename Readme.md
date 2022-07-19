@@ -1,10 +1,10 @@
-# LogsJB
+# LogsJB :computer: 
 LogsJB es una librería java que permite la gestión de 
 registros de un programa en paralelo a la ejecución 
-del programa, lo cual la hace una potente herramienta para programas
-que exigen grandes niveles de rendimiento.
+del programa, lo cual la hace una potente herramienta para programas empresariales y personales 
+que exigen grandes niveles de rendimiento. 
 * * *
-## Estado del Proyecto
+## Estado del Proyecto :checkered_flag: 
 LogsJB actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 
 son bienvenidas para mejorar el proyecto.
 ***
@@ -22,11 +22,13 @@ En el cual se crea automáticamente una carpeta por cada día en el que se crea 
 
 Al superarse el tamaño máximo por default de Log, se modificará el nombre de este a la siguiente notación
 Log_dd-MM-YYYY_HH-MM-SSS.txt y se seguirán escribiendo los Logs en Log.txt
+![](Imagenes/notacion_logs.png)
 
 - Los Logs que se registran en Log.txt tienen un grado igual o superior a Info.
 
 Por default se registran únicamente los registros con un grado igual o mayor al grado que posee el NivelLog.INFO.
 
+Así se ven los registros generados en Log.txt
 
 
 

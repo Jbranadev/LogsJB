@@ -5,23 +5,34 @@ del programa, lo cual la hace una potente herramienta para programas
 que exigen grandes niveles de rendimiento.
 * * *
 ## Estado del Proyecto
-LogsJB actualmente esta en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 
+LogsJB actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 
 son bienvenidas para mejorar el proyecto.
 ***
 
 ## Configuración
-Utilizar LogsJB es muy facil.
-LogsJB viene con una configuración por default, la cual es la siguiente:
+Utilizar LogsJB es muy fácil. LogsJB viene con una configuración por default.
 
-Los Logs se almacenan en ContextRoute/Logs/fecha_actual/Log.txt
+### Configuración por Default de LogsJB
+- Los Logs se almacenan en ContextRoute/Logs/fecha_actual/Log.txt
 
-Donde ContextRoute es la ruta del programa actual en ejecución, 
+Donde ContextRoute es la ruta del programa actual en ejecución, Logs es una carpeta creada en el directorio de la aplicación
+En el cual se crea automáticamente una carpeta por cada día en el que se crea un Log.
+
+- El tamaño máximo de un log es de 125Mb 
+
+Al superarse el tamaño máximo por default de Log, se modificará el nombre de este a la siguiente notación
+Log_dd-MM-YYYY_HH-MM-SSS.txt y se seguirán escribiendo los Logs en Log.txt
+
+- Los Logs que se registran en Log.txt tienen un grado igual o superior a Info.
+
+Por default se registran únicamente los registros con un grado igual o mayor al grado que posee el NivelLog.INFO.
+
 
 
 
 * * *
 ## ¿Cómo Obtener LogsJB para usarlo en mi proyecto?
-Puedes obtener la libreria LogsJB de la siguiente manera
+Puedes obtener la librería LogsJB de la siguiente manera
 
 Maven 
 ~~~

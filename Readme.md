@@ -175,7 +175,7 @@ Maven
 <dependency>
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>LogsJB</artifactId>
-    <version>0.3</version>
+    <version>0.4</version>
 </dependency>
 ~~~
 

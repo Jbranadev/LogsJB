@@ -92,11 +92,11 @@ class MethodsTxt {
             temp=formater.format(LocalDateTime.now());
 
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo que Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS");
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo que Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
         return temp;
     }
@@ -113,11 +113,11 @@ class MethodsTxt {
             temp=formater.format(LocalDateTime.now());
 
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo que Obtiene la fecha en el formato indicado");
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo que Obtiene la fecha en el formato indicado");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
         return temp;
     }
@@ -155,12 +155,12 @@ class MethodsTxt {
             }
 
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo que retorna la cantidad de tabulaciones para el siguiente texto en la misma linea conforme\n" +
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo que retorna la cantidad de tabulaciones para el siguiente texto en la misma linea conforme\n" +
                     "     * al la longitud de la cadena actual:");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
         return result;
     }
@@ -196,7 +196,7 @@ class MethodsTxt {
 
                     //System.out.println( "La fecha y hora de creación del archivo es: " + fechaformateada );
                 }catch(IOException exception) {
-                    com.josebran.LogsJB.LogsJB.fatal("Exception handled when trying to get file " + "attributes: " + exception.getMessage());
+                    com.josebran.LogsJB.LogsJB.fatal("Excepción capturada " + "attributes: " + exception.getMessage());
                 }
 
                 //SimpleDateFormat  formatofecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -214,11 +214,11 @@ class MethodsTxt {
                 }
             }
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo por medio del cual se verifica el tamaño del archivo: " +getRuta());
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo por medio del cual se verifica el tamaño del archivo: " +getRuta());
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
     }
 
@@ -246,9 +246,7 @@ class MethodsTxt {
             File directorio = new File(fichero.getParent());
             if (!directorio.exists()) {
                 if (directorio.mkdirs()) {
-                    com.josebran.LogsJB.LogsJB.info("*");
-                    com.josebran.LogsJB.LogsJB.info("Crea el directorio donde almacenara el Log de la prueba: "+fichero.getParent());
-                    com.josebran.LogsJB.LogsJB.info("*");
+                    com.josebran.LogsJB.LogsJB.debug("Crea el directorio donde almacenara el Log de la prueba: "+fichero.getParent());
                 }
             }
             
@@ -304,11 +302,11 @@ class MethodsTxt {
                 }
             }
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo por medio del cual se escribir el log del Text");
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo por medio del cual se escribir el log del Text");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
 
     }
@@ -370,12 +368,12 @@ class MethodsTxt {
             field.set(null, Logtext);
             //logtext = logtext;
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear el contador de las veces que se a escrito en " +
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el contador de las veces que se a escrito en " +
                     "el log " +Logtext);
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
 
     }

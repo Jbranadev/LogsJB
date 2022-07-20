@@ -58,11 +58,11 @@ public class ListaMensajes {
                 return dato;
             }
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al obtener el mensaje: "+Thread.currentThread().getName());
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al obtener el mensaje: "+Thread.currentThread().getName());
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
         return null;
     }

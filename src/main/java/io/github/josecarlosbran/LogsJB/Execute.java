@@ -78,11 +78,11 @@ class Execute {
         try{
             writePrincipal();
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
     }
 
@@ -142,12 +142,12 @@ class Execute {
             executorPrincipal.submit(EscritorPrincipal);
             executorPrincipal.shutdown();
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Escritor principal, es el que maneja la logica de la aplicación la cual decide si el log se almacena en una BD's,\n" +
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Escritor principal, es el que maneja la logica de la aplicación la cual decide si el log se almacena en una BD's,\n" +
                     "     * un Txt Ó si se envía a un RestAPI.");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
 
         }
     }
@@ -189,12 +189,12 @@ class Execute {
             executorTxt.shutdown();
             return;
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo encargado de crear los subprocesos encargados de escribir los logs en los TXT.\n" +
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de crear los subprocesos encargados de escribir los logs en los TXT.\n" +
                     "     * Crea un hilo que verifica el tamaño del archivo y otro que se encarga de escribir en el archivo.");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
     }
 

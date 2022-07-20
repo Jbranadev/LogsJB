@@ -66,7 +66,7 @@ public  class LogsJB {
             field.set(null, Ruta);
             com.josebran.LogsJB.LogsJB.setRuta(Ruta);
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la ruta del log " +Ruta);
         }
     }
 
@@ -108,7 +108,7 @@ public  class LogsJB {
             com.josebran.LogsJB.LogsJB.setGradeLog(getNivelLog(GradeLog));
             //Methods.metodo = metodo;
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
         }
     }
 
@@ -140,7 +140,7 @@ public  class LogsJB {
             com.josebran.LogsJB.LogsJB.setSizeLog(getSizeLog(SizeLog));
             //Methods.metodo = metodo;
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
         }
     }
 
@@ -164,11 +164,11 @@ public  class LogsJB {
             field.set(null, Usuario);
             com.josebran.LogsJB.LogsJB.setUsuario(Usuario);
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el usuario del entorno actual "+Usuario);
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
 
     }
@@ -212,14 +212,14 @@ public  class LogsJB {
                     //archivos=new File(getRuta()).list().length;
                     //System.out.println("Cantida de archivos: "+archivos);
                 }catch (Exception e){
-                    System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+                    System.out.println("Excepción capturada en el metodo main: "+e.getMessage());
                 }
 
 
             }
             System.out.println("Salio del While: "+archivos);
         }catch (Exception e){
-            System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+            System.out.println("Excepción capturada en el metodo main: "+e.getMessage());
         }
 
 
@@ -249,7 +249,7 @@ public  class LogsJB {
         return;
 
     }catch (Exception e){
-        System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+        System.out.println("Excepción capturada en el metodo main: "+e.getMessage());
     }
 }
 */
@@ -290,13 +290,13 @@ public  class LogsJB {
                 Thread.sleep(2);
             }
         }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
                     "     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal");
-            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
 
 

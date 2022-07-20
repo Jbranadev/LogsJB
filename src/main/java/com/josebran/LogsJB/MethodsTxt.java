@@ -136,24 +136,51 @@ class MethodsTxt {
         //Minima tabulacion es una
         String result = "";
         String tab = "\u0009";
+        int tamaño=cadena.length();
+        int sobrantes=tamaño%4;
+        if(sobrantes!=0){
+            int restantes=4-sobrantes;
+            for(int i=1;i<restantes;i++){
+                result=result+" ";
+            }
+        }
         try{
-            //Si la cadena es menor a 8, retornara 4 tabs
-            if(cadena.length()<8){
+            //Si la cadena es menor a 13, retornara 7 tabs
+            if(tamaño<13){
+                for(int i=0;i<7;i++){
+                    result=result+tab;
+                }
+                //Si la cadena es menor a 17, retornara 6 tabs
+            }else if(tamaño<17){
+                for(int i=0;i<6;i++){
+                    result=result+tab;
+                }
+                //Si la cadena es menor a 25, retornara 5 tabs
+            }else if(tamaño<25){
+                for(int i=0;i<5;i++){
+                    result=result+tab;
+                }
+                //Si la cadena es menor a 29, retornara 4 tabs
+            }else if(tamaño<29){
                 for(int i=0;i<4;i++){
                     result=result+tab;
                 }
-                //Si la cadena es menor a 17, retornara 3 tabs
-            }else if(cadena.length()<17){
+                //Si la cadena es menor a 33, retornara 3 tabs
+            }else if(tamaño<33){
                 for(int i=0;i<3;i++){
                     result=result+tab;
                 }
-                //Si la cadena es menor a 25, retornara 2 tabs
-            }else if(cadena.length()>16){
+                //Si la cadena es menor a 33, retornara 2 tabs
+            }else if(tamaño<37){
                 for(int i=0;i<2;i++){
                     result=result+tab;
                 }
+                //Si la cadena es mayor a 36, retornara 1 tabs
+            }else if(tamaño>36){
+                for(int i=0;i<1;i++){
+                    result=result+tab;
+                }
             }
-
         }catch (Exception e){
             System.out.println("Exepcion capturada en el metodo Metodo que retorna la cantidad de tabulaciones para el siguiente texto en la misma linea conforme\n" +
                     "     * al la longitud de la cadena actual:");

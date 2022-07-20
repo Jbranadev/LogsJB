@@ -181,7 +181,7 @@ Maven
 
 Gradle
 ~~~
-implementation 'io.github.josecarlosbran:LogsJB:0.3'
+implementation 'io.github.josecarlosbran:LogsJB:0.5'
 ~~~
 
 Para mayor información sobre como descargar LogsJB desde otros 

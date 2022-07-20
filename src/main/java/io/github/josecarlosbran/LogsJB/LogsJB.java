@@ -14,18 +14,19 @@
  * limitaciones bajo la Licencia.
  */
 
-package com.josebran.LogsJB;
+package io.github.josecarlosbran.LogsJB;
 
 
-import com.josebran.LogsJB.Mensajes.MensajeWrite;
-import com.josebran.LogsJB.Numeracion.NivelLog;
-import com.josebran.LogsJB.Numeracion.SizeLog;
+import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
+import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
+import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
+
 
 import java.lang.reflect.Field;
 
-import static com.josebran.LogsJB.Execute.getInstance;
-import static com.josebran.LogsJB.Execute.getListado;
-import static com.josebran.LogsJB.MethodsTxt.convertir_fecha;
+import static io.github.josecarlosbran.LogsJB.Execute.getInstance;
+import static io.github.josecarlosbran.LogsJB.Execute.getListado;
+import static io.github.josecarlosbran.LogsJB.MethodsTxt.convertir_fecha;
 
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
@@ -51,7 +52,7 @@ public  class LogsJB {
      * @return Retorna un String con la ruta del archivo .Txt donde se estara escribiendo el Log.
      */
     public static String getRuta() {
-        return MethodsTxt.ruta;
+        return io.github.josecarlosbran.LogsJB.MethodsTxt.ruta;
     }
 
     /**
@@ -60,11 +61,12 @@ public  class LogsJB {
      */
     public static void setRuta(String Ruta) {
         try{
-            Field field = MethodsTxt.class.getDeclaredField("ruta");
+            Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("ruta");
             field.setAccessible(true);
             field.set(null, Ruta);
+            com.josebran.LogsJB.LogsJB.setRuta(Ruta);
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
+            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
         }
     }
 
@@ -82,7 +84,7 @@ public  class LogsJB {
      * superiores, El valor por defaul es Info.
      */
     public static NivelLog getGradeLog() {
-        return MethodsTxt.gradeLog;
+        return io.github.josecarlosbran.LogsJB.MethodsTxt.gradeLog;
     }
 
 
@@ -100,12 +102,13 @@ public  class LogsJB {
      */
     public static void setGradeLog(NivelLog GradeLog) {
         try{
-            Field field = MethodsTxt.class.getDeclaredField("gradeLog");
+            Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("gradeLog");
             field.setAccessible(true);
             field.set(null, GradeLog);
+            com.josebran.LogsJB.LogsJB.setGradeLog(getNivelLog(GradeLog));
             //Methods.metodo = metodo;
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
+            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
         }
     }
 
@@ -115,7 +118,7 @@ public  class LogsJB {
      * El valor por defaul es Little_Little.
      */
     public static SizeLog getSizeLog() {
-        return MethodsTxt.sizeLog;
+        return io.github.josecarlosbran.LogsJB.MethodsTxt.sizeLog;
     }
 
     /***
@@ -131,12 +134,13 @@ public  class LogsJB {
      */
     public static void setSizeLog(SizeLog SizeLog) {
         try{
-            Field field = MethodsTxt.class.getDeclaredField("sizeLog");
+            Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("sizeLog");
             field.setAccessible(true);
             field.set(null, SizeLog);
+            com.josebran.LogsJB.LogsJB.setSizeLog(getSizeLog(SizeLog));
             //Methods.metodo = metodo;
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
+            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
         }
     }
 
@@ -146,7 +150,7 @@ public  class LogsJB {
      * @return Retorna un String con el nombre del usuario actual.
      */
     public static String getUsuario() {
-        return MethodsTxt.usuario;
+        return io.github.josecarlosbran.LogsJB.MethodsTxt.usuario;
     }
 
     /***
@@ -155,15 +159,16 @@ public  class LogsJB {
      */
     public static void setUsuario(String Usuario){
         try{
-            Field field = MethodsTxt.class.getDeclaredField("usuario");
+            Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("usuario");
             field.setAccessible(true);
             field.set(null, Usuario);
+            com.josebran.LogsJB.LogsJB.setUsuario(Usuario);
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
         }
 
     }
@@ -285,47 +290,19 @@ public  class LogsJB {
                 Thread.sleep(2);
             }
         }catch (Exception e){
-            System.out.println("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
+            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
                     "     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal");
-            System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
         }
 
 
     }
 
-    /***
-     * Procedimiento encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
-     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal
-     * @param nivelLog NivelLog del mensaje que queremos almacenar en el Log.
-     * @param Texto Texto que se desea escribir en el Log.
-     * @param clase Clase a la que pertenece el metodo desde el que se desea escribir el Log.
-     * @param metodo Metodo desde el que se llama la escritura del Log.
-     *//*
-    protected static void executor(NivelLog nivelLog, String Texto, String clase, String metodo){
-        try{
-            //Permitira obtener la pila de procesos asociados a la ejecuciòn actual
-            StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-            Methods.setClase(clase);
-            Methods.setMetodo(metodo);
-            Execute writer= new Execute();
-            writer.setMensaje(Texto);
-            writer.setNivellog(nivelLog);
-            writer.start();
-            while(writer.getState()!= Thread.State.TERMINATED){
 
-            }
-        }catch (Exception e){
-            System.out.println("Excepcion capturada al Executor encargado de llamar al proceso asincrono " +nivelLog.toString()+": "+e.getMessage());
-        }
-
-
-    }
-
-*/
     /***
      * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Informacion.
      * @param Texto Texto que se desea escribir en el Log.
@@ -373,6 +350,46 @@ public  class LogsJB {
         executor(NivelLog.ERROR, Texto);
     }
 
+    /***
+     * Obtiene el equivalente entre la librería de apoyo a interno y la Libreria de ejecución normal
+     * @param nivelLog NivelLog que se desea comparar y obtener
+     * @return Retorna el NivelLog equivalente entre ambas librerías
+     */
+    protected static com.josebran.LogsJB.Numeracion.NivelLog getNivelLog(NivelLog nivelLog){
+        if(nivelLog==NivelLog.TRACE)
+            return com.josebran.LogsJB.Numeracion.NivelLog.TRACE;
+        if(nivelLog==NivelLog.DEBUG)
+            return com.josebran.LogsJB.Numeracion.NivelLog.DEBUG;
+        if(nivelLog==NivelLog.INFO)
+            return com.josebran.LogsJB.Numeracion.NivelLog.INFO;
+        if(nivelLog==NivelLog.WARNING)
+            return com.josebran.LogsJB.Numeracion.NivelLog.WARNING;
+        if(nivelLog==NivelLog.ERROR)
+            return com.josebran.LogsJB.Numeracion.NivelLog.ERROR;
+        if(nivelLog==NivelLog.FATAL)
+            return com.josebran.LogsJB.Numeracion.NivelLog.FATAL;
+        return com.josebran.LogsJB.Numeracion.NivelLog.INFO;
+    }
 
+    /***
+     * Obtiene el equivalente entre la librería de apoyo a interno y la Libreria de ejecución normal
+     * @param sizeLog SizeLog que se desea comparar y obtener
+     * @return Retorna el SizeLog equivalente entre ambas librerías
+     */
+    protected static com.josebran.LogsJB.Numeracion.SizeLog getSizeLog(SizeLog sizeLog){
+        if(sizeLog==SizeLog.Little_Little)
+            return com.josebran.LogsJB.Numeracion.SizeLog.Little_Little;
+        if(sizeLog==SizeLog.Little)
+            return com.josebran.LogsJB.Numeracion.SizeLog.Little;
+        if(sizeLog==SizeLog.Small_Medium)
+            return com.josebran.LogsJB.Numeracion.SizeLog.Small_Medium;
+        if(sizeLog==SizeLog.Medium)
+            return com.josebran.LogsJB.Numeracion.SizeLog.Medium;
+        if(sizeLog==SizeLog.Small_Large)
+            return com.josebran.LogsJB.Numeracion.SizeLog.Small_Large;
+        if(sizeLog==SizeLog.Large)
+            return com.josebran.LogsJB.Numeracion.SizeLog.Large;
+        return com.josebran.LogsJB.Numeracion.SizeLog.Little_Little;
+    }
 
 }

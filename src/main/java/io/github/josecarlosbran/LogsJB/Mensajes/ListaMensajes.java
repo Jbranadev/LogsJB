@@ -14,7 +14,9 @@
  * limitaciones bajo la Licencia.
  */
 
-package com.josebran.LogsJB.Mensajes;
+package io.github.josecarlosbran.LogsJB.Mensajes;
+
+import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,13 +27,13 @@ import java.util.List;
  * por escribir a la lista, mientras que el proceso de ejecución secundario se encarga de escribir los mensajes.
  */
 public class ListaMensajes {
-    private List<MensajeWrite> mensajes=new LinkedList<>();
+    private List<io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite> mensajes=new LinkedList<>();
 
     /***
      * Agrega un mensaje a la lista para que este luego sea escrito.
      * @param dato Mensaje que se desea agregar a la lista.
      */
-    public synchronized void addDato(MensajeWrite dato)
+    public synchronized void addDato(io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite dato)
     {
         //System.out.println("Agrega el msj a la lista: "+dato.getTexto()+" "+dato.getNivelLog());
         mensajes.add(dato);
@@ -45,7 +47,7 @@ public class ListaMensajes {
      * @return Restorna el proximo mensaje en la cola a ser escrito, basado en el algoritmo FIFO, si no hay mensajes
      * retorna null.
      */
-    public synchronized MensajeWrite getDato()  {
+    public synchronized io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite getDato()  {
         try{
             if (mensajes.size()==0){
                 return null;
@@ -56,7 +58,11 @@ public class ListaMensajes {
                 return dato;
             }
         }catch (Exception e){
-            System.out.println("Excepcion capturada al obtener el mensaje: "+Thread.currentThread().getName());
+            com.josebran.LogsJB.LogsJB.fatal("Excepcion capturada al obtener el mensaje: "+Thread.currentThread().getName());
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
         }
         return null;
     }

@@ -15,9 +15,9 @@
  */
 
 
-package com.josebran.LogsJB.Mensajes;
+package io.github.josecarlosbran.LogsJB.Mensajes;
 
-import com.josebran.LogsJB.Numeracion.NivelLog;
+import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
 /***
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran

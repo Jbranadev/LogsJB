@@ -14,19 +14,19 @@
  * limitaciones bajo la Licencia.
  */
 
-package com.josebran.LogsJB;
+package io.github.josecarlosbran.LogsJB;
 
 
-import com.josebran.LogsJB.Mensajes.ListaMensajes;
-import com.josebran.LogsJB.Mensajes.MensajeWrite;
-import com.josebran.LogsJB.Numeracion.NivelLog;
+import io.github.josecarlosbran.LogsJB.Mensajes.ListaMensajes;
+import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
+import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.josebran.LogsJB.MethodsTxt.verificarSizeFichero;
-import static com.josebran.LogsJB.MethodsTxt.writeLog;
+import static io.github.josecarlosbran.LogsJB.MethodsTxt.verificarSizeFichero;
+import static io.github.josecarlosbran.LogsJB.MethodsTxt.writeLog;
 
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
@@ -78,11 +78,11 @@ class Execute {
         try{
             writePrincipal();
         }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
         }
     }
 
@@ -96,7 +96,7 @@ class Execute {
                 String temporal="";
                 boolean band=true;
                 while(band){
-                    NivelLog nivel=LogsJB.getGradeLog();
+                    NivelLog nivel= LogsJB.getGradeLog();
                     //String Mensaje=Execute.getInstance().getTexto();
                     //NivelLog logtemporal=Execute.getInstance().getNivelLog();
                     MensajeWrite mensajetemp=null;
@@ -142,12 +142,12 @@ class Execute {
             executorPrincipal.submit(EscritorPrincipal);
             executorPrincipal.shutdown();
         }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo Escritor principal, es el que maneja la logica de la aplicación la cual decide si el log se almacena en una BD's,\n" +
+            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo Escritor principal, es el que maneja la logica de la aplicación la cual decide si el log se almacena en una BD's,\n" +
                     "     * un Txt Ó si se envía a un RestAPI.");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
 
         }
     }
@@ -189,12 +189,12 @@ class Execute {
             executorTxt.shutdown();
             return;
         }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo encargado de crear los subprocesos encargados de escribir los logs en los TXT.\n" +
+            com.josebran.LogsJB.LogsJB.fatal("Exepcion capturada en el metodo encargado de crear los subprocesos encargados de escribir los logs en los TXT.\n" +
                     "     * Crea un hilo que verifica el tamaño del archivo y otro que se encarga de escribir en el archivo.");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Exepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Exepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Exepción : "+e.getStackTrace());
         }
     }
 

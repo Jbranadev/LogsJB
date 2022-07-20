@@ -14,7 +14,7 @@
  * limitaciones bajo la Licencia.
  */
 
-package com.josebran.LogsJB.Numeracion;
+package io.github.josecarlosbran.LogsJB.Numeracion;
 
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran

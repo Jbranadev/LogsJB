@@ -197,6 +197,10 @@ class MethodsTxt {
                     //System.out.println( "La fecha y hora de creación del archivo es: " + fechaformateada );
                 }catch(IOException exception) {
                     com.josebran.LogsJB.LogsJB.fatal("Excepción capturada " + "attributes: " + exception.getMessage());
+                    com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+exception.getClass());
+                    com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+exception.getCause());
+                    com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+exception.getMessage());
+                    com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+exception.getStackTrace());
                 }
 
                 //SimpleDateFormat  formatofecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -240,7 +244,6 @@ class MethodsTxt {
             //System.out.println("clase: " + Clase + " metodo: " + Metodo);
             //Rutas de archivos
             File fichero = new File(getRuta());
-            com.josebran.LogsJB.LogsJB.debug("Ruta del log: " + fichero.getAbsolutePath());
 
             //Verifica si existe la carpeta Logs, si no existe, la Crea
             File directorio = new File(fichero.getParent());

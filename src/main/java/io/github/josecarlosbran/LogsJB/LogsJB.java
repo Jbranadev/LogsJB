@@ -227,12 +227,12 @@ public  class LogsJB {
 */
 
 
-/*
+/**/
     public static void main(String[] args) {
     try{
 
         //LogsJB.debug( "Primer comentario grado Debug");
-
+        LogsJB.setGradeLog(NivelLog.TRACE);
         //Comentario grado Trace
         trace( "Primer comentario grado Trace");
         //Comentario grado Debug
@@ -252,7 +252,7 @@ public  class LogsJB {
         System.out.println("Excepción capturada en el metodo main: "+e.getMessage());
     }
 }
-*/
+
 
 
     /***

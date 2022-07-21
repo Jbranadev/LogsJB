@@ -76,11 +76,11 @@ class MethodsTxt {
      */
     static SizeLog sizeLog=SizeLog.Little_Little;
 
-    MethodsTxt(){
+    /*MethodsTxt(){
         setearRuta();
         setearNivelLog();
         setearSizelLog();
-    }
+    }*/
 
     static void setearNivelLog(){
         String nivelLog=System.getProperty("NivelLog");
@@ -107,6 +107,7 @@ class MethodsTxt {
                 setGradeLog(NivelLog.FATAL);
             }
         }
+        System.out.println("SystemProperty Seteada: "+System.getProperty("NivelLog"));
     }
 
     static void setearRuta(){
@@ -119,6 +120,7 @@ class MethodsTxt {
         }else{
             setRuta(rutaLog);
         }
+        System.out.println("SystemProperty Seteada: "+System.getProperty("RutaLog"));
     }
 
 
@@ -147,6 +149,7 @@ class MethodsTxt {
                 setSizeLog(SizeLog.Large);
             }
         }
+        System.out.println("SystemProperty Seteada: "+System.getProperty("SizeLog"));
     }
 
 

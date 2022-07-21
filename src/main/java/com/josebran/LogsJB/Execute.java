@@ -25,8 +25,7 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.josebran.LogsJB.MethodsTxt.verificarSizeFichero;
-import static com.josebran.LogsJB.MethodsTxt.writeLog;
+import static com.josebran.LogsJB.MethodsTxt.*;
 
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
@@ -49,7 +48,9 @@ class Execute {
     private static Execute instance = new Execute();
 
     private Execute() {
-
+        setearRuta();
+        setearNivelLog();
+        setearSizelLog();
     }
 
     /***

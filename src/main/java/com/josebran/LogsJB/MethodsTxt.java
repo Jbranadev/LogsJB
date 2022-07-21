@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,6 +75,79 @@ class MethodsTxt {
      * con el nuevo registro.
      */
     static SizeLog sizeLog=SizeLog.Little_Little;
+
+    MethodsTxt(){
+        setearRuta();
+        setearNivelLog();
+        setearSizelLog();
+    }
+
+    static void setearNivelLog(){
+        String nivelLog=System.getProperty("NivelLog");
+        if(Objects.isNull(nivelLog)){
+                //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setGradeLog(NivelLog.INFO);
+        }else{
+            if(nivelLog.equals("TRACE")){
+                setGradeLog(NivelLog.TRACE);
+            }
+            if(nivelLog.equals("DEBUG")){
+                setGradeLog(NivelLog.DEBUG);
+            }
+            if(nivelLog.equals("INFO")){
+                setGradeLog(NivelLog.INFO);
+            }
+            if(nivelLog.equals("WARNING")){
+                setGradeLog(NivelLog.WARNING);
+            }
+            if(nivelLog.equals("ERROR")){
+                setGradeLog(NivelLog.ERROR);
+            }
+            if(nivelLog.equals("FATAL")){
+                setGradeLog(NivelLog.FATAL);
+            }
+        }
+    }
+
+    static void setearRuta(){
+        String rutaLog=System.getProperty("RutaLog");
+        if(Objects.isNull(rutaLog)){
+            //Si la propiedad del sistema no esta definida, setea la ruta por default
+            String ruta=(Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+
+                    convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+            setRuta(ruta);
+        }else{
+            setRuta(rutaLog);
+        }
+    }
+
+
+    static void setearSizelLog(){
+        String sizeLog=System.getProperty("SizeLog");
+        if(Objects.isNull(sizeLog)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setSizeLog(SizeLog.Little_Little);
+        }else{
+            if(sizeLog.equals("Little_Little")){
+                setSizeLog(SizeLog.Little_Little);
+            }
+            if(sizeLog.equals("Little")){
+                setSizeLog(SizeLog.Little);
+            }
+            if(sizeLog.equals("Small_Medium")){
+                setSizeLog(SizeLog.Small_Medium);
+            }
+            if(sizeLog.equals("Medium")){
+                setSizeLog(SizeLog.Medium);
+            }
+            if(sizeLog.equals("Small_Large")){
+                setSizeLog(SizeLog.Small_Large);
+            }
+            if(sizeLog.equals("Large")){
+                setSizeLog(SizeLog.Large);
+            }
+        }
+    }
 
 
     /***
@@ -170,14 +244,14 @@ class MethodsTxt {
                 for(int i=0;i<3;i++){
                     result=result+tab;
                 }
-                //Si la cadena es menor a 33, retornara 2 tabs
+                //Si la cadena es menor a 37, retornara 2 tabs
             }else if(tamaño<37){
                 for(int i=0;i<2;i++){
                     result=result+tab;
                 }
-                //Si la cadena es mayor a 36, retornara 1 tabs
+                //Si la cadena es mayor a 36, retornara 2 tabs
             }else if(tamaño>36){
-                for(int i=0;i<1;i++){
+                for(int i=0;i<2;i++){
                     result=result+tab;
                 }
             }

@@ -63,6 +63,7 @@ public  class LogsJB {
             Field field = MethodsTxt.class.getDeclaredField("ruta");
             field.setAccessible(true);
             field.set(null, Ruta);
+            System.setProperty("RutaLog",Ruta);
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
         }
@@ -103,6 +104,7 @@ public  class LogsJB {
             Field field = MethodsTxt.class.getDeclaredField("gradeLog");
             field.setAccessible(true);
             field.set(null, GradeLog);
+            System.setProperty("NivelLog",GradeLog.name());
             //Methods.metodo = metodo;
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
@@ -134,6 +136,7 @@ public  class LogsJB {
             Field field = MethodsTxt.class.getDeclaredField("sizeLog");
             field.setAccessible(true);
             field.set(null, SizeLog);
+            System.setProperty("SizeLog",SizeLog.name());
             //Methods.metodo = metodo;
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);

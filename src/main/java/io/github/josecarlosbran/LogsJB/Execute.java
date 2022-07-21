@@ -49,7 +49,9 @@ class Execute {
     private static Execute instance = new Execute();
 
     private Execute() {
-
+        setearRuta();
+        setearNivelLog();
+        setearSizelLog();
     }
 
     /***
@@ -96,7 +98,7 @@ class Execute {
                 String temporal="";
                 boolean band=true;
                 while(band){
-                    NivelLog nivel= LogsJB.getGradeLog();
+                    NivelLog nivel=LogsJB.getGradeLog();
                     //String Mensaje=Execute.getInstance().getTexto();
                     //NivelLog logtemporal=Execute.getInstance().getNivelLog();
                     MensajeWrite mensajetemp=null;

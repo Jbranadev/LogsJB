@@ -61,28 +61,116 @@ class MethodsTxt {
      * Ruta donde se estara escribiendo el log por default, la cual sería:
      *  ContexAplicación/Logs/fecha_hoy/Log.txt
      */
-    static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+    protected static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
 
 
     /****
      * NivelLog desde el grado configurado hacía arriba se estara escribiendo el Log
      * El NivelLog por default es INFO.
      */
-    static NivelLog gradeLog=NivelLog.INFO;
+    protected static NivelLog gradeLog=NivelLog.INFO;
 
     /****
      * Tamaño maximo del archivo LogTxt diario que se estara escribiendo, si se supera el tamaño se modificara
      * el nombre del archivo a LOG_dd-MM-YYYY_HH-MM-SSS.txt, e iniciara la escritura del archivo Log.txt
      * con el nuevo registro.
      */
-    static SizeLog sizeLog=SizeLog.Little_Little;
+    protected static SizeLog sizeLog=SizeLog.Little_Little;
+
+    /*MethodsTxt(){
+        setearRuta();
+        setearNivelLog();
+        setearSizelLog();
+    }*/
+
+    /***
+     * Setea el NivelLog configurado en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a NivelLog, setea el nivel por default.
+     */
+    protected static void setearNivelLog(){
+        String nivelLog=System.getProperty("NivelLog");
+        if(Objects.isNull(nivelLog)){
+                //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setGradeLog(NivelLog.INFO);
+        }else{
+            if(nivelLog.equals("TRACE")){
+                setGradeLog(NivelLog.TRACE);
+            }
+            if(nivelLog.equals("DEBUG")){
+                setGradeLog(NivelLog.DEBUG);
+            }
+            if(nivelLog.equals("INFO")){
+                setGradeLog(NivelLog.INFO);
+            }
+            if(nivelLog.equals("WARNING")){
+                setGradeLog(NivelLog.WARNING);
+            }
+            if(nivelLog.equals("ERROR")){
+                setGradeLog(NivelLog.ERROR);
+            }
+            if(nivelLog.equals("FATAL")){
+                setGradeLog(NivelLog.FATAL);
+            }
+        }
+        //System.out.println("SystemProperty Seteada: "+System.getProperty("NivelLog"));
+    }
+
+    /***
+     * Setea la RutaLog configurado en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a RutaLog, setea la ruta por default.
+     */
+    protected static void setearRuta(){
+        String rutaLog=System.getProperty("RutaLog");
+        if(Objects.isNull(rutaLog)){
+            //Si la propiedad del sistema no esta definida, setea la ruta por default
+            String ruta=(Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+
+                    convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+            setRuta(ruta);
+        }else{
+            setRuta(rutaLog);
+        }
+        //System.out.println("SystemProperty Seteada: "+System.getProperty("RutaLog"));
+    }
+
+
+    /***
+     * Setea el SizeLog configurado en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a SizeLog, setea el SizeLog por default.
+     */
+    protected static void setearSizelLog(){
+        String sizeLog=System.getProperty("SizeLog");
+        if(Objects.isNull(sizeLog)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setSizeLog(SizeLog.Little_Little);
+        }else{
+            if(sizeLog.equals("Little_Little")){
+                setSizeLog(SizeLog.Little_Little);
+            }
+            if(sizeLog.equals("Little")){
+                setSizeLog(SizeLog.Little);
+            }
+            if(sizeLog.equals("Small_Medium")){
+                setSizeLog(SizeLog.Small_Medium);
+            }
+            if(sizeLog.equals("Medium")){
+                setSizeLog(SizeLog.Medium);
+            }
+            if(sizeLog.equals("Small_Large")){
+                setSizeLog(SizeLog.Small_Large);
+            }
+            if(sizeLog.equals("Large")){
+                setSizeLog(SizeLog.Large);
+            }
+        }
+        //System.out.println("SystemProperty Seteada: "+System.getProperty("SizeLog"));
+    }
 
 
     /***
      * Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS
      * @return Retorna una cadena de texto con la fecha obtenida
      */
-    static String convertir_fecha(){
+    protected static String convertir_fecha(){
         String temp=null;
         try{
             //DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -119,6 +207,7 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
             com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
+
         return temp;
     }
 
@@ -198,7 +287,7 @@ class MethodsTxt {
      * Verifica el tamaño del fichero de log actual, cuando este alcance los 5MB le asignara el nombre
      * LOG_dd-MM-YYYY_HH-MM-SSS.txt donde la fecha y hora que se le coloca, corresponde a la fecha y hora de creación del archivo
      */
-    static synchronized void verificarSizeFichero(){
+    protected static synchronized void verificarSizeFichero(){
         try {
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             File logactual = new File(getRuta());
@@ -263,7 +352,7 @@ class MethodsTxt {
      * @param Metodo Metodo que representa el metodo desde el cual se llama la escritura del Log.
      * @param fecha fecha y hora de la escritura del Log.
      */
-    synchronized static void writeLog(NivelLog nivelLog, String Texto, String Clase, String Metodo, String fecha){
+    protected synchronized static void writeLog(NivelLog nivelLog, String Texto, String Clase, String Metodo, String fecha){
         try{
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             String tab = "\u0009";

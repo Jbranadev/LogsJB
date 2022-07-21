@@ -65,6 +65,7 @@ public  class LogsJB {
             field.setAccessible(true);
             field.set(null, Ruta);
             com.josebran.LogsJB.LogsJB.setRuta(Ruta);
+            System.setProperty("RutaLog",Ruta);
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la ruta del log " +Ruta);
         }
@@ -106,6 +107,7 @@ public  class LogsJB {
             field.setAccessible(true);
             field.set(null, GradeLog);
             com.josebran.LogsJB.LogsJB.setGradeLog(getNivelLog(GradeLog));
+            System.setProperty("NivelLog",GradeLog.name());
             //Methods.metodo = metodo;
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
@@ -212,14 +214,14 @@ public  class LogsJB {
                     //archivos=new File(getRuta()).list().length;
                     //System.out.println("Cantida de archivos: "+archivos);
                 }catch (Exception e){
-                    System.out.println("Excepción capturada en el metodo main: "+e.getMessage());
+                    System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
                 }
 
 
             }
             System.out.println("Salio del While: "+archivos);
         }catch (Exception e){
-            System.out.println("Excepción capturada en el metodo main: "+e.getMessage());
+            System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
         }
 
 

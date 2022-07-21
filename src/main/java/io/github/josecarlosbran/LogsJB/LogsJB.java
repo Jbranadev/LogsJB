@@ -64,7 +64,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("ruta");
             field.setAccessible(true);
             field.set(null, Ruta);
-            com.josebran.LogsJB.LogsJB.setRuta(Ruta);
+            //com.josebran.LogsJB.LogsJB.setRuta(Ruta);
             System.setProperty("RutaLog",Ruta);
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la ruta del log " +Ruta);
@@ -106,7 +106,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("gradeLog");
             field.setAccessible(true);
             field.set(null, GradeLog);
-            com.josebran.LogsJB.LogsJB.setGradeLog(getNivelLog(GradeLog));
+            //com.josebran.LogsJB.LogsJB.setGradeLog(getNivelLog(GradeLog));
             System.setProperty("NivelLog",GradeLog.name());
             //Methods.metodo = metodo;
         }catch (Exception e){
@@ -139,7 +139,8 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("sizeLog");
             field.setAccessible(true);
             field.set(null, SizeLog);
-            com.josebran.LogsJB.LogsJB.setSizeLog(getSizeLog(SizeLog));
+            System.setProperty("SizeLog",SizeLog.name());
+            //com.josebran.LogsJB.LogsJB.setSizeLog(getSizeLog(SizeLog));
             //Methods.metodo = metodo;
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);

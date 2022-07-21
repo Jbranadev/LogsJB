@@ -25,8 +25,7 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static io.github.josecarlosbran.LogsJB.MethodsTxt.verificarSizeFichero;
-import static io.github.josecarlosbran.LogsJB.MethodsTxt.writeLog;
+import static io.github.josecarlosbran.LogsJB.MethodsTxt.*;
 
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran

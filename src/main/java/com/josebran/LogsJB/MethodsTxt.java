@@ -60,21 +60,21 @@ class MethodsTxt {
      * Ruta donde se estara escribiendo el log por default, la cual sería:
      *  ContexAplicación/Logs/fecha_hoy/Log.txt
      */
-    static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+    protected static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
 
 
     /****
      * NivelLog desde el grado configurado hacía arriba se estara escribiendo el Log
      * El NivelLog por default es INFO.
      */
-    static NivelLog gradeLog=NivelLog.INFO;
+    protected static NivelLog gradeLog=NivelLog.INFO;
 
     /****
      * Tamaño maximo del archivo LogTxt diario que se estara escribiendo, si se supera el tamaño se modificara
      * el nombre del archivo a LOG_dd-MM-YYYY_HH-MM-SSS.txt, e iniciara la escritura del archivo Log.txt
      * con el nuevo registro.
      */
-    static SizeLog sizeLog=SizeLog.Little_Little;
+    protected static SizeLog sizeLog=SizeLog.Little_Little;
 
     /*MethodsTxt(){
         setearRuta();
@@ -82,7 +82,11 @@ class MethodsTxt {
         setearSizelLog();
     }*/
 
-    static void setearNivelLog(){
+    /***
+     * Setea el NivelLog configurado en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a NivelLog, setea el nivel por default.
+     */
+    protected static void setearNivelLog(){
         String nivelLog=System.getProperty("NivelLog");
         if(Objects.isNull(nivelLog)){
                 //Si la propiedad del sistema no esta definida, setea el nivel por default
@@ -110,7 +114,11 @@ class MethodsTxt {
         //System.out.println("SystemProperty Seteada: "+System.getProperty("NivelLog"));
     }
 
-    static void setearRuta(){
+    /***
+     * Setea la RutaLog configurado en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a RutaLog, setea la ruta por default.
+     */
+    protected static void setearRuta(){
         String rutaLog=System.getProperty("RutaLog");
         if(Objects.isNull(rutaLog)){
             //Si la propiedad del sistema no esta definida, setea la ruta por default
@@ -124,7 +132,11 @@ class MethodsTxt {
     }
 
 
-    static void setearSizelLog(){
+    /***
+     * Setea el SizeLog configurado en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a SizeLog, setea el SizeLog por default.
+     */
+    protected static void setearSizelLog(){
         String sizeLog=System.getProperty("SizeLog");
         if(Objects.isNull(sizeLog)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
@@ -157,7 +169,7 @@ class MethodsTxt {
      * Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS
      * @return Retorna una cadena de texto con la fecha obtenida
      */
-    static String convertir_fecha(){
+    protected static String convertir_fecha(){
         String temp=null;
         try{
             //DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -181,7 +193,7 @@ class MethodsTxt {
      * @param formato Formato que se desea obtener la fecha
      * @return Retorna una cadena de texto con la fecha obtenida en el formato especificado.
      */
-    private static String convertir_fecha(String formato){
+    public static String convertir_fecha(String formato){
 
         String temp=null;
         try{
@@ -275,7 +287,7 @@ class MethodsTxt {
      * Verifica el tamaño del fichero de log actual, cuando este alcance los 5MB le asignara el nombre
      * LOG_dd-MM-YYYY_HH-MM-SSS.txt donde la fecha y hora que se le coloca, corresponde a la fecha y hora de creación del archivo
      */
-    static synchronized void verificarSizeFichero(){
+    protected static synchronized void verificarSizeFichero(){
         try {
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             File logactual = new File(getRuta());
@@ -336,7 +348,7 @@ class MethodsTxt {
      * @param Metodo Metodo que representa el metodo desde el cual se llama la escritura del Log.
      * @param fecha fecha y hora de la escritura del Log.
      */
-    synchronized static void writeLog(NivelLog nivelLog, String Texto, String Clase, String Metodo, String fecha){
+    protected synchronized static void writeLog(NivelLog nivelLog, String Texto, String Clase, String Metodo, String fecha){
         try{
             //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
             String tab = "\u0009";

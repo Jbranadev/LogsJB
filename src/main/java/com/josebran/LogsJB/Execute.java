@@ -48,6 +48,7 @@ class Execute {
     private static Execute instance = new Execute();
 
     private Execute() {
+        System.out.println("Ejecuta el constructor de Execute Soporte: ");
         setearRuta();
         setearNivelLog();
         setearSizelLog();

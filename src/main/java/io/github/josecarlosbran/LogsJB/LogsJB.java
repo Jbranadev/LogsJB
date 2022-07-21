@@ -236,6 +236,7 @@ public  class LogsJB {
 
         //LogsJB.debug( "Primer comentario grado Debug");
         LogsJB.setGradeLog(NivelLog.TRACE);
+        LogsJB.setSizeLog(SizeLog.Small_Medium);
         //Comentario grado Trace
         trace( "Primer comentario grado Trace");
         //Comentario grado Debug
@@ -249,6 +250,9 @@ public  class LogsJB {
         //Comentario grado Fatal
         fatal( "Primer comentario grado Fatal");
 
+        System.out.println("SystemProperty Seteada: "+System.getProperty("RutaLog"));
+        System.out.println("SystemProperty Seteada: "+System.getProperty("NivelLog"));
+        System.out.println("SystemProperty Seteada: "+System.getProperty("SizeLog"));
         return;
 
     }catch (Exception e){

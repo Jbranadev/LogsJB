@@ -170,14 +170,14 @@ class MethodsTxt {
                 for(int i=0;i<3;i++){
                     result=result+tab;
                 }
-                //Si la cadena es menor a 33, retornara 2 tabs
+                //Si la cadena es menor a 37, retornara 2 tabs
             }else if(tamaño<37){
                 for(int i=0;i<2;i++){
                     result=result+tab;
                 }
                 //Si la cadena es mayor a 36, retornara 1 tabs
             }else if(tamaño>36){
-                for(int i=0;i<1;i++){
+                for(int i=0;i<2;i++){
                     result=result+tab;
                 }
             }

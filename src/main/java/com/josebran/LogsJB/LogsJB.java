@@ -273,7 +273,7 @@ public  class LogsJB {
                 metodo = elements[2].getMethodName();
             }
 
-            if(nivelLog.getGradeLog()>= getGradeLog().getGradeLog()){
+            //if(nivelLog.getGradeLog()>= getGradeLog().getGradeLog()){
                 MensajeWrite mensaje=new MensajeWrite();
                 mensaje.setTexto(Texto);
                 mensaje.setNivelLog(nivelLog);
@@ -286,7 +286,7 @@ public  class LogsJB {
                 getInstance().run();
                 //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
                 Thread.sleep(2);
-            }
+            //}
         }catch (Exception e){
             System.out.println("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
                     "     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal");

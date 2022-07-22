@@ -64,7 +64,6 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("ruta");
             field.setAccessible(true);
             field.set(null, Ruta);
-            //com.josebran.LogsJB.LogsJB.setRuta(Ruta);
             System.setProperty("RutaLog",Ruta);
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la ruta del log " +Ruta);
@@ -106,9 +105,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("gradeLog");
             field.setAccessible(true);
             field.set(null, GradeLog);
-            //com.josebran.LogsJB.LogsJB.setGradeLog(getNivelLog(GradeLog));
             System.setProperty("NivelLog",GradeLog.name());
-            //Methods.metodo = metodo;
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
         }
@@ -140,8 +137,6 @@ public  class LogsJB {
             field.setAccessible(true);
             field.set(null, SizeLog);
             System.setProperty("SizeLog",SizeLog.name());
-            //com.josebran.LogsJB.LogsJB.setSizeLog(getSizeLog(SizeLog));
-            //Methods.metodo = metodo;
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
         }
@@ -357,46 +352,6 @@ public  class LogsJB {
         executor(NivelLog.ERROR, Texto);
     }
 
-    /***
-     * Obtiene el equivalente entre la librería de apoyo a interno y la Libreria de ejecución normal
-     * @param nivelLog NivelLog que se desea comparar y obtener
-     * @return Retorna el NivelLog equivalente entre ambas librerías
-     */
-    protected static com.josebran.LogsJB.Numeracion.NivelLog getNivelLog(NivelLog nivelLog){
-        if(nivelLog==NivelLog.TRACE)
-            return com.josebran.LogsJB.Numeracion.NivelLog.TRACE;
-        if(nivelLog==NivelLog.DEBUG)
-            return com.josebran.LogsJB.Numeracion.NivelLog.DEBUG;
-        if(nivelLog==NivelLog.INFO)
-            return com.josebran.LogsJB.Numeracion.NivelLog.INFO;
-        if(nivelLog==NivelLog.WARNING)
-            return com.josebran.LogsJB.Numeracion.NivelLog.WARNING;
-        if(nivelLog==NivelLog.ERROR)
-            return com.josebran.LogsJB.Numeracion.NivelLog.ERROR;
-        if(nivelLog==NivelLog.FATAL)
-            return com.josebran.LogsJB.Numeracion.NivelLog.FATAL;
-        return com.josebran.LogsJB.Numeracion.NivelLog.INFO;
-    }
 
-    /***
-     * Obtiene el equivalente entre la librería de apoyo a interno y la Libreria de ejecución normal
-     * @param sizeLog SizeLog que se desea comparar y obtener
-     * @return Retorna el SizeLog equivalente entre ambas librerías
-     */
-    protected static com.josebran.LogsJB.Numeracion.SizeLog getSizeLog(SizeLog sizeLog){
-        if(sizeLog==SizeLog.Little_Little)
-            return com.josebran.LogsJB.Numeracion.SizeLog.Little_Little;
-        if(sizeLog==SizeLog.Little)
-            return com.josebran.LogsJB.Numeracion.SizeLog.Little;
-        if(sizeLog==SizeLog.Small_Medium)
-            return com.josebran.LogsJB.Numeracion.SizeLog.Small_Medium;
-        if(sizeLog==SizeLog.Medium)
-            return com.josebran.LogsJB.Numeracion.SizeLog.Medium;
-        if(sizeLog==SizeLog.Small_Large)
-            return com.josebran.LogsJB.Numeracion.SizeLog.Small_Large;
-        if(sizeLog==SizeLog.Large)
-            return com.josebran.LogsJB.Numeracion.SizeLog.Large;
-        return com.josebran.LogsJB.Numeracion.SizeLog.Little_Little;
-    }
 
 }

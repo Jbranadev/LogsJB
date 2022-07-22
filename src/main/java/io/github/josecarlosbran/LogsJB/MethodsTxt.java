@@ -78,11 +78,7 @@ class MethodsTxt {
      */
     protected static SizeLog sizeLog=SizeLog.Little_Little;
 
-    /*MethodsTxt(){
-        setearRuta();
-        setearNivelLog();
-        setearSizelLog();
-    }*/
+
 
     /***
      * Setea el NivelLog configurado en las propiedades del sistema, de no estar
@@ -329,7 +325,6 @@ class MethodsTxt {
                 if(logactual.renameTo(newfile)){
                     com.josebran.LogsJB.LogsJB.info("Archivo renombrado: " +newrute);
                     logactual.delete();
-                    //Thread.sleep(5000);
                     logactual.createNewFile();
                 }else{
                     com.josebran.LogsJB.LogsJB.info(logactual.toPath()+" No se pudo renombrar el archivo: " +newrute);

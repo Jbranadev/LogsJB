@@ -113,7 +113,7 @@ class MethodsTxt {
                 setGradeLog(NivelLog.FATAL);
             }
         }
-        System.out.println("SystemProperty Seteada: "+System.getProperty("NivelLog"));
+        //System.out.println("SystemProperty Seteada: "+System.getProperty("NivelLog"));
     }
 
     /***
@@ -130,7 +130,7 @@ class MethodsTxt {
         }else{
             setRuta(rutaLog);
         }
-        System.out.println("SystemProperty Seteada: "+System.getProperty("RutaLog"));
+        //System.out.println("SystemProperty Seteada: "+System.getProperty("RutaLog"));
     }
 
 
@@ -163,7 +163,7 @@ class MethodsTxt {
                 setSizeLog(SizeLog.Large);
             }
         }
-        System.out.println("SystemProperty Seteada: "+System.getProperty("SizeLog"));
+        //System.out.println("SystemProperty Seteada: "+System.getProperty("SizeLog"));
     }
 
 

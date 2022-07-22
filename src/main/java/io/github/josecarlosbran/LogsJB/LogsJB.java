@@ -230,7 +230,7 @@ public  class LogsJB {
 */
 
 
-/**/
+/*
     public static void main(String[] args) {
     try{
 
@@ -259,7 +259,7 @@ public  class LogsJB {
         System.out.println("Excepción capturada en el metodo main: "+e.getMessage());
     }
 }
-
+*/
 
 
     /***

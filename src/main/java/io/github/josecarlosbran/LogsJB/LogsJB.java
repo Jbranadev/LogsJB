@@ -17,6 +17,7 @@
 package io.github.josecarlosbran.LogsJB;
 
 
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
@@ -46,6 +47,7 @@ import static io.github.josecarlosbran.LogsJB.MethodsTxt.convertir_fecha;
  */
 public  class LogsJB {
 
+    private static typeAutentication tipeautentication=typeAutentication.BEARER;
 
     /***
      * Obtiene la ruta donde se estara escribiendo el Log.
@@ -353,5 +355,33 @@ public  class LogsJB {
     }
 
 
+    /***
+     * Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
+     * @param typeAutentication Tipo de autenticación que acepta el RestAPI
+     */
+    public static void setTypeAutentication(typeAutentication typeAutentication){
+        try{
+            Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("tipeautentication");
+            field.setAccessible(true);
+            field.set(null, typeAutentication);
+            //tipeautentication = tipeautentication;
+        }catch (Exception e){
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el tipo de autenticación " +
+                    "para el RestAPI: "+typeAutentication);
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
+    }
+
+    /***
+     * Obtiene el tipo de autenticación que se indica para consumir el RestAPI
+     * @return Retorna un objeto typeAutentication con el tipo de autenticación indicada para
+     * consumir el RestAPI
+     */
+    public static typeAutentication getTypeAutentication() {
+        return tipeautentication;
+    }
 
 }

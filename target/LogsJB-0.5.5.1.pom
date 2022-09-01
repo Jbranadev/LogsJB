@@ -6,7 +6,7 @@
 
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>LogsJB</artifactId>
-  <version>0.5.5</version>
+  <version>0.5.5.1</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>LogsJB es una librería java que permite la gestión de
@@ -166,7 +166,7 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.7</version>
+        <version>1.6.8</version>
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>

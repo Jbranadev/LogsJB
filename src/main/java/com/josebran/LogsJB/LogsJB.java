@@ -283,9 +283,11 @@ public  class LogsJB {
                 //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
                 getListado().addDato(mensaje);
                 //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
-                getInstance().run();
+                if(getInstance().getTaskisReady()){
+                    getInstance().run();
+                }
                 //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
-                Thread.sleep(2);
+                //Thread.sleep(2);
             }
         }catch (Exception e){
             System.out.println("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +

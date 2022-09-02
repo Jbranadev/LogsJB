@@ -34,6 +34,8 @@ import static com.josebran.LogsJB.MethodsTxt.*;
  */
 class Execute {
 
+    private Boolean TaskisReady=true;
+
     /***
      * Lista que funciona como la cola de peticiones que llegan al Ejecutor
      */
@@ -94,6 +96,7 @@ class Execute {
      */
     private void writePrincipal(){
         try{
+            getInstance().setTaskisReady(false);
             Runnable EscritorPrincipal= ()->{
                 String temporal="";
                 boolean band=true;
@@ -135,6 +138,7 @@ class Execute {
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListado().getSize());
                     if(getListado().getSize()==0){
                         band=false;
+                        getInstance().setTaskisReady(true);
                         break;
                     }
                 }
@@ -198,6 +202,22 @@ class Execute {
             System.out.println("Mensaje de la Exepción : "+e.getMessage());
             System.out.println("Trace de la Exepción : "+e.getStackTrace());
         }
+    }
+
+    /**
+     * Obtiene la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
+     * @return True si esta libre, false si actualmente esta trabajando
+     */
+    public Boolean getTaskisReady() {
+        return TaskisReady;
+    }
+
+    /**
+     * Setea la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
+     * @param taskisReady True si esta libre, false si actualmente esta trabajando
+     */
+    public void setTaskisReady(Boolean taskisReady) {
+        TaskisReady = taskisReady;
     }
 
 }

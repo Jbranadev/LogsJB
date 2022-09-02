@@ -6,11 +6,14 @@
 
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>LogsJB</artifactId>
-  <version>0.3</version>
+  <version>0.5.7</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
-  <description>LogsJB es una librería multiplataforma que sirve para el manejo de los Logs en segundo plano, para mayor
-  información, consultar el siguiente enlace https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.txt</description>
+  <description>LogsJB es una librería java que permite la gestión de
+    registros de un programa en paralelo a la ejecución
+    del programa, lo cual la hace una potente herramienta para programas empresariales y personales
+    que exigen grandes niveles de rendimiento. Para mayor
+  información, consultar el siguiente enlace https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.md</description>
   <!-- FIXME change it to the project's website -->
   <url>https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.md</url>
 
@@ -57,6 +60,35 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <!-- Dependencia Log Interno -->
+    <dependency>
+      <groupId>io.github.josecarlosbran</groupId>
+      <artifactId>LogsJB</artifactId>
+      <version>0.5.3</version>
+    </dependency>
+
+    <!-- Dependencia Para almacenar en BD's -->
+    <dependency>
+      <groupId>io.github.josecarlosbran</groupId>
+      <artifactId>JBSqlUtils</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+
+    <!-- Dependencia Para enviar los logs a un RestAPI -->
+    <dependency>
+      <groupId>io.github.josecarlosbran</groupId>
+      <artifactId>JBRestAPI</artifactId>
+      <version>0.1</version>
+    </dependency>
+
+    <!-- Dependencia Para enviar crear JSON -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.9.1</version>
+    </dependency>
+
+
   </dependencies>
 
   <distributionManagement>
@@ -157,7 +189,7 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
-        <version>1.6.7</version>
+        <version>1.6.13</version>
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>

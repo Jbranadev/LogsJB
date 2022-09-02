@@ -18,12 +18,14 @@ package io.github.josecarlosbran.LogsJB;
 
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
+import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
+import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
 import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
 
-
 import java.lang.reflect.Field;
+import java.nio.file.Paths;
 
 import static io.github.josecarlosbran.LogsJB.Execute.getInstance;
 import static io.github.josecarlosbran.LogsJB.Execute.getListado;
@@ -48,6 +50,12 @@ import static io.github.josecarlosbran.LogsJB.MethodsTxt.convertir_fecha;
 public  class LogsJB {
 
     private static typeAutentication tipeautentication=typeAutentication.BEARER;
+
+    private static Boolean writeTxt=true;
+
+    private static Boolean writeDB=false;
+
+    private static Boolean tableDBExists=false;
 
     /***
      * Obtiene la ruta donde se estara escribiendo el Log.
@@ -178,39 +186,38 @@ public  class LogsJB {
     public static void main(String[] args) {
         try{
             int archivos=0;
-            File archivo = new File(getRuta());
-            while(archivos<3){
+            //File archivo = new File(getRuta());
+            //while(archivos<3){
+            int i=0;
+            setWriteDB(true);
+            setWriteTxt(false);
+            LogsJB.setGradeLog(NivelLog.TRACE);
+            String separador = System.getProperty("file.separator");
+            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                    "Logs" +
+                    separador +
+                    "JBSqlUtils.db");
+            LogsJBDB.setDataBaseGlobal(BDSqlite);
+            LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
+            while(i<112){
                 try{
-                    //LogsJB.setRuta("C:/Reportes/Logs/Log.txt");
-                    executor(NivelLog.DEBUG, "Ruta donde se esta escribiendo el log: "+getRuta());
-                    //Thread.sleep(2);
+
+
                     debug( "Primer comentario grado Debug");
-                    //Thread.sleep(2);
+
                     error( "Primer comentario grado Error");
-                    //Thread.sleep(2);
+
                     fatal( "Primer comentario grado Fatal");
-                    //Thread.sleep(2);
+
                     info( "Primer comentario grado Info");
-                    //Thread.sleep(2);
+
                     trace( "Primer comentario grado Trace");
-                    //Thread.sleep(2);
+
                     warning( "Primer comentario grado Warning");
-                    //Thread.sleep(2);
-                    debug("Jbran");
-                    //Thread.sleep(2);
-                    //Thread.sleep(100);
-                    File carpeta = new File(archivo.getParent());
-                    File[] listado;
-                    listado = carpeta.listFiles();
-                    archivos=listado.length;
 
-                    //System.out.println("Cantida de archivos: "+archivos);
-                    if(archivos>1){
-                        return;
-                    }
 
-                    //archivos=new File(getRuta()).list().length;
-                    //System.out.println("Cantida de archivos: "+archivos);
+                    i=i+6;
+
                 }catch (Exception e){
                     System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
                 }
@@ -223,8 +230,8 @@ public  class LogsJB {
         }
 
 
-    }
-*/
+    }*/
+
 
 
 /*
@@ -289,9 +296,11 @@ public  class LogsJB {
                 //System.out.println("Agregara el dato: "+Thread.currentThread().getName());
                 getListado().addDato(mensaje);
                 //System.out.println("Correra el metodo run: "+Thread.currentThread().getName());
-                getInstance().run();
+                if(getInstance().getTaskisReady()){
+                    getInstance().run();
+                }
                 //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
-                Thread.sleep(2);
+                //Thread.sleep(2);
             }
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
@@ -383,5 +392,88 @@ public  class LogsJB {
     public static typeAutentication getTypeAutentication() {
         return tipeautentication;
     }
+
+
+
+    /**
+     * Obtiene la bandera que índica a LogsJB si se escribirá el log en el archivo TXT
+     * @return True si se desea escribir el Log en el archivo TXT, False si se desea
+     *         que no se escriba el Log en el archivo TXT
+     */
+    public static Boolean getWriteTxt() {
+        return writeTxt;
+    }
+
+    /**
+     * Setea la bandera que índica a LogsJB si se escribirá el log en el archivo TXT
+     * @param writeTxt True si se desea escribir el Log en el archivo TXT, False si se desea
+     *                 que no se escriba el Log en el archivo TXT
+     */
+    public static void setWriteTxt(Boolean writeTxt) {
+        try{
+            Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("writeTxt");
+            field.setAccessible(true);
+            field.set(null, writeTxt);
+            System.setProperty("writeTxt", String.valueOf(writeTxt));
+        }catch (Exception e){
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
+                    "si se escribirá el Log en Txt: " +writeTxt);
+        }
+        //Execute.writeTxt = writeTxt;
+    }
+
+    /**
+     * Obtiene la bandera que índica a LogsJB si se escribirá el log en BD's
+     * @return True si se desea escribir el Log en BD's, False si se desea
+     *         que no se escriba el Log en BD's
+     */
+    public static Boolean getWriteDB() {
+        return writeDB;
+    }
+
+    /**
+     * Setea la bandera que índica a LogsJB si se escribirá el log en BD's
+     * @param writeDB True si se desea escribir el Log en BD's, False si se desea
+     *                que no se escriba el Log en BD's
+     */
+    public static void setWriteDB(Boolean writeDB) {
+        try{
+            Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("writeDB");
+            field.setAccessible(true);
+            field.set(null, writeDB);
+            System.setProperty("writeDB", String.valueOf(writeDB));
+        }catch (Exception e){
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
+                    "si se escribirá el Log en BD's: " +writeDB);
+        }
+        //Execute.writeDB = writeDB;
+    }
+
+    /**
+     * Obtiene la bandera que índica a LogsJB si la tabla en BD's correspondiente a los Logs existe
+     * en BD's
+     * @return True si la tabla existe en BD's, False si la tabla no existe.
+     */
+    public static Boolean getTableDBExists() {
+        return tableDBExists;
+    }
+
+    /**
+     * Setea la bandera que índica a LogsJB si la tabla en BD's correspondiente a los Logs existe
+     * @param tableDBExists True si la tabla existe en BD's, False si la tabla no existe.
+     */
+    public static void setTableDBExists(Boolean tableDBExists) {
+        try{
+            Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("tableDBExists");
+            field.setAccessible(true);
+            field.set(null, tableDBExists);
+            System.setProperty("writeDB", String.valueOf(tableDBExists));
+        }catch (Exception e){
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
+                    "si la tabla de los Logs existe en BD's: " +tableDBExists);
+        }
+        //Execute.tableDBExists = tableDBExists;
+    }
+
 
 }

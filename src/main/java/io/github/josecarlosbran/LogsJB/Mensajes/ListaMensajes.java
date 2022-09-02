@@ -16,8 +16,6 @@
 
 package io.github.josecarlosbran.LogsJB.Mensajes;
 
-import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
-
 import java.util.LinkedList;
 import java.util.List;
 

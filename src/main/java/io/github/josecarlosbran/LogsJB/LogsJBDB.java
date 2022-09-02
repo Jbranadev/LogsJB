@@ -10,7 +10,7 @@ import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
 
-class LogsJBDB extends JBSqlUtils {
+public class LogsJBDB extends JBSqlUtils {
 
     /**
      * Setea el nombre de la Base de Datos global a la que se conectaran los modelos que no tengan una configuración

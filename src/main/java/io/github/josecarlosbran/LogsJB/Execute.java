@@ -20,14 +20,10 @@ package io.github.josecarlosbran.LogsJB;
 import com.google.gson.JsonObject;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.RestApi;
-import io.github.josecarlosbran.JBSqlLite.Exceptions.DataBaseUndefind;
-import io.github.josecarlosbran.JBSqlLite.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlLite.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.LogsJB.Mensajes.ListaMensajes;
 import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
-import java.lang.reflect.Field;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,12 +37,9 @@ import static io.github.josecarlosbran.LogsJB.MethodsTxt.*;
  */
 class Execute {
 
-    private static Boolean writeTxt=true;
 
-    private static Boolean writeDB=false;
 
-    private static Boolean tableDBExists=false;
-
+    private Boolean TaskisReady=true;
 
 
     /***
@@ -85,87 +78,6 @@ class Execute {
         return listado;
     }
 
-    /**
-     * Obtiene la bandera que índica a LogsJB si se escribirá el log en el archivo TXT
-     * @return True si se desea escribir el Log en el archivo TXT, False si se desea
-     *         que no se escriba el Log en el archivo TXT
-     */
-    public static Boolean getWriteTxt() {
-        return writeTxt;
-    }
-
-    /**
-     * Setea la bandera que índica a LogsJB si se escribirá el log en el archivo TXT
-     * @param writeTxt True si se desea escribir el Log en el archivo TXT, False si se desea
-     *                 que no se escriba el Log en el archivo TXT
-     */
-    public static void setWriteTxt(Boolean writeTxt) {
-        try{
-            Field field = io.github.josecarlosbran.LogsJB.Execute.class.getDeclaredField("writeTxt");
-            field.setAccessible(true);
-            field.set(null, writeTxt);
-            System.setProperty("writeTxt", String.valueOf(writeTxt));
-        }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
-                    "si se escribirá el Log en Txt: " +writeTxt);
-        }
-        //Execute.writeTxt = writeTxt;
-    }
-
-    /**
-     * Obtiene la bandera que índica a LogsJB si se escribirá el log en BD's
-     * @return True si se desea escribir el Log en BD's, False si se desea
-     *         que no se escriba el Log en BD's
-     */
-    public static Boolean getWriteDB() {
-        return writeDB;
-    }
-
-    /**
-     * Setea la bandera que índica a LogsJB si se escribirá el log en BD's
-     * @param writeDB True si se desea escribir el Log en BD's, False si se desea
-     *                que no se escriba el Log en BD's
-     */
-    public static void setWriteDB(Boolean writeDB) {
-        try{
-            Field field = io.github.josecarlosbran.LogsJB.Execute.class.getDeclaredField("writeDB");
-            field.setAccessible(true);
-            field.set(null, writeDB);
-            System.setProperty("writeDB", String.valueOf(writeDB));
-        }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
-                    "si se escribirá el Log en BD's: " +writeDB);
-        }
-        //Execute.writeDB = writeDB;
-    }
-
-    /**
-     * Obtiene la bandera que índica a LogsJB si la tabla en BD's correspondiente a los Logs existe
-     * en BD's
-     * @return True si la tabla existe en BD's, False si la tabla no existe.
-     */
-    public static Boolean getTableDBExists() {
-        return tableDBExists;
-    }
-
-    /**
-     * Setea la bandera que índica a LogsJB si la tabla en BD's correspondiente a los Logs existe
-     * @param tableDBExists True si la tabla existe en BD's, False si la tabla no existe.
-     */
-    public static void setTableDBExists(Boolean tableDBExists) {
-        try{
-            Field field = io.github.josecarlosbran.LogsJB.Execute.class.getDeclaredField("tableDBExists");
-            field.setAccessible(true);
-            field.set(null, tableDBExists);
-            System.setProperty("writeDB", String.valueOf(tableDBExists));
-        }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
-                    "si la tabla de los Logs existe en BD's: " +tableDBExists);
-        }
-        //Execute.tableDBExists = tableDBExists;
-    }
-
-
     /***
      * Metodo por medio del cual se llama la escritura de los logs
      */
@@ -187,6 +99,31 @@ class Execute {
      */
     private void writePrincipal() {
         try {
+            getInstance().setTaskisReady(false);
+            //Decide si escribe o no en la BD's
+            if(LogsJB.getWriteDB()){
+                if(!LogsJB.getTableDBExists()){
+                    System.out.println("Creara la tabla: ");
+                    //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
+                    try {
+                        LogsJBDB log = new LogsJBDB();
+                        if(log.crateTable()){
+                            LogsJB.setTableDBExists(true);
+                        }else{
+                            LogsJB.setTableDBExists(true);
+                        }
+                        System.out.println("Creo la tabla: ");
+                    }catch (Exception e) {
+                        com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de crear " +
+                                "la tabla de Log en BD's");
+                        com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                        com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                        com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                        com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                    }
+                }
+            }
+
             Runnable EscritorPrincipal = () -> {
                 String temporal = "";
                 boolean band = true;
@@ -219,31 +156,17 @@ class Execute {
                         //verificarSizeFichero();
                         //writeLog(logtemporal, Mensaje, Clase, Metodo);
                         //Decide si escribe o no en el TXT
-                        if(Execute.getWriteTxt()){
+                        if(LogsJB.getWriteTxt()){
                             writeTXT(logtemporal, Mensaje, Clase, Metodo, fecha);
                         }
                         //Decide si escribe o no en la BD's
-                        if(Execute.getWriteDB()){
-                            if(!Execute.getTableDBExists()){
-                                //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
-                                try {
-                                    LogsJBDB log = new LogsJBDB();
-                                    if(log.crateTable()){
-                                        Execute.setTableDBExists(true);
-                                    }else{
-                                        Execute.setTableDBExists(true);
-                                    }
-                                }catch (Exception e) {
-                                    com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de crear " +
-                                            "la tabla de Log en BD's");
-                                    com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                                    com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                                    com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                                    com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-                                }
-                            }
+                        if(LogsJB.getWriteDB()){
+
                             writeBD(logtemporal, Mensaje, Clase, Metodo, fecha);
+
+
                         }
+
                     } else {
 
                     }
@@ -253,10 +176,10 @@ class Execute {
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListado().getSize());
                     if (getListado().getSize() == 0) {
                         band = false;
+                        getInstance().setTaskisReady(true);
                         break;
                     }
                 }
-                return;
             };
             ExecutorService executorPrincipal = Executors.newFixedThreadPool(1);
             executorPrincipal.submit(EscritorPrincipal);
@@ -328,25 +251,40 @@ class Execute {
      */
     private void writeBD(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
         try {
-            //System.out.println("El valor es igual o mayor al nivel de la aplicación: "+intniveltemporal);
-            //System.out.println("NivelLog 2: "+logtemporal);
-            //System.out.println("Texto 2: "+Mensaje);
-            //System.out.println("Temporal: "+temporal);
+            Runnable writeDB = () -> {
+                try{
+                    /*System.out.println("NivelLog 2: "+logtemporal);
+                    System.out.println("Texto 2: "+Mensaje);
+                    System.out.println("Clase: "+Clase);
+                    System.out.println("Clase: "+Metodo);
+                    System.out.println("Clase: "+fecha);*/
+                    //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
+                    LogsJBDB log = new LogsJBDB();
+
+                    //Asignamos los valores a almacenar
+                    log.getNivelLog().setValor(logtemporal.name());
+                    log.getTexto().setValor(Mensaje);
+                    log.getClase().setValor(Clase);
+                    log.getMetodo().setValor(Metodo);
+                    log.getFecha().setValor(fecha);
+
+                    //Guardamos el modelo
+                    log.save();
+                    //System.out.println("Guardo el registro en BD's: ");
+                }catch (Exception e) {
+                    com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado d crear el objeto que escribira" +
+                            "el Log en BD's");
+                    com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+                    com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+                    com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+                    com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+                }
 
 
-            //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
-            LogsJBDB log = new LogsJBDB();
-
-            //Asignamos los valores a almacenar
-            log.getNivelLog().setValor(logtemporal.name());
-            log.getTexto().setValor(Mensaje);
-            log.getClase().setValor(Clase);
-            log.getMetodo().setValor(Metodo);
-            log.getFecha().setValor(fecha);
-
-            //Guardamos el modelo
-            log.save();
-
+            };
+            ExecutorService executorDB = Executors.newFixedThreadPool(1);
+            executorDB.submit(writeDB);
+            executorDB.shutdown();
 
         } catch (Exception e) {
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado d crear el objeto que escribira" +
@@ -397,5 +335,21 @@ class Execute {
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
             com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
         }
+    }
+
+    /**
+     * Obtiene la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
+     * @return True si esta libre, false si actualmente esta trabajando
+     */
+    public Boolean getTaskisReady() {
+        return TaskisReady;
+    }
+
+    /**
+     * Setea la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
+     * @param taskisReady True si esta libre, false si actualmente esta trabajando
+     */
+    public void setTaskisReady(Boolean taskisReady) {
+        TaskisReady = taskisReady;
     }
 }

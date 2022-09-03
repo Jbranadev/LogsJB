@@ -6,7 +6,7 @@
 
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>LogsJB</artifactId>
-  <version>0.5.7</version>
+  <version>0.5.9</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>LogsJB es una librería java que permite la gestión de
@@ -65,6 +65,7 @@
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>LogsJB</artifactId>
       <version>0.5.6</version>
+      <scope>compile</scope>
     </dependency>
 
     <!-- Dependencia Para almacenar en BD's -->
@@ -72,6 +73,7 @@
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>JBSqlUtils</artifactId>
       <version>1.0.1</version>
+      <scope>compile</scope>
     </dependency>
 
     <!-- Dependencia Para enviar los logs a un RestAPI -->
@@ -79,6 +81,7 @@
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>JBRestAPI</artifactId>
       <version>0.1</version>
+      <scope>compile</scope>
     </dependency>
 
     <!-- Dependencia Para enviar crear JSON -->
@@ -86,6 +89,7 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.9.1</version>
+      <scope>compile</scope>
     </dependency>
 
 

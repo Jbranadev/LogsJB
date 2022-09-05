@@ -18,14 +18,11 @@ package io.github.josecarlosbran.LogsJB;
 
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
-import io.github.josecarlosbran.JBSqlLite.Enumerations.DataBase;
-import io.github.josecarlosbran.JBSqlLite.JBSqlUtils;
 import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
 
 import java.lang.reflect.Field;
-import java.nio.file.Paths;
 
 import static io.github.josecarlosbran.LogsJB.Execute.getInstance;
 import static io.github.josecarlosbran.LogsJB.Execute.getListado;
@@ -54,6 +51,15 @@ public  class LogsJB {
     private static Boolean writeTxt=true;
 
     private static Boolean writeDB=false;
+
+    private static Boolean writeRestAPI=false;
+
+
+    private static String keyLogRest="";
+
+    private static String urlLogRest="";
+
+
 
     private static Boolean tableDBExists=false;
 
@@ -163,7 +169,7 @@ public  class LogsJB {
 
     /***
      * Setea el nombre del usuario del sistema sobre el cual corre la aplicación
-     * @param Usuario Usuario actual del sistema que se desea indicar al Log.
+     * @param Usuario Usuario actual del sistema que se desea índicar al Log.
      */
     public static void setUsuario(String Usuario){
         try{
@@ -317,7 +323,7 @@ public  class LogsJB {
 
 
     /***
-     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Informacion.
+     * Escribe en el Log el mensaje especificado índicando que pertenece a la categoria de Informacion.
      * @param Texto Texto que se desea escribir en el Log.
      */
     public static void info(String Texto){
@@ -325,14 +331,14 @@ public  class LogsJB {
     }
 
     /***
-     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Debug.
+     * Escribe en el Log el mensaje especificado índicando que pertenece a la categoria de Debug.
      * @param Texto Texto que se desea escribir en el Log.
      */
     public static void debug(String Texto){
         executor(NivelLog.DEBUG, Texto);
     }
     /***
-     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Trace, la cual es un seguimiento mayor a Debug.
+     * Escribe en el Log el mensaje especificado índicando que pertenece a la categoria de Trace, la cual es un seguimiento mayor a Debug.
      * @param Texto Texto que se desea escribir en el Log.
      */
     public static void trace(String Texto){
@@ -340,7 +346,7 @@ public  class LogsJB {
     }
 
     /***
-     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Advertencia.
+     * Escribe en el Log el mensaje especificado índicando que pertenece a la categoria de Advertencia.
      * @param Texto Texto que se desea escribir en el Log.
      */
     public static void warning(String Texto){
@@ -348,7 +354,7 @@ public  class LogsJB {
     }
 
     /***
-     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria Fatal lo cual indica un error del cual no es posible recuperarse.
+     * Escribe en el Log el mensaje especificado índicando que pertenece a la categoria Fatal lo cual índica un error del cual no es posible recuperarse.
      * @param Texto Texto que se desea escribir en el Log.
      */
     public static void fatal(String Texto){
@@ -356,7 +362,7 @@ public  class LogsJB {
     }
 
     /***
-     * Escribe en el Log el mensaje especificado indicando que pertenece a la categoria de Error, lo cual indica que capturo un error.
+     * Escribe en el Log el mensaje especificado índicando que pertenece a la categoria de Error, lo cual índica que capturo un error.
      * @param Texto Texto que se desea escribir en el Log.
      */
     public static void error(String Texto){
@@ -364,34 +370,6 @@ public  class LogsJB {
     }
 
 
-    /***
-     * Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
-     * @param typeAutentication Tipo de autenticación que acepta el RestAPI
-     */
-    public static void setTypeAutentication(typeAutentication typeAutentication){
-        try{
-            Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("tipeautentication");
-            field.setAccessible(true);
-            field.set(null, typeAutentication);
-            //tipeautentication = tipeautentication;
-        }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el tipo de autenticación " +
-                    "para el RestAPI: "+typeAutentication);
-            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
-        }
-    }
-
-    /***
-     * Obtiene el tipo de autenticación que se indica para consumir el RestAPI
-     * @return Retorna un objeto typeAutentication con el tipo de autenticación indicada para
-     * consumir el RestAPI
-     */
-    public static typeAutentication getTypeAutentication() {
-        return tipeautentication;
-    }
 
 
 
@@ -450,6 +428,33 @@ public  class LogsJB {
     }
 
     /**
+     * Obtiene la bandera que índica a LogsJB si se enviaran los logs a un RestAPI
+     * @return True si se desea envíar el Log a un RestAPI, False si se desea
+     *         que no se envíen
+     */
+    public static Boolean getWriteRestAPI() {
+        return writeRestAPI;
+    }
+
+    /**
+     * Setea la bandera que índica si se envíaran los logs a un RestAPI
+     * @param writeRestAPI True si se desea envíar el Log a un RestAPI,
+     *                     False si no se desea que se envíen los Logs a un RestAPI
+     */
+    public static void setWriteRestAPI(Boolean writeRestAPI) {
+        try{
+            Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("writeRestAPI");
+            field.setAccessible(true);
+            field.set(null, writeRestAPI);
+            System.setProperty("writeRestAPI", String.valueOf(writeRestAPI));
+        }catch (Exception e){
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
+                    "si se envíara el Log a un RestAPI: " +writeRestAPI);
+        }
+        //LogsJB.writeRestAPI = writeRestAPI;
+    }
+
+    /**
      * Obtiene la bandera que índica a LogsJB si la tabla en BD's correspondiente a los Logs existe
      * en BD's
      * @return True si la tabla existe en BD's, False si la tabla no existe.
@@ -467,13 +472,103 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("tableDBExists");
             field.setAccessible(true);
             field.set(null, tableDBExists);
-            System.setProperty("writeDB", String.valueOf(tableDBExists));
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
                     "si la tabla de los Logs existe en BD's: " +tableDBExists);
         }
-        //Execute.tableDBExists = tableDBExists;
     }
 
 
+
+    /***
+     * Obtiene el tipo de autenticación que se índica para consumir el RestAPI
+     * @return Retorna un objeto typeAutentication con el tipo de autenticación índicada para
+     * consumir el RestAPI
+     */
+    public static typeAutentication getTipeautentication() {
+        return tipeautentication;
+    }
+
+
+    /***
+     * Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
+     * @param tipeautentication Tipo de autenticación que acepta el RestAPI
+     */
+    public static void setTipeautentication(typeAutentication tipeautentication) {
+        try{
+            Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("tipeautentication");
+            field.setAccessible(true);
+            field.set(null, tipeautentication);
+            System.setProperty("tipeautentication", String.valueOf(tipeautentication));
+        }catch (Exception e){
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el tipo de autenticación " +
+                    "para el RestAPI: "+tipeautentication);
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
+    }
+
+    
+
+
+    /**
+     * Obtiene la clave con la cual se debera de autenticar para envíar los Logs a un RestAPI
+     * @return Clave con la cual se debera de autenticar para envíar los Logs a un RestAPI
+     */
+    public static String getKeyLogRest() {
+        return keyLogRest;
+    }
+
+    /**
+     * Setea la clave con la cual se debera de autenticar para envíar los Logs a un RestAPI
+     * @param keyLogRest Clave con la cual se debera de autenticar para envíar los Logs a un RestAPI
+     */
+    public static void setKeyLogRest(String keyLogRest) {
+        try{
+            Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("keyLogRest");
+            field.setAccessible(true);
+            field.set(null, keyLogRest);
+            System.setProperty("keyLogRest", keyLogRest);
+        }catch (Exception e){
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la keyLogRest " +
+                    "Se autenticara en el RestAPI: "+keyLogRest);
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
+        
+    }
+
+    /**
+     * Obtiene la Url del endpoint que estara escuchando las solicitudes de escribir el Log en un Servidor
+     * @return Url donde estara escuchando las solicitudes el servidor
+     */
+    public static String getUrlLogRest() {
+        
+        return urlLogRest;
+    }
+
+    /**
+     * Setea la Url del endpoint que estara escuchando las solicitudes de escribir el Log en un Servidor
+     * @param urlLogRest Url donde estara escuchando las solicitudes el servidor
+     */
+    public static void setUrlLogRest(String urlLogRest) {
+        try{
+            Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("urlLogRest");
+            field.setAccessible(true);
+            field.set(null, urlLogRest);
+            System.setProperty("urlLogRest", urlLogRest);
+        }catch (Exception e){
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la keyLogRest " +
+                    "Se autenticara en el RestAPI: "+urlLogRest);
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+        }
+        //LogsJB.urlLogRest = urlLogRest;
+    }
 }

@@ -17,6 +17,7 @@
 package io.github.josecarlosbran.LogsJB;
 
 
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
 
@@ -161,6 +162,111 @@ class MethodsTxt {
         }
         //System.out.println("SystemProperty Seteada: "+System.getProperty("SizeLog"));
     }
+
+    /***
+     * Setea la bandera writeTxt configurada en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a writeTxt, setea el writeTxt por default.
+     */
+    protected static void setearWriteTxt(){
+        String writeTxt=System.getProperty("writeTxt");
+        if(Objects.isNull(writeTxt)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setWriteTxt(true);
+        }else{
+            setWriteTxt(Boolean.parseBoolean(writeTxt));
+        }
+    }
+
+    /***
+     * Setea la bandera writeDB configurada en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a writeDB, setea el writeDB por default.
+     */
+    protected static void setearWriteDB(){
+        String writeRestAPI=System.getProperty("writeRestAPI");
+        if(Objects.isNull(writeRestAPI)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setWriteDB(false);
+        }else{
+            setWriteDB(Boolean.parseBoolean(writeRestAPI));
+        }
+    }
+
+    /***
+     * Setea la bandera writeRestAPI configurada en las propiedades del sistema, de no estar
+     * configurada la propiedad correspondiente a writeRestAPI, setea el writeRestAPI por default.
+     */
+    protected static void setearWriteRestAPI(){
+        String writeTxt=System.getProperty("writeTxt");
+        if(Objects.isNull(writeTxt)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setWriteRestAPI(false);
+        }else{
+            setWriteRestAPI(Boolean.parseBoolean(writeTxt));
+        }
+    }
+
+    /**
+     * Setea el tipo de autenticación que acepta el RestAPI a donde se envíaran los Logs configurada
+     * entre las propiedades del sistema,
+     * si la writeRestAPI tiene un valor true, de no estar configurada el tipo de autenticación
+     * entre las variables del sitema, setea la propiedad writeRestAPI en false.
+     */
+    protected static void setearTipeAutenticación(){
+        String tipeautentication=System.getProperty("tipeautentication");
+        if(Objects.isNull(tipeautentication)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setWriteRestAPI(false);
+        }else{
+            if(tipeautentication.equalsIgnoreCase(typeAutentication.BEARER.name())){
+                setTipeautentication(typeAutentication.BEARER);
+            }
+
+            if(tipeautentication.equalsIgnoreCase(typeAutentication.APIKEY.name())){
+                setTipeautentication(typeAutentication.APIKEY);
+            }
+
+            if(tipeautentication.equalsIgnoreCase(typeAutentication.BASIC.name())){
+                setTipeautentication(typeAutentication.BASIC);
+            }
+            if(tipeautentication.equalsIgnoreCase(typeAutentication.DIGEST.name())){
+                setTipeautentication(typeAutentication.DIGEST);
+            }
+
+        }
+    }
+
+    /**
+     * Setea la clave con la cual se autenticara para envíar los Logs, configurada entre las propiedades del sistema
+     * si la writeRestAPI tiene un valor true, de no estar configurada la keyLogRest
+     * entre las variables del sitema, setea la propiedad writeRestAPI en false.
+     */
+    protected static void setearKeyLogRest(){
+        String keyLogRest=System.getProperty("keyLogRest");
+        if(Objects.isNull(keyLogRest)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setWriteRestAPI(false);
+        }else{
+            setKeyLogRest(keyLogRest);
+        }
+    }
+
+    /**
+     * Setea la urlLogRest a la cual se envíaran los Logs, configurada entre las propiedades del sistema
+     * si la writeRestAPI tiene un valor true, de no estar configurada la urlLogRest
+     * entre las variables del sitema, setea la propiedad writeRestAPI en false.
+     */
+    protected static void setearUrlLogRest(){
+        String urlLogRest=System.getProperty("urlLogRest");
+        if(Objects.isNull(urlLogRest)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setWriteRestAPI(false);
+        }else{
+            setUrlLogRest(urlLogRest);
+        }
+    }
+
+
+
 
 
     /***

@@ -182,12 +182,12 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a writeDB, setea el writeDB por default.
      */
     protected static void setearWriteDB(){
-        String writeRestAPI=System.getProperty("writeRestAPI");
-        if(Objects.isNull(writeRestAPI)){
+        String writeDB=System.getProperty("writeDB");
+        if(Objects.isNull(writeDB)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteDB(false);
         }else{
-            setWriteDB(Boolean.parseBoolean(writeRestAPI));
+            setWriteDB(Boolean.parseBoolean(writeDB));
         }
     }
 
@@ -196,12 +196,12 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a writeRestAPI, setea el writeRestAPI por default.
      */
     protected static void setearWriteRestAPI(){
-        String writeTxt=System.getProperty("writeTxt");
-        if(Objects.isNull(writeTxt)){
+        String writeRestAPI=System.getProperty("writeRestAPI");
+        if(Objects.isNull(writeRestAPI)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);
         }else{
-            setWriteRestAPI(Boolean.parseBoolean(writeTxt));
+            setWriteRestAPI(Boolean.parseBoolean(writeRestAPI));
         }
     }
 

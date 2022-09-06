@@ -114,6 +114,7 @@ class Execute {
         try {
             getInstance().setTaskisReady(false);
             //Decide si escribe o no en la BD's
+            //System.out.println("Valor de escritura BD's: "+ LogsJB.getWriteDB());
             if(LogsJB.getWriteDB()){
                 if(!LogsJB.getTableDBExists()){
                     System.out.println("Creara la tabla: ");
@@ -327,33 +328,48 @@ class Execute {
             //System.out.println("Temporal: "+temporal);
 
             JsonObject json=new JsonObject();
-            json.addProperty("NivelLog", logtemporal.name());
-            json.addProperty("Texto", Mensaje);
-            json.addProperty("Clase", Clase);
-            json.addProperty("Metodo", Metodo);
-            json.addProperty("Fecha", fecha);
+            json.addProperty("nivelLog", logtemporal.name());
+            json.addProperty("texto", Mensaje);
+            json.addProperty("clase", Clase);
+            json.addProperty("metodo", Metodo);
+            json.addProperty("fecha", fecha);
 
+            //System.out.println("Tipo de autenticación seteada en RestApi: "+LogsJB.getTipeautentication());
             RestApi rest= new RestApi(LogsJB.getTipeautentication(), contentType.JSON);
-
-            rest.Post(getUrlLogRest(), json.getAsString(), getKeyLogRest());
+            //System.out.println("Json a envíar: "+json.toString());
+            String respuesta=rest.Post(getUrlLogRest(), json.toString(), getKeyLogRest());
             requestCode codigorespuesta=rest.getCodigorespuesta();
+            System.out.println("Respuesta: "+respuesta);
+            System.out.println("Codigo de Respuesta: "+codigorespuesta);
+
             if((codigorespuesta==requestCode.CREATED)||(codigorespuesta==requestCode.OK)){
+                String separador = System.getProperty("file.separator");
+                String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+                        "Logs" +
+                        separador +
+                        "LogsJB.db");
+                LogsJBDB.setDataBaseGlobal(BDSqlite);
+                LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
+
                 //Verificara si hay Logs por obtener y envíar al servidor
                 LogsJBDB log = new LogsJBDB();
                 List<LogsJBDB> logs = new ArrayList<LogsJBDB>();
                 logs=log.getAll();
+                while(!log.getTaskIsReady()){
+
+                }
                 if(!logs.isEmpty()){
                     logs.forEach(temp->{
                         //Por cada objeto creo un Json y lo envío
                         JsonObject jsontemp=new JsonObject();
-                        jsontemp.addProperty("NivelLog", temp.getNivelLog().getValor());
-                        jsontemp.addProperty("Texto", temp.getTexto().getValor());
-                        jsontemp.addProperty("Clase", temp.getClase().getValor());
-                        jsontemp.addProperty("Metodo", temp.getTexto().getValor());
-                        jsontemp.addProperty("Fecha", temp.getFecha().getValor());
+                        jsontemp.addProperty("nivelLog", temp.getNivelLog().getValor());
+                        jsontemp.addProperty("texto", temp.getTexto().getValor());
+                        jsontemp.addProperty("clase", temp.getClase().getValor());
+                        jsontemp.addProperty("metodo", temp.getTexto().getValor());
+                        jsontemp.addProperty("fecha", temp.getFecha().getValor());
 
                         RestApi resttemp= new RestApi(LogsJB.getTipeautentication(), contentType.JSON);
-                        resttemp.Post(getUrlLogRest(), jsontemp.getAsString(), getKeyLogRest());
+                        resttemp.Post(getUrlLogRest(), jsontemp.toString(), getKeyLogRest());
                         requestCode codigorespuestatemp=resttemp.getCodigorespuesta();
                         //Si logro envíar el Log, elimina el modelo en Bd's
                         if((codigorespuestatemp==requestCode.CREATED)||(codigorespuestatemp==requestCode.OK)){
@@ -370,6 +386,7 @@ class Execute {
                         "LogsJB.db");
                 LogsJBDB.setDataBaseGlobal(BDSqlite);
                 LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
+
                 LogsJBDB log = new LogsJBDB();
 
                 if(!LogsJB.getTableDBExists()){

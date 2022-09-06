@@ -130,7 +130,7 @@ public class LogsJBDB extends JBSqlUtils {
     }
 
 
-    protected LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    public LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
         super();
     }
 

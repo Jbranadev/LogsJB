@@ -18,11 +18,13 @@ package io.github.josecarlosbran.LogsJB;
 
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
+import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
 
 import java.lang.reflect.Field;
+import java.nio.file.Paths;
 
 import static io.github.josecarlosbran.LogsJB.Execute.getInstance;
 import static io.github.josecarlosbran.LogsJB.Execute.getListado;
@@ -188,38 +190,42 @@ public  class LogsJB {
     }
 
 
-/*
+//*
     public static void main(String[] args) {
         try{
             int archivos=0;
             //File archivo = new File(getRuta());
             //while(archivos<3){
             int i=0;
-            setWriteDB(true);
+            //setWriteDB(false);
             setWriteTxt(false);
+            setWriteRestAPI(true);
+            setKeyLogRest("sdfasf");
+            setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
+            setTipeautentication(typeAutentication.BEARER);
             LogsJB.setGradeLog(NivelLog.TRACE);
-            String separador = System.getProperty("file.separator");
+            /*String separador = System.getProperty("file.separator");
             String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                     "Logs" +
                     separador +
                     "JBSqlUtils.db");
             LogsJBDB.setDataBaseGlobal(BDSqlite);
-            LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
-            while(i<112){
+            LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);*/
+            while(i<5){
                 try{
 
 
-                    debug( "Primer comentario grado Debug");
+                    //debug( "Primer comentario grado Debug");
 
-                    error( "Primer comentario grado Error");
+                    //error( "Primer comentario grado Error");
 
                     fatal( "Primer comentario grado Fatal");
 
-                    info( "Primer comentario grado Info");
+                    //info( "Primer comentario grado Info");
 
-                    trace( "Primer comentario grado Trace");
+                    /*trace( "Primer comentario grado Trace");
 
-                    warning( "Primer comentario grado Warning");
+                    warning( "Primer comentario grado Warning");*/
 
 
                     i=i+6;
@@ -236,7 +242,7 @@ public  class LogsJB {
         }
 
 
-    }*/
+    }//*/
 
 
 

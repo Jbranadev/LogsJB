@@ -69,6 +69,33 @@ public  class LogsJB {
         }
     }
 
+    /**
+     * Bandera que indica si la libreria esta siendo utilizada en Android
+     * @return True si la libreia esta siendo utilizada en Android, de lo contrario retorna False
+     */
+    public static Boolean getIsAndroid() {
+        return MethodsTxt.isAndroid;
+    }
+
+    /**
+     * Setea la bandera que indica si la libreria esta siendo utilizada en Android
+     * @param isAndroid True si la libreria esta siendo utilizada en Android, False si no esta siendo utilizada en Android
+     */
+    public static void setIsAndroid(Boolean isAndroid) {
+        try{
+            Field field = MethodsTxt.class.getDeclaredField("isAndroid");
+            field.setAccessible(true);
+            field.set(null, isAndroid);
+            System.setProperty("isAndroid",String.valueOf(isAndroid));
+        }catch (Exception e){
+            System.out.println("Excepcion capturada al tratar de setear el contador de las veces que se a escrito en " +
+                    "el log " +isAndroid);
+            System.out.println("Tipo de Excepción : "+e.getClass());
+            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.out.println("Mensaje de la Exepción : "+e.getMessage());
+            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+        }
+    }
 
     /***
      * Obtiene el grado del log, sobre el cual se estara realizando el seguimiento de los mensajes que se

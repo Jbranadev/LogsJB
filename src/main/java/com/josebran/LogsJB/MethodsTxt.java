@@ -45,6 +45,8 @@ import static com.josebran.LogsJB.LogsJB.*;
  */
 class MethodsTxt {
 
+    protected static  Boolean isAndroid=false;
+
     /***
      * Obtiene el usuario actual del sistema operativo
      */
@@ -163,6 +165,22 @@ class MethodsTxt {
         }
         //System.out.println("SystemProperty Seteada soporte: "+System.getProperty("SizeLog"));
     }
+
+
+    /***
+     * Setea la propiedad de si la libreria esta siendo utilizada en Android o no
+     */
+    protected static void setearIsAndroid(){
+        String Android=System.getProperty("isAndroid");
+        if(Objects.isNull(Android)){
+            //Si la propiedad del sistema no esta definida, setea el nivel por default
+            setIsAndroid(false);
+        }else{
+            setIsAndroid(Boolean.valueOf(Android));
+        }
+        //System.out.println("SystemProperty Seteada soporte: "+System.getProperty("SizeLog"));
+    }
+
 
 
     /***
@@ -354,73 +372,73 @@ class MethodsTxt {
             String tab = "\u0009";
             //Aumenta la Cantidad de Veces que se a escrito el Log
             setLogtext(getLogtext()+1);
-
-
-            //System.out.println("clase: " + Clase + " metodo: " + Metodo);
-
-            //Rutas de archivos
-            File fichero = new File(getRuta());
-            //System.out.println("Ruta del log: " + fichero.getAbsolutePath());
-
-            //Verifica si existe la carpeta Logs, si no existe, la Crea
-            File directorio = new File(fichero.getParent());
-            if (!directorio.exists()) {
-                if (directorio.mkdirs()) {
-                    System.out.println("*");
-                    System.out.println("Crea el directorio donde almacenara el Log de la prueba: "+fichero.getParent());
-                    System.out.println("*");
-                }
-            }
-            
-            /////Esta seccion se encarga de Crear y escribir en el Log/////
-            //verificarSizeFichero();
-
-            /*Si es un nuevo Test se ejecuta el siguiente codigo, tomando en cuenta que sea el primer
-             * TestCase del Test actual*/
-
-            //Si el fichero no Existe, lo creara y agregara el siguiente texto
-            if(!fichero.exists()){
-                BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
-                bw.write("*"+ "\n");
-                bw.write("*"+ "\n");
-                bw.write("*"+ "\n");
-                bw.write("*"+ "\n");
-                bw.write("*"+ "\n");
-                bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
-                bw.close();
-                System.out.println("*"+ "\n");
-                System.out.println("*"+ "\n");
-                System.out.println("*"+ "\n");
-                System.out.println("*"+ "\n");
-                System.out.println("*"+ "\n");
+            if(getIsAndroid()){
+                System.out.println("\n");
                 System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
             }else{
-                if(getLogtext()==1){
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
+                //System.out.println("clase: " + Clase + " metodo: " + Metodo);
+
+                //Rutas de archivos
+                File fichero = new File(getRuta());
+                //System.out.println("Ruta del log: " + fichero.getAbsolutePath());
+
+                //Verifica si existe la carpeta Logs, si no existe, la Crea
+                File directorio = new File(fichero.getParent());
+                if (!directorio.exists()) {
+                    if (directorio.mkdirs()) {
+                        System.out.println("*");
+                        System.out.println("Crea el directorio donde almacenara el Log de la prueba: "+fichero.getParent());
+                        System.out.println("*");
+                    }
+                }
+
+                /////Esta seccion se encarga de Crear y escribir en el Log/////
+                //verificarSizeFichero();
+                /*Si es un nuevo Test se ejecuta el siguiente codigo, tomando en cuenta que sea el primer
+                 * TestCase del Test actual*/
+                //Si el fichero no Existe, lo creara y agregara el siguiente texto
+                if(!fichero.exists()){
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
                     bw.write("*"+ "\n");
                     bw.write("*"+ "\n");
                     bw.write("*"+ "\n");
                     bw.write("*"+ "\n");
                     bw.write("*"+ "\n");
-                    //bw.write("\n");
                     bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                     bw.close();
-                    //System.out.println("*"+ "\n");
-                    //System.out.println("*"+ "\n");
-                    //System.out.println("*"+ "\n");
-                    //System.out.println("*"+ "\n");
-                    //System.out.println("*"+ "\n");
-                    System.out.println("\n");
+                    System.out.println("*"+ "\n");
+                    System.out.println("*"+ "\n");
+                    System.out.println("*"+ "\n");
+                    System.out.println("*"+ "\n");
+                    System.out.println("*"+ "\n");
                     System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                 }else{
-                    //Agrega en el fichero el Log
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
-                    bw.write("\n");
-                    bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
-                    bw.close();
-                    System.out.println("\n");
-                    System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
-
+                    if(getLogtext()==1){
+                        BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
+                        bw.write("*"+ "\n");
+                        bw.write("*"+ "\n");
+                        bw.write("*"+ "\n");
+                        bw.write("*"+ "\n");
+                        bw.write("*"+ "\n");
+                        //bw.write("\n");
+                        bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                        bw.close();
+                        //System.out.println("*"+ "\n");
+                        //System.out.println("*"+ "\n");
+                        //System.out.println("*"+ "\n");
+                        //System.out.println("*"+ "\n");
+                        //System.out.println("*"+ "\n");
+                        System.out.println("\n");
+                        System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    }else{
+                        //Agrega en el fichero el Log
+                        BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
+                        bw.write("\n");
+                        bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                        bw.close();
+                        System.out.println("\n");
+                        System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    }
                 }
             }
         }catch (Exception e){
@@ -500,5 +518,6 @@ class MethodsTxt {
 
     }
 
-    
+
+
 }

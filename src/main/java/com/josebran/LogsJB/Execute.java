@@ -54,6 +54,7 @@ class Execute {
         setearRuta();
         setearNivelLog();
         setearSizelLog();
+        setearIsAndroid();
     }
 
     /***

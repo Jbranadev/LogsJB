@@ -18,13 +18,11 @@ package io.github.josecarlosbran.LogsJB;
 
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
-import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
 
 import java.lang.reflect.Field;
-import java.nio.file.Paths;
 
 import static io.github.josecarlosbran.LogsJB.Execute.getInstance;
 import static io.github.josecarlosbran.LogsJB.Execute.getListado;

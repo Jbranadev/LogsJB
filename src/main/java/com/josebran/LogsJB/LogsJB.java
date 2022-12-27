@@ -295,9 +295,17 @@ public  class LogsJB {
             try{
                 clase = elements[3].getClassName();
                 metodo = elements[3].getMethodName();
+                if(getIsAndroid()){
+                    clase = elements[4].getClassName();
+                    metodo = elements[4].getMethodName();
+                }
             }catch (Exception ex){
                 clase = elements[2].getClassName();
                 metodo = elements[2].getMethodName();
+                if(getIsAndroid()){
+                    clase = elements[3].getClassName();
+                    metodo = elements[3].getMethodName();
+                }
             }
 
             if(nivelLog.getGradeLog()>= getGradeLog().getGradeLog()){

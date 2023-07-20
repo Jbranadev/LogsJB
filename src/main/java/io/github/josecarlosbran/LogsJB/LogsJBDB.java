@@ -9,7 +9,12 @@ import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
 import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
+import lombok.Getter;
+import lombok.Setter;
 
+/**
+ * Clase que permite el almacenamiento de los Logs en BD's
+ */
 public class LogsJBDB extends JBSqlUtils {
 
     /**
@@ -130,24 +135,49 @@ public class LogsJBDB extends JBSqlUtils {
     }
 
 
-    public LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined, ValorUndefined {
+    /**
+     * Setea las propiedades extra de conexion url DB que pueden utilizar los modelos para conectarse a BD's
+     * @param propertisUrl Propiedades extra para la url de conexion a BD's por ejemplo
+     *                     ?autoReconnect=true
+     */
+    public static void setPropertisUrlConexionGlobal(String propertisUrl){
+        try {
+            System.setProperty("DBpropertisUrl", propertisUrl);
+        } catch (Exception e) {
+            com.josebran.LogsJB.LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + e.toString());
+            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
+            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
+            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+        }
+    }
+
+
+    /**
+     * Constructor por default de la clase que se encarga de escribir los logs en BD's
+     * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las propiedades de conexión necesarias para conectarse a la BD's especificada
+     */
+    public LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
     }
 
 
+    @Getter @Setter
     private Column<Integer> Id=new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
-
+    @Getter @Setter
     private Column<String> Texto=new Column<>(DataType.VARCHAR);
-
+    @Getter @Setter
     private Column<String> NivelLog=new Column<>(DataType.VARCHAR);
-
+    @Getter @Setter
     private Column<String> Clase=new Column<>(DataType.VARCHAR);
-
+    @Getter @Setter
     private Column<String> Metodo=new Column<>(DataType.VARCHAR);
-
+    @Getter @Setter
     private Column<String> Fecha=new Column<>(DataType.VARCHAR);
 
 
+    /*
     public Column<Integer> getId() {
         return Id;
     }
@@ -194,5 +224,8 @@ public class LogsJBDB extends JBSqlUtils {
 
     public void setFecha(Column<String> fecha) {
         Fecha = fecha;
-    }
+    }*/
+
+
+
 }

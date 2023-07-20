@@ -25,7 +25,17 @@ import java.util.List;
  * por escribir a la lista, mientras que el proceso de ejecución secundario se encarga de escribir los mensajes.
  */
 public class ListaMensajes {
-    private List<io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite> mensajes=new LinkedList<>();
+    /**
+     * Lista de mensajes a escribir
+     */
+    private List<io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite> mensajes;
+
+    /**
+     * Constructor por default
+     */
+    public ListaMensajes(){
+        mensajes=new LinkedList<io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite>();
+    }
 
     /***
      * Agrega un mensaje a la lista para que este luego sea escrito.

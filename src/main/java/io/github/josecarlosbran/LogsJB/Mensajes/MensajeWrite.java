@@ -38,6 +38,13 @@ public class MensajeWrite {
 
     private String fecha;
 
+    /**
+     * Constructor por default de la clase escritora
+     */
+    public MensajeWrite(){
+
+    }
+
     /***
      * Obtiene el texto del cuerpo del Mensaje
      * @return Retorna un String que representa el mensaje que deseamos sea escrito.

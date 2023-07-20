@@ -73,6 +73,71 @@ Mensaje, es el Mensaje que el usuario índico que quería registrar.
 
 LogsJB puede ser configurada de acuerdo a las necesidades de la implementación que usted esté realizando.
 
+- Establecer que el Log se almacene en una BD's.
+
+Usted puede configurar LogsJB para que los registros se almacenen en una tabla de BD's.
+~~~
+/**
+ * Setea la bandera que índica a LogsJB si se escribirá el log en BD's
+ * @param writeDB True si se desea escribir el Log en BD's, False si se desea
+ *                que no se escriba el Log en BD's
+ */
+setWriteDB(true);
+/**
+ * Configuración de la Base De Datos en la cual volcaría los Logs
+ * Para mayor información sobre las BD's a las cuales puede volcal los Logs, visite el siguiente enlace
+ * https://github.com/Jbranadev/JBSqlUtils
+ *
+ * LogsJBDB brinda acceso a los metodos de configuración de conexión de JBSqlUtils
+ */
+String separador = System.getProperty("file.separator");
+String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
+        "Logs" +
+        separador +
+        "LogsJB.db");
+LogsJBDB.setDataBaseGlobal(BDSqlite);
+LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
+LogsJBDB.setHostGlobal("Host");
+LogsJBDB.setUserGlobal("User");
+LogsJBDB.setPortGlobal("Port");
+LogsJBDB.setPropertisUrlConexionGlobal("PropetiesURLConexión");
+~~~
+
+- Establecer que el Log se envíe a un RestAPI.
+
+Usted puede configurar LogsJB para que los registros sean enviados a un RestAPI.
+~~~
+/**
+ * Setea la bandera que índica si se envíaran los logs a un RestAPI
+ * @param writeRestAPI True si se desea envíar el Log a un RestAPI,
+ *                     False si no se desea que se envíen los Logs a un RestAPI
+ *
+ * Para mas información sobre la configuración del RestAPI al que nos vamos a conectar puede visitar el siguiente
+ * enlace, ya que hacemos uso de la Librería JBRestAPI para el envio del Log
+ *                     https://github.com/Jbranadev/JBRestAPI
+ * Al servidor se envía el siguiente JSON por medio de un metodo POST
+ *      {"nivelLog":"","texto":"", "fecha":"", "clase":"", "metodo":""}
+ */
+setWriteRestAPI(false);
+setKeyLogRest("sdfasf");
+setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
+setTipeautentication(typeAutentication.BEARER);
+~~~
+
+
+- Establecer que el Log se registre en un archivo txt.
+
+Usted puede configurar LogsJB para que los registros sean estampados en un archivo de texto.
+~~~
+/**
+ * Setea la bandera que índica a LogsJB si se escribirá el log en el archivo TXT
+ * @param writeTxt True si se desea escribir el Log en el archivo TXT, False si se desea
+ *                 que no se escriba el Log en el archivo TXT
+ */
+setWriteTxt(true);
+~~~
+
+
 - Modificar la ruta de almacenamiento de los registros.
 
 Usted puede modificar la ruta de almacenamiento de los registros de su implementación de la siguiente manera.
@@ -175,13 +240,13 @@ Maven
 <dependency>
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>LogsJB</artifactId>
-    <version>0.5</version>
+    <version>0.6.1</version>
 </dependency>
 ~~~
 
 Gradle
 ~~~
-implementation 'io.github.josecarlosbran:LogsJB:0.5'
+implementation 'io.github.josecarlosbran:LogsJB:0.6.1'
 ~~~
 
 Para mayor información sobre como descargar LogsJB desde otros 

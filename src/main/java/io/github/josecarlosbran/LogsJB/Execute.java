@@ -45,6 +45,7 @@ import static io.github.josecarlosbran.LogsJB.MethodsTxt.*;
 class Execute {
 
 
+    private LogsJBDB log ;
 
     private Boolean TaskisReady=true;
 
@@ -79,6 +80,9 @@ class Execute {
      * en segundo plano.
      */
     protected static Execute getInstance() {
+        if(instance==null){
+            instance= new Execute();
+        }
         return instance;
     }
 
@@ -274,17 +278,21 @@ class Execute {
                     System.out.println("Clase: "+Metodo);
                     System.out.println("Clase: "+fecha);*/
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
-                    LogsJBDB log = new LogsJBDB();
-
+                    //LogsJBDB log = new LogsJBDB();
+                    if(log==null){
+                        log= new LogsJBDB();
+                    }
                     //Asignamos los valores a almacenar
                     log.getNivelLog().setValor(logtemporal.name());
                     log.getTexto().setValor(Mensaje);
                     log.getClase().setValor(Clase);
                     log.getMetodo().setValor(Metodo);
                     log.getFecha().setValor(fecha);
-
                     //Guardamos el modelo
                     log.save();
+                    while(!log.getTaskIsReady()){
+
+                    }
                     //System.out.println("Guardo el registro en BD's: ");
                 }catch (Exception e) {
                     com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado d crear el objeto que escribira" +
@@ -295,20 +303,7 @@ class Execute {
                     com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                 }
 
-            /*
-            };
-            ExecutorService executorDB = Executors.newFixedThreadPool(1);
-            executorDB.submit(writeDB);
-            executorDB.shutdown();
 
-        } catch (Exception e) {
-            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado d crear el objeto que escribira" +
-                    "el Log en BD's");
-            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
-        }*/
     }
 
 

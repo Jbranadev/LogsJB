@@ -63,6 +63,13 @@ public  class LogsJB {
 
     private static Boolean tableDBExists=false;
 
+    /**
+     * Constructor por default de la clase
+     */
+    public LogsJB(){
+
+    }
+
     /***
      * Obtiene la ruta donde se estara escribiendo el Log.
      * @return Retorna un String con la ruta del archivo .Txt donde se estara escribiendo el Log.
@@ -195,13 +202,9 @@ public  class LogsJB {
             //File archivo = new File(getRuta());
             //while(archivos<3){
             int i=0;
+
             setWriteDB(true);
-            setWriteTxt(false);
-            setWriteRestAPI(true);
-            setKeyLogRest("sdfasf");
-            setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
-            setTipeautentication(typeAutentication.BEARER);
-            LogsJB.setGradeLog(NivelLog.TRACE);
+
             String separador = System.getProperty("file.separator");
             String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                     "Logs" +
@@ -209,21 +212,38 @@ public  class LogsJB {
                     "LogsJB.db");
             LogsJBDB.setDataBaseGlobal(BDSqlite);
             LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
+            LogsJBDB.setHostGlobal("Host");
+            LogsJBDB.setUserGlobal("User");
+            LogsJBDB.setPortGlobal("Port");
+            LogsJBDB.setPropertisUrlConexionGlobal("PropetiesURLConexión");
+
+
+            setWriteTxt(true);
+
+
+            setWriteRestAPI(false);
+            setKeyLogRest("sdfasf");
+            setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
+            setTipeautentication(typeAutentication.BEARER);
+
+
+            LogsJB.setGradeLog(NivelLog.TRACE);
+
             while(i<96){
                 try{
 
 
-                    debug( "Primer comentario grado Debug");
+                    debug( i+" comentario grado Debug");
 
-                    error( "Primer comentario grado Error");
+                    error( i+" comentario grado Error");
 
-                    fatal( "Primer comentario grado Fatal");
+                    fatal( i+" comentario grado Fatal");
 
-                    info( "Primer comentario grado Info");
+                    info( i+" comentario grado Info");
 
-                    trace( "Primer comentario grado Trace");
+                    trace( i+" comentario grado Trace");
 
-                    warning( "Primer comentario grado Warning");
+                    warning( i+" comentario grado Warning");
 
 
                     i=i+6;
@@ -240,8 +260,8 @@ public  class LogsJB {
         }
 
 
-    }*/
-
+    }
+*/
 
 
 /*

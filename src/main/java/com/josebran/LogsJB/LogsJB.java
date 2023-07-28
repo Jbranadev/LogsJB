@@ -252,33 +252,6 @@ public  class LogsJB {
 */
 
 
-/*
-    public static void main(String[] args) {
-    try{
-
-        //LogsJB.debug( "Primer comentario grado Debug");
-
-        //Comentario grado Trace
-        trace( "Primer comentario grado Trace");
-        //Comentario grado Debug
-        debug( "Primer comentario grado Debug");
-        //Comentario grado Info
-        info( "Primer comentario grado Info");
-        //Comentario grado Warning
-        warning( "Primer comentario grado Warning");
-        //Comentario grado Error
-        error( "Primer comentario grado Error");
-        //Comentario grado Fatal
-        fatal( "Primer comentario grado Fatal");
-
-        return;
-
-    }catch (Exception e){
-        System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
-    }
-}
-*/
-
 
     /***
      * Metodo encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
@@ -335,6 +308,24 @@ public  class LogsJB {
         }
 
 
+    }
+
+    /**
+     * Obtiene la bandera que indica si no existe alguna tarea pendiente de realizar por parte LogsJB
+     * @return True si la LogsJB se encuentra libre, si esta ocupado retorna False
+     */
+    public static Boolean getTaskIsReady(){
+        return getInstance().getTaskisReady();
+    }
+
+    /**
+     * Espera que se termine de ejecutar los trabajos que esta realizando el Log
+     */
+    public static void waitForOperationComplete(){
+        while(!getInstance().getTaskisReady()){
+
+        }
+        System.out.println("Completo de escribir los Logs");
     }
 
     /***

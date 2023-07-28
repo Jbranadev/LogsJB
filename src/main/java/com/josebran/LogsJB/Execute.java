@@ -101,7 +101,13 @@ class Execute {
             Runnable EscritorPrincipal= ()->{
                 String temporal="";
                 boolean band=true;
+                Integer i=0;
                 while(band){
+                    if(i>5000){
+                        verificarSizeFichero();
+                        i=0;
+                    }
+                    i++;
                     NivelLog nivel=LogsJB.getGradeLog();
                     //String Mensaje=Execute.getInstance().getTexto();
                     //NivelLog logtemporal=Execute.getInstance().getNivelLog();
@@ -119,6 +125,7 @@ class Execute {
                     String Metodo= mensajetemp.getMetodo();
                     String fecha= mensajetemp.getFecha();
 
+
                     //System.out.println("NivelLog definido: "+nivelaplicación);
                     //System.out.println("NivelLog temporal: "+intniveltemporal);
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
@@ -129,7 +136,7 @@ class Execute {
                     if(!temporal.equals(Mensaje)){
                         //verificarSizeFichero();
                         //writeLog(logtemporal, Mensaje, Clase, Metodo);
-                        writeTXT(logtemporal, Mensaje, Clase, Metodo, fecha);
+                        writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
                     }else{
 
                     }
@@ -160,56 +167,13 @@ class Execute {
     }
 
 
-    /****
-     * Metodo encargado de crear los subprocesos encargados de escribir los logs en los TXT.
-     * Crea un hilo que verifica el tamaño del archivo y otro que se encarga de escribir en el archivo.
-     * @param logtemporal Nivel de Log especificado para el texto que se escribira.
-     * @param Mensaje Texto que se desea escribir en el Log.
-     * @param Clase Clase a la que pertenece el metodo el cual inicia el proceso de registro del Log.
-     * @param Metodo Metodo desde que se manda a llamar el Log.
-     * @param fecha fecha y hora de la escritura del Log.
-     */
-    private void writeTXT(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha){
-        try{
-            //System.out.println("El valor es igual o mayor al nivel de la aplicación: "+intniveltemporal);
-            //System.out.println("NivelLog 2: "+logtemporal);
-            //System.out.println("Texto 2: "+Mensaje);
-            //System.out.println("Temporal: "+temporal);
 
-            Runnable verificarTxt= ()->{
-                //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
-                //Verifica el tamaño del archivo
-                verificarSizeFichero();
-            };
-            ExecutorService verificarsize = Executors.newFixedThreadPool(1);
-            verificarsize.submit(verificarTxt);
-            verificarsize.shutdown();
-
-            Runnable writeTxt= ()->{
-                //System.out.println("Nombre hilo Execute: "+Thread.currentThread().getName());
-                //Ejecuta la escritura en el archivo Log
-                writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
-
-            };
-            ExecutorService executorTxt = Executors.newFixedThreadPool(1);
-            executorTxt.submit(writeTxt);
-            executorTxt.shutdown();
-            return;
-        }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo encargado de crear los subprocesos encargados de escribir los logs en los TXT.\n" +
-                    "     * Crea un hilo que verifica el tamaño del archivo y otro que se encarga de escribir en el archivo.");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
-        }
-    }
 
     /**
      * Obtiene la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
      * @return True si esta libre, false si actualmente esta trabajando
      */
-    public Boolean getTaskisReady() {
+    public synchronized Boolean getTaskisReady() {
         return TaskisReady;
     }
 
@@ -217,7 +181,7 @@ class Execute {
      * Setea la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
      * @param taskisReady True si esta libre, false si actualmente esta trabajando
      */
-    public void setTaskisReady(Boolean taskisReady) {
+    public synchronized void setTaskisReady(Boolean taskisReady) {
         TaskisReady = taskisReady;
     }
 

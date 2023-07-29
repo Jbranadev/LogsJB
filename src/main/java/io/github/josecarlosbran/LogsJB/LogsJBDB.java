@@ -12,6 +12,8 @@ import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
 import lombok.Getter;
 import lombok.Setter;
 
+import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
+
 /**
  * Clase que permite el almacenamiento de los Logs en BD's
  */
@@ -160,6 +162,190 @@ public class LogsJBDB extends JBSqlUtils {
      */
     public LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined {
         super();
+        /*super(false);
+        this.setDataBaseType(setearDBType());
+        this.setBD(setearBD());
+        this.setHost(setearHost());
+        this.setPort(setearPort());
+        this.setUser(setearUser());
+        this.setPassword(setearPassword());
+        this.setPropertisURL(setearPropertisUrl());
+        */
+    }
+
+
+
+    /**
+     * Setea el tipo de BD's al cual se estara conectando este modelo.
+     *
+     * @return Retorna el tipo de BD's al cual se estara conectando la BD's si esta definida
+     * de lo contrario retorna NULL.
+     * @throws DataBaseUndefind Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
+     *                          el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     *                          esta excepción, poder manejarla.
+     */
+    private DataBase setearDBType() throws DataBaseUndefind {
+        if (this.getGetPropertySystem()) {
+            String dataBase = System.getProperty(ConeccionProperties.DBTYPE.getPropiertie());
+            if (stringIsNullOrEmpty(dataBase)) {
+                //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                throw new DataBaseUndefind("No se a seteado la DataBase que índica a que BD's deseamos se pegue JBSqlUtils");
+            } else {
+                if (dataBase.equals(DataBase.MySQL.name())) {
+                    setDataBaseType(DataBase.MySQL);
+                    return DataBase.MySQL;
+                }
+                if (dataBase.equals(DataBase.SQLite.name())) {
+                    setDataBaseType(DataBase.SQLite);
+                    return DataBase.SQLite;
+                }
+                if (dataBase.equals(DataBase.SQLServer.name())) {
+                    setDataBaseType(DataBase.SQLServer);
+                    return DataBase.SQLServer;
+                }
+                if (dataBase.equals(DataBase.PostgreSQL.name())) {
+                    setDataBaseType(DataBase.PostgreSQL);
+                    return DataBase.PostgreSQL;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    /**
+     * Setea el Host en el cual se encuentra la BD's a la cual se conectara.
+     *
+     * @return Retorna el Host en el cual se encuentra la BD's, de no estar definido, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a definido el Host en el cual se encuentra la BD's, si el tipo
+     *                               de BD's al cual se desea conectar es diferente a una BD's SQLite
+     * @throws DataBaseUndefind      Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
+     *                               el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     *                               esta excepción, poder manejarla.
+     */
+    private String setearHost() throws PropertiesDBUndefined, DataBaseUndefind {
+        if (this.getGetPropertySystem()) {
+            String host = System.getProperty(ConeccionProperties.DBHOST.getPropiertie());
+            if (this.getDataBaseType() != DataBase.SQLite) {
+                if (stringIsNullOrEmpty(host)) {
+                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                    throw new PropertiesDBUndefined("No se a seteado el host en el que se encuentra la BD's a la cual deseamos se pegue JBSqlUtils");
+                }
+            }
+            return host;
+
+        }
+        return null;
+    }
+
+
+    /**
+     * Setea el Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
+     *
+     * @return Retorna el Puerto en el cual se encuentra la BD's, de no estar definido, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Puerto en el cual
+     *                               se encuentra escuchando la BD's, si el tipo de BD's al cual se desea conectar es diferente a una BD's SQLite
+     * @throws DataBaseUndefind      Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
+     *                               el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     *                               esta excepción, poder manejarla.
+     */
+    private String setearPort() throws PropertiesDBUndefined, DataBaseUndefind {
+        if (this.getGetPropertySystem()) {
+            String port = System.getProperty(ConeccionProperties.DBPORT.getPropiertie());
+            if (this.getDataBaseType() != DataBase.SQLite) {
+                if (stringIsNullOrEmpty(port)) {
+                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                    throw new PropertiesDBUndefined("No se a seteado el puerto en el que se encuentra escuchando la BD's a la cual deseamos se pegue JBSqlUtils");
+                }
+            }
+            return port;
+
+        }
+        return null;
+    }
+
+
+    /**
+     * Setea el Usuario de la BD's a la cual nos conectaremos
+     *
+     * @return Retorna el Usuario con el cual se conectara la BD's, de no estar definido, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Usuario con el cual
+     *                               se conectara a la BD's
+     * @throws DataBaseUndefind      Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
+     *                               el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     *                               esta excepción, poder manejarla.
+     */
+    private String setearUser() throws PropertiesDBUndefined, DataBaseUndefind {
+        if (this.getGetPropertySystem()) {
+            String user = System.getProperty(ConeccionProperties.DBUSER.getPropiertie());
+            if (this.getDataBaseType() != DataBase.SQLite) {
+                if (stringIsNullOrEmpty(user)) {
+                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                    throw new PropertiesDBUndefined("No se a seteado el usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
+                }
+            }
+            return user;
+        }
+        return null;
+    }
+
+
+    /**
+     * Setea el Nombre de la BD's a la cual nos conectaremos.
+     *
+     * @return Retorna el nombre de la BD's a la cual nos conectaremos, de no estar definido, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado el Nombre de la BD's a la cual nos conectaremos.
+     * @throws DataBaseUndefind      Lanza esta excepción cuando no se a configurado la BD's a la cual se conectara el modelo
+     *                               el usuario de la librería es el encargado de setear el tipo de BD's a la cual se conectara el modelo, asi mismo de ser lanzada
+     *                               esta excepción, poder manejarla.
+     */
+    private String setearBD() throws PropertiesDBUndefined {
+        if (this.getGetPropertySystem()) {
+            String DB = System.getProperty(ConeccionProperties.DBNAME.getPropiertie());
+            //System.out.println("BD seteada en system property: " + DB);
+            if (stringIsNullOrEmpty(DB)) {
+                //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
+            }
+            return DB;
+
+        }
+        return null;
+    }
+
+    /**
+     * Setea la contraseña del usuario de la BD's a la cual nos conectaremos.
+     *
+     * @return Retorna la contraseña del usuario con el cual se conectara la BD's, de no estar definida, retorna NULL
+     * @throws PropertiesDBUndefined Lanza esta excepción si no se a seteado la contraseña del usuario con el cual
+     *                               se conectara a la BD's
+     */
+    private String setearPassword() throws PropertiesDBUndefined, DataBaseUndefind {
+        if (this.getGetPropertySystem()) {
+            String password = System.getProperty(ConeccionProperties.DBPASSWORD.getPropiertie());
+            if (this.getDataBaseType() != DataBase.SQLite) {
+                if (stringIsNullOrEmpty(password)) {
+                    //Si la propiedad del sistema no esta definida, Lanza una Exepción
+                    throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
+
+                }
+            }
+            return password;
+        }
+        return null;
+    }
+
+    /**
+     * Obtiene las propiedades de la url de conexión a la BD's
+     *
+     * @return Las propiedades de la url para la conexión a la BD's obtenida de las variables del sistema
+     */
+    private String setearPropertisUrl() {
+        if (this.getGetPropertySystem()) {
+            String property = System.getProperty(ConeccionProperties.DBPROPERTIESURL.getPropiertie());
+            return property;
+        }
+        return null;
     }
 
 
@@ -176,55 +362,6 @@ public class LogsJBDB extends JBSqlUtils {
     @Getter @Setter
     private Column<String> Fecha=new Column<>(DataType.VARCHAR);
 
-
-    /*
-    public Column<Integer> getId() {
-        return Id;
-    }
-
-    public void setId(Column<Integer> id) {
-        Id = id;
-    }
-
-    public Column<String> getTexto() {
-        return Texto;
-    }
-
-    public void setTexto(Column<String> texto) {
-        Texto = texto;
-    }
-
-    public Column<String> getNivelLog() {
-        return NivelLog;
-    }
-
-    public void setNivelLog(Column<String> nivelLog) {
-        NivelLog = nivelLog;
-    }
-
-    public Column<String> getClase() {
-        return Clase;
-    }
-
-    public void setClase(Column<String> clase) {
-        Clase = clase;
-    }
-
-    public Column<String> getMetodo() {
-        return Metodo;
-    }
-
-    public void setMetodo(Column<String> metodo) {
-        Metodo = metodo;
-    }
-
-    public Column<String> getFecha() {
-        return Fecha;
-    }
-
-    public void setFecha(Column<String> fecha) {
-        Fecha = fecha;
-    }*/
 
 
 

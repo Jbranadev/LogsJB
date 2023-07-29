@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.LogsJB;
 
 
+import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import org.testng.annotations.Test;
@@ -133,7 +134,7 @@ public class LogsJBTest {
             //com.josebran.LogsJB.LogsJB.setGradeLog(com.josebran.LogsJB.Numeracion.NivelLog.WARNING);
             //LogsJB.debug( "Primer comentario grado Debug");
             Integer i=0;
-            while(i<6){
+            while(i<600){
                 i+=6;
                 //Comentario grado Trace
                 trace( "Primer comentario grado Trace " +i);
@@ -154,5 +155,42 @@ public class LogsJBTest {
         }
     }
 
+
+    @Test(testName = "Write Log DB",
+            dependsOnMethods = "writeLogDB")
+    public void writeLogRestAPI() {
+        try{
+            LogsJB.setWriteTxt(false);
+            LogsJB.setWriteDB(false);
+            LogsJB.setWriteRestAPI(true);
+
+            LogsJB.setWriteRestAPI(false);
+            LogsJB.setKeyLogRest("");
+            LogsJB.setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
+            LogsJB.setTipeautentication(typeAutentication.BEARER);
+            LogsJB.setGradeLog(NivelLog.TRACE);
+            //com.josebran.LogsJB.LogsJB.setGradeLog(com.josebran.LogsJB.Numeracion.NivelLog.WARNING);
+            //LogsJB.debug( "Primer comentario grado Debug");
+            Integer i=0;
+            while(i<6){
+                i+=6;
+                //Comentario grado Trace
+                trace( "Primer comentario grado Trace " +i);
+                //Comentario grado Debug
+                debug( "Primer comentario grado Debug "+i);
+                //Comentario grado Info
+                info( "Primer comentario grado Info "+i);
+                //Comentario grado Warning
+                warning( "Primer comentario grado Warning "+i);
+                //Comentario grado Error
+                error( "Primer comentario grado Error "+i);
+                //Comentario grado Fatal
+                fatal( "Primer comentario grado Fatal "+i);
+            }
+            LogsJB.waitForOperationComplete();
+        }catch (Exception e){
+            System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+        }
+    }
 
 }

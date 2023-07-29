@@ -6,7 +6,7 @@
 
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>LogsJB</artifactId>
-  <version>0.6.1</version>
+  <version>0.6.2</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>LogsJB es una librería java que permite la gestión de
@@ -54,6 +54,13 @@
   </properties>
 
   <dependencies>
+    <!-- Dependencia TestNG -->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.7.1</version>
+      <scope>test</scope>
+    </dependency>
 
     <!-- Dependencia Log Interno -->
     <dependency>

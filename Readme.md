@@ -240,13 +240,13 @@ Maven
 <dependency>
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>LogsJB</artifactId>
-    <version>0.6.1</version>
+    <version>0.6.2</version>
 </dependency>
 ~~~
 
 Gradle
 ~~~
-implementation 'io.github.josecarlosbran:LogsJB:0.6.1'
+implementation 'io.github.josecarlosbran:LogsJB:0.6.2'
 ~~~
 
 Para mayor información sobre como descargar LogsJB desde otros 

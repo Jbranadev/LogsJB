@@ -124,7 +124,7 @@ class Execute {
                     System.out.println("Creara la tabla: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     try {
-                        LogsJBDB log = new LogsJBDB();
+                        LogsJBDB log = new LogsJBDB(false);
                         if(log.crateTable()){
                             LogsJB.setTableDBExists(true);
                         }else{
@@ -242,7 +242,7 @@ class Execute {
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     //LogsJBDB log = new LogsJBDB();
                     if(log==null){
-                        log= new LogsJBDB();
+                        log= new LogsJBDB(false);
                     }
                     //Asignamos los valores a almacenar
                     log.getNivelLog().setValor(logtemporal.name());
@@ -309,7 +309,7 @@ class Execute {
                 LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
 
                 //Verificara si hay Logs por obtener y envíar al servidor
-                LogsJBDB log = new LogsJBDB();
+                LogsJBDB log = new LogsJBDB(false);
                 List<LogsJBDB> logs = new ArrayList<LogsJBDB>();
                 logs=log.getAll();
                 while(!log.getTaskIsReady()){
@@ -341,11 +341,10 @@ class Execute {
                         "Logs" +
                         separador +
                         "LogsJB.db");
-                LogsJBDB.setDataBaseGlobal(BDSqlite);
-                LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
 
-                LogsJBDB log = new LogsJBDB();
-
+                LogsJBDB log = new LogsJBDB(false);
+                log.setDataBaseType(DataBase.SQLite);
+                log.setBD(BDSqlite);
                 if(!LogsJB.getTableDBExists()){
                     System.out.println("Creara la tabla: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual

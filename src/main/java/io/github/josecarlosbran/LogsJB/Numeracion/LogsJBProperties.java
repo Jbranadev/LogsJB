@@ -37,27 +37,51 @@ public enum LogsJBProperties {
     LogsJBDBNAME("LogsJBDataBaseBD"),
 
 
+    /**
+     * Url del endpoint que estara escuchando las solicitudes de escribir el Log en un Servidor
+     */
     LogsJBUrlLogRest("LogsJBurlLogRest"),
 
+    /**
+     * Clave con la cual se debera de autenticar para envíar los Logs a un RestAPI
+     */
     LogsJBKeyLogRest("LogsJBkeyLogRest"),
 
-
+    /**
+     * Tipo de autenticación que se índica para consumir el RestAPI
+     */
     LogsJBTypeAutenticatiosRest("LogsJBtypeAutenticationRest"),
-
+    /**
+     * Bandera que índica a LogsJB si se escribirá el log en el archivo TXT
+     */
     LogsJBWriteTxt("LogsJBwriteTxt"),
 
+    /**
+     * Bandera que índica a LogsJB si se enviaran los logs a un RestAPI
+     */
     LogsJBWriteRestApi("LogsJBwriteRestAPI"),
 
+    /**
+     * Bandera que índica a LogsJB si se escribirá el log en BD's
+     */
 
     LogsJBWriteDB("LogsJBwriteDB"),
 
 
+    /**
+     * Tamaño maximo del archivo sobre el cual se estara escribiendo el Log.
+     */
     LogsJBSizeLog("LogsJBSizeLog"),
 
-
+    /**
+     * Nivel Log desde el cual hacía arriba en la jerarquia de logs, deseamos se reporten
+     */
     LogsJBNivelLog("LogsJBNivelLog"),
 
 
+    /**
+     * Ruta del archivo .Txt donde se desea escribir el Log.
+     */
     LogsJBRutaLog("LogsJBRutaLog");
 
 

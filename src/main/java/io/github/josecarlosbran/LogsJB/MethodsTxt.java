@@ -18,6 +18,7 @@ package io.github.josecarlosbran.LogsJB;
 
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
+import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
 
@@ -86,7 +87,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a NivelLog, setea el nivel por default.
      */
     protected static void setearNivelLog(){
-        String nivelLog=System.getProperty("NivelLog");
+        String nivelLog=System.getProperty(LogsJBProperties.LogsJBNivelLog.getProperty());
         if(Objects.isNull(nivelLog)){
                 //Si la propiedad del sistema no esta definida, setea el nivel por default
             setGradeLog(NivelLog.INFO);
@@ -118,7 +119,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a RutaLog, setea la ruta por default.
      */
     protected static void setearRuta(){
-        String rutaLog=System.getProperty("RutaLog");
+        String rutaLog=System.getProperty(LogsJBProperties.LogsJBRutaLog.getProperty());
         if(Objects.isNull(rutaLog)){
             //Si la propiedad del sistema no esta definida, setea la ruta por default
             String ruta=(Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+
@@ -136,7 +137,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a SizeLog, setea el SizeLog por default.
      */
     protected static void setearSizelLog(){
-        String sizeLog=System.getProperty("SizeLog");
+        String sizeLog=System.getProperty(LogsJBProperties.LogsJBSizeLog.getProperty());
         if(Objects.isNull(sizeLog)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setSizeLog(SizeLog.Little_Little);
@@ -168,7 +169,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a writeTxt, setea el writeTxt por default.
      */
     protected static void setearWriteTxt(){
-        String writeTxt=System.getProperty("writeTxt");
+        String writeTxt=System.getProperty(LogsJBProperties.LogsJBWriteTxt.getProperty());
         if(Objects.isNull(writeTxt)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteTxt(true);
@@ -182,7 +183,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a writeDB, setea el writeDB por default.
      */
     protected static void setearWriteDB(){
-        String writeDB=System.getProperty("writeDB");
+        String writeDB=System.getProperty(LogsJBProperties.LogsJBWriteDB.getProperty());
         if(Objects.isNull(writeDB)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteDB(false);
@@ -196,7 +197,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a writeRestAPI, setea el writeRestAPI por default.
      */
     protected static void setearWriteRestAPI(){
-        String writeRestAPI=System.getProperty("writeRestAPI");
+        String writeRestAPI=System.getProperty(LogsJBProperties.LogsJBWriteRestApi.getProperty());
         if(Objects.isNull(writeRestAPI)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);
@@ -212,7 +213,7 @@ class MethodsTxt {
      * entre las variables del sitema, setea la propiedad writeRestAPI en false.
      */
     protected static void setearTipeAutenticación(){
-        String tipeautentication=System.getProperty("tipeautentication");
+        String tipeautentication=System.getProperty(LogsJBProperties.LogsJBTypeAutenticatiosRest.getProperty());
         if(Objects.isNull(tipeautentication)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);
@@ -241,7 +242,7 @@ class MethodsTxt {
      * entre las variables del sitema, setea la propiedad writeRestAPI en false.
      */
     protected static void setearKeyLogRest(){
-        String keyLogRest=System.getProperty("keyLogRest");
+        String keyLogRest=System.getProperty(LogsJBProperties.LogsJBKeyLogRest.getProperty());
         if(Objects.isNull(keyLogRest)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);
@@ -256,7 +257,7 @@ class MethodsTxt {
      * entre las variables del sitema, setea la propiedad writeRestAPI en false.
      */
     protected static void setearUrlLogRest(){
-        String urlLogRest=System.getProperty("urlLogRest");
+        String urlLogRest=System.getProperty(LogsJBProperties.LogsJBUrlLogRest.getProperty());
         if(Objects.isNull(urlLogRest)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);

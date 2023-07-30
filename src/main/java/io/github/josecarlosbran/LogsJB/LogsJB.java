@@ -19,6 +19,7 @@ package io.github.josecarlosbran.LogsJB;
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
+import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
 
@@ -87,7 +88,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("ruta");
             field.setAccessible(true);
             field.set(null, Ruta);
-            System.setProperty("RutaLog",Ruta);
+            System.setProperty(LogsJBProperties.LogsJBRutaLog.getProperty(), Ruta);
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la ruta del log " +Ruta);
         }
@@ -128,7 +129,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("gradeLog");
             field.setAccessible(true);
             field.set(null, GradeLog);
-            System.setProperty("NivelLog",GradeLog.name());
+            System.setProperty(LogsJBProperties.LogsJBNivelLog.getProperty(), GradeLog.name());
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
         }
@@ -159,7 +160,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.MethodsTxt.class.getDeclaredField("sizeLog");
             field.setAccessible(true);
             field.set(null, SizeLog);
-            System.setProperty("SizeLog",SizeLog.name());
+            System.setProperty(LogsJBProperties.LogsJBSizeLog.getProperty(), SizeLog.name());
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
         }
@@ -336,7 +337,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("writeTxt");
             field.setAccessible(true);
             field.set(null, writeTxt);
-            System.setProperty("writeTxt", String.valueOf(writeTxt));
+            System.setProperty(LogsJBProperties.LogsJBWriteTxt.getProperty(), String.valueOf(writeTxt));
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
                     "si se escribirá el Log en Txt: " +writeTxt);
@@ -363,7 +364,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("writeDB");
             field.setAccessible(true);
             field.set(null, writeDB);
-            System.setProperty("writeDB", String.valueOf(writeDB));
+            System.setProperty(LogsJBProperties.LogsJBWriteDB.getProperty(), String.valueOf(writeDB));
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
                     "si se escribirá el Log en BD's: " +writeDB);
@@ -390,7 +391,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("writeRestAPI");
             field.setAccessible(true);
             field.set(null, writeRestAPI);
-            System.setProperty("writeRestAPI", String.valueOf(writeRestAPI));
+            System.setProperty(LogsJBProperties.LogsJBWriteRestApi.getProperty(), String.valueOf(writeRestAPI));
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear " +
                     "si se envíara el Log a un RestAPI: " +writeRestAPI);
@@ -443,7 +444,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("tipeautentication");
             field.setAccessible(true);
             field.set(null, tipeautentication);
-            System.setProperty("tipeautentication", String.valueOf(tipeautentication));
+            System.setProperty(LogsJBProperties.LogsJBTypeAutenticatiosRest.getProperty(), String.valueOf(tipeautentication));
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el tipo de autenticación " +
                     "para el RestAPI: "+tipeautentication);
@@ -474,7 +475,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("keyLogRest");
             field.setAccessible(true);
             field.set(null, keyLogRest);
-            System.setProperty("keyLogRest", keyLogRest);
+            System.setProperty(LogsJBProperties.LogsJBKeyLogRest.getProperty(), keyLogRest);
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la keyLogRest " +
                     "Se autenticara en el RestAPI: "+keyLogRest);
@@ -504,7 +505,7 @@ public  class LogsJB {
             Field field = io.github.josecarlosbran.LogsJB.LogsJB.class.getDeclaredField("urlLogRest");
             field.setAccessible(true);
             field.set(null, urlLogRest);
-            System.setProperty("urlLogRest", urlLogRest);
+            System.setProperty(LogsJBProperties.LogsJBUrlLogRest.getProperty(), urlLogRest);
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear la keyLogRest " +
                     "Se autenticara en el RestAPI: "+urlLogRest);

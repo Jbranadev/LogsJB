@@ -49,6 +49,11 @@ import static io.github.josecarlosbran.LogsJB.LogsJB.*;
  */
 class MethodsTxt {
 
+    /**
+     * Separador que utiliza el sistema de archivos por default
+     */
+    private static String separador = System.getProperty("file.separator");
+
     /***
      * Obtiene el usuario actual del sistema operativo
      */
@@ -64,7 +69,7 @@ class MethodsTxt {
      * Ruta donde se estara escribiendo el log por default, la cual sería:
      *  ContexAplicación/Logs/fecha_hoy/Log.txt
      */
-    protected static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+    protected static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+separador+"Logs"+separador+convertir_fecha("dd-MM-YYYY") +separador+ "Log.txt");
 
 
     /****
@@ -122,8 +127,8 @@ class MethodsTxt {
         String rutaLog=System.getProperty(LogsJBProperties.LogsJBRutaLog.getProperty());
         if(Objects.isNull(rutaLog)){
             //Si la propiedad del sistema no esta definida, setea la ruta por default
-            String ruta=(Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+
-                    convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+            String ruta=(Paths.get("").toAbsolutePath().normalize().toString()+separador+"Logs"+separador+
+                    convertir_fecha("dd-MM-YYYY") + separador+"Log.txt");
             setRuta(ruta);
         }else{
             setRuta(rutaLog);

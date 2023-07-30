@@ -211,7 +211,7 @@ public  class LogsJB {
      * Espera que se termine de ejecutar los trabajos que esta realizando el Log
      */
     public static void waitForOperationComplete(){
-        while(!getInstance().getTaskisReady()){
+        while(!io.github.josecarlosbran.LogsJB.Execute.getInstance().getTaskisReady()){
 
         }
         System.out.println("Completo de escribir los Logs");

@@ -4,12 +4,13 @@ package io.github.josecarlosbran.LogsJB;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.nio.file.Paths;
 
 import static io.github.josecarlosbran.LogsJB.LogsJB.*;
-
+@Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class LogsJBTest {
 
     /*

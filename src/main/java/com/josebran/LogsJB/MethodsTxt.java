@@ -17,6 +17,7 @@
 package com.josebran.LogsJB;
 
 
+import com.josebran.LogsJB.Numeracion.LogsJBProperties;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.josebran.LogsJB.Numeracion.SizeLog;
 
@@ -89,7 +90,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a NivelLog, setea el nivel por default.
      */
     protected static void setearNivelLog(){
-        String nivelLog=System.getProperty("NivelLog");
+        String nivelLog=System.getProperty(LogsJBProperties.LogsJBNivelLog.getProperty());
         if(Objects.isNull(nivelLog)){
                 //Si la propiedad del sistema no esta definida, setea el nivel por default
             setGradeLog(NivelLog.INFO);
@@ -121,7 +122,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a RutaLog, setea la ruta por default.
      */
     protected static void setearRuta(){
-        String rutaLog=System.getProperty("RutaLog");
+        String rutaLog=System.getProperty(LogsJBProperties.LogsJBRutaLog.getProperty());
         if(Objects.isNull(rutaLog)){
             //Si la propiedad del sistema no esta definida, setea la ruta por default
             String ruta=(Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+
@@ -139,7 +140,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a SizeLog, setea el SizeLog por default.
      */
     protected static void setearSizelLog(){
-        String sizeLog=System.getProperty("SizeLog");
+        String sizeLog=System.getProperty(LogsJBProperties.LogsJBSizeLog.getProperty());
         if(Objects.isNull(sizeLog)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setSizeLog(SizeLog.Little_Little);
@@ -171,7 +172,7 @@ class MethodsTxt {
      * Setea la propiedad de si la libreria esta siendo utilizada en Android o no
      */
     protected static void setearIsAndroid(){
-        String Android=System.getProperty("isAndroid");
+        String Android=System.getProperty(LogsJBProperties.LogsJBIsAndroid.getProperty());
         if(Objects.isNull(Android)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setIsAndroid(false);

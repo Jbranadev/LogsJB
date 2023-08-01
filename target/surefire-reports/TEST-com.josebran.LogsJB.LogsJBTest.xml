@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.josebran.LogsJB.LogsJBTest" time="27.595" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.josebran.LogsJB.LogsJBTest" time="33.308" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\josec\IdeaProjects\LogsJB\target\test-classes;C:\Users\josec\IdeaProjects\LogsJB\target\classes;C:\Users\josec\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\josec\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\josec\.m2\repository\org\testng\testng\7.7.1\testng-7.7.1.jar;C:\Users\josec\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\josec\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\josec\.m2\repository\org\webjars\jquery\3.6.1\jquery-3.6.1.jar;"/>
+    <property name="java.class.path" value="C:\Users\josec\IdeaProjects\LogsJB\target\test-classes;C:\Users\josec\IdeaProjects\LogsJB\target\classes;C:\Users\josec\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\josec\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\josec\.m2\repository\org\testng\testng\7.8.0\testng-7.8.0.jar;C:\Users\josec\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\josec\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\josec\.m2\repository\org\webjars\jquery\3.6.1\jquery-3.6.1.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GT"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-18.0.2\bin"/>
-    <property name="sun.java.command" value="C:\Users\josec\AppData\Local\Temp\surefire7689063284296447150\surefirebooter9381609171181285252.jar C:\Users\josec\AppData\Local\Temp\surefire7689063284296447150 2023-07-28T16-20-52_113-jvmRun1 surefire13910848196335608897tmp surefire_07561234800349735085tmp"/>
+    <property name="sun.java.command" value="C:\Users\josec\AppData\Local\Temp\surefire295903960012803463\surefirebooter1240495075332561307.jar C:\Users\josec\AppData\Local\Temp\surefire295903960012803463 2023-07-31T20-52-23_933-jvmRun1 surefire4455205464980722840tmp surefire_01700537980035421889tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\josec\IdeaProjects\LogsJB\target\test-classes;C:\Users\josec\IdeaProjects\LogsJB\target\classes;C:\Users\josec\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\josec\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\josec\.m2\repository\org\testng\testng\7.7.1\testng-7.7.1.jar;C:\Users\josec\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\josec\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\josec\.m2\repository\org\webjars\jquery\3.6.1\jquery-3.6.1.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\josec\IdeaProjects\LogsJB\target\test-classes;C:\Users\josec\IdeaProjects\LogsJB\target\classes;C:\Users\josec\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\josec\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\josec\.m2\repository\org\testng\testng\7.8.0\testng-7.8.0.jar;C:\Users\josec\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\josec\.m2\repository\com\beust\jcommander\1.82\jcommander-1.82.jar;C:\Users\josec\.m2\repository\org\webjars\jquery\3.6.1\jquery-3.6.1.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\josec"/>
     <property name="user.language" value="es"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\josec\AppData\Local\Temp\surefire7689063284296447150\surefirebooter9381609171181285252.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\josec\AppData\Local\Temp\surefire295903960012803463\surefirebooter1240495075332561307.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="18.0.2+9-61"/>
@@ -56,5 +56,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="writeLog" classname="com.josebran.LogsJB.LogsJBTest" time="27.145"/>
+  <testcase name="writeLog" classname="com.josebran.LogsJB.LogsJBTest" time="32.868"/>
 </testsuite>

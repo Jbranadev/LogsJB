@@ -18,6 +18,7 @@ package com.josebran.LogsJB;
 
 
 import com.josebran.LogsJB.Mensajes.MensajeWrite;
+import com.josebran.LogsJB.Numeracion.LogsJBProperties;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.josebran.LogsJB.Numeracion.SizeLog;
 
@@ -63,7 +64,7 @@ public  class LogsJB {
             Field field = MethodsTxt.class.getDeclaredField("ruta");
             field.setAccessible(true);
             field.set(null, Ruta);
-            System.setProperty("RutaLog",Ruta);
+            System.setProperty(LogsJBProperties.LogsJBRutaLog.getProperty(), Ruta);
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
         }
@@ -86,7 +87,7 @@ public  class LogsJB {
             Field field = MethodsTxt.class.getDeclaredField("isAndroid");
             field.setAccessible(true);
             field.set(null, isAndroid);
-            System.setProperty("isAndroid",String.valueOf(isAndroid));
+            System.setProperty(LogsJBProperties.LogsJBIsAndroid.getProperty(), String.valueOf(isAndroid));
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el contador de las veces que se a escrito en " +
                     "el log " +isAndroid);
@@ -131,7 +132,7 @@ public  class LogsJB {
             Field field = MethodsTxt.class.getDeclaredField("gradeLog");
             field.setAccessible(true);
             field.set(null, GradeLog);
-            System.setProperty("NivelLog",GradeLog.name());
+            System.setProperty(LogsJBProperties.LogsJBNivelLog.getProperty(), GradeLog.name());
             //Methods.metodo = metodo;
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
@@ -163,7 +164,7 @@ public  class LogsJB {
             Field field = MethodsTxt.class.getDeclaredField("sizeLog");
             field.setAccessible(true);
             field.set(null, SizeLog);
-            System.setProperty("SizeLog",SizeLog.name());
+            System.setProperty(LogsJBProperties.LogsJBSizeLog.getProperty(), SizeLog.name());
             //Methods.metodo = metodo;
         }catch (Exception e){
             System.out.println("Excepcion capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);

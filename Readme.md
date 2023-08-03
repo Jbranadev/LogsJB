@@ -1,18 +1,18 @@
-# LogsJB :computer: 
-LogsJB es una librería java que permite la gestión de 
+# LogsJBSupport :computer: 
+LogsJBSupport es una librería java que permite la gestión de 
 registros de un programa en paralelo a la ejecución 
 del programa, lo cual la hace una potente herramienta para programas empresariales y personales 
 que exigen grandes niveles de rendimiento. 
 * * *
 ## Estado del Proyecto :atom:  
-LogsJB actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 
+LogsJBSupport actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 
 son bienvenidas para mejorar el proyecto.
 ***
 
 ## Configuración :gear: 
-Utilizar LogsJB es muy fácil. LogsJB viene con una configuración por default.
+Utilizar LogsJBSupport es muy fácil. LogsJBSupport viene con una configuración por default.
 
-### Configuración por Default de LogsJB
+### Configuración por Default de LogsJBSupport
 - Los registros se almacenan en ContextRoute/Logs/fecha_actual/Log.txt
 
 Donde:
@@ -40,7 +40,7 @@ Así se ven los registros generados en Log.txt
 
 ![](Imagenes/Registros_Log_txt.png)
 
-Las primeras cuatro columnas son generadas automáticamente por LogsJB
+Las primeras cuatro columnas son generadas automáticamente por LogsJBSupport
 estas cuatro columnas son:
 
 | Fecha y Hora | Usuario | Clase | Método |
@@ -69,9 +69,9 @@ Nivel Log, índica el tipo de registro que es. Los tipos de registro disponibles
 Mensaje, es el Mensaje que el usuario índico que quería registrar.
 ***
 
-### ¿Configuración de LogsJB de acuerdo a las necesidades de mi implementación?
+### ¿Configuración de LogsJBSupport de acuerdo a las necesidades de mi implementación?
 
-LogsJB puede ser configurada de acuerdo a las necesidades de la implementación que usted esté realizando.
+LogsJBSupport puede ser configurada de acuerdo a las necesidades de la implementación que usted esté realizando.
 
 - Modificar la ruta de almacenamiento de los registros.
 
@@ -130,9 +130,9 @@ LogsJB.setUsuario(Usuario);
 ~~~
 * * *
 
-## ¿Cómo usar LogsJB?
-Usar LogsJB es más fácil que hacer un llamado a System.out.println(mensaje), ya que al llamar a los métodos de registro
-de LogsJB se escribe el mensaje en la salida de la terminal del programa y en el archivo Log.txt, con menos esfuerzo del necesario
+## ¿Cómo usar LogsJBSupport?
+Usar LogsJBSupport es más fácil que hacer un llamado a System.out.println(mensaje), ya que al llamar a los métodos de registro
+de LogsJBSupport se escribe el mensaje en la salida de la terminal del programa y en el archivo Log.txt, con menos esfuerzo del necesario
 para hacer un System.out.println(mensaje).
 
 ~~~
@@ -167,8 +167,8 @@ Salida en Log.txt
 
 
 * * *
-## ¿Cómo Obtener LogsJB para usarlo en mi proyecto?
-Puedes obtener la librería LogsJB de la siguiente manera
+## ¿Cómo Obtener LogsJBSupport para usarlo en mi proyecto?
+Puedes obtener la librería LogsJBSupport de la siguiente manera
 
 Maven 
 ~~~
@@ -184,14 +184,14 @@ Gradle
 implementation 'io.github.josecarlosbran:LogsJBSupport:0.4'
 ~~~
 
-Para mayor información sobre como descargar LogsJB desde otros 
+Para mayor información sobre como descargar LogsJBSupport desde otros 
 administradores de paquetes, puedes ir al siguiente Link
-<https://search.maven.org/artifact/io.github.josecarlosbran/LogsJB>
+<https://search.maven.org/artifact/io.github.josecarlosbran/LogsJBSupport>
 
 ***
 
 ## Licencia :balance_scale: 
-LogsJB es una librería open source desarrollada por José Bran, para la administración
+LogsJBSupport es una librería open source desarrollada por José Bran, para la administración
 de los registros de un programa, con licencia de Apache License, Versión 2.0;
 
 No puede usar esta librería excepto de conformidad con la Licencia.

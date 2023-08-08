@@ -161,8 +161,7 @@ public class LogsJBDB extends JBSqlUtils {
      * @throws DataBaseUndefind Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de BD's a la cual se conectara el modelo.
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las propiedades de conexión necesarias para conectarse a la BD's especificada
      */
-    /*public LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined {
-        super();
+    public LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined {
         super(false);
         this.setDataBaseType(setearDBType());
         this.setBD(setearBD());
@@ -172,7 +171,7 @@ public class LogsJBDB extends JBSqlUtils {
         this.setPassword(setearPassword());
         this.setPropertisURL(setearPropertisUrl());
 
-    }*/
+    }
 
     /**
      * Constructor por default de la clase que se encarga de escribir los logs en BD's
@@ -181,16 +180,16 @@ public class LogsJBDB extends JBSqlUtils {
      * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las propiedades de conexión necesarias para conectarse a la BD's especificada
      */
     public LogsJBDB(Boolean getPropetySystem) throws DataBaseUndefind, PropertiesDBUndefined {
-        super();
-        /*super(false);
-        this.setDataBaseType(setearDBType());
-        this.setBD(setearBD());
-        this.setHost(setearHost());
-        this.setPort(setearPort());
-        this.setUser(setearUser());
-        this.setPassword(setearPassword());
-        this.setPropertisURL(setearPropertisUrl());
-        */
+        super(false);
+        if(getPropetySystem){
+            this.setDataBaseType(setearDBType());
+            this.setBD(setearBD());
+            this.setHost(setearHost());
+            this.setPort(setearPort());
+            this.setUser(setearUser());
+            this.setPassword(setearPassword());
+            this.setPropertisURL(setearPropertisUrl());
+        }
     }
 
 
@@ -205,7 +204,7 @@ public class LogsJBDB extends JBSqlUtils {
      *                          esta excepción, poder manejarla.
      */
     private DataBase setearDBType() throws DataBaseUndefind {
-        if (this.getGetPropertySystem()) {
+        //if (this.getGetPropertySystem()) {
             String dataBase = System.getProperty(LogsJBProperties.LogsJBDBTYPE.getProperty());
             if (stringIsNullOrEmpty(dataBase)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
@@ -228,7 +227,7 @@ public class LogsJBDB extends JBSqlUtils {
                     return DataBase.PostgreSQL;
                 }
             }
-        }
+        //}
         return null;
     }
 
@@ -244,7 +243,7 @@ public class LogsJBDB extends JBSqlUtils {
      *                               esta excepción, poder manejarla.
      */
     private String setearHost() throws PropertiesDBUndefined, DataBaseUndefind {
-        if (this.getGetPropertySystem()) {
+        //if (this.getGetPropertySystem()) {
             String host = System.getProperty(LogsJBProperties.LogsJBDBHOST.getProperty());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(host)) {
@@ -254,8 +253,7 @@ public class LogsJBDB extends JBSqlUtils {
             }
             return host;
 
-        }
-        return null;
+        //}
     }
 
 
@@ -270,7 +268,7 @@ public class LogsJBDB extends JBSqlUtils {
      *                               esta excepción, poder manejarla.
      */
     private String setearPort() throws PropertiesDBUndefined, DataBaseUndefind {
-        if (this.getGetPropertySystem()) {
+        //if (this.getGetPropertySystem()) {
             String port = System.getProperty(LogsJBProperties.LogsJBDBPORT.getProperty());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(port)) {
@@ -280,8 +278,7 @@ public class LogsJBDB extends JBSqlUtils {
             }
             return port;
 
-        }
-        return null;
+        //}
     }
 
 
@@ -296,7 +293,7 @@ public class LogsJBDB extends JBSqlUtils {
      *                               esta excepción, poder manejarla.
      */
     private String setearUser() throws PropertiesDBUndefined, DataBaseUndefind {
-        if (this.getGetPropertySystem()) {
+        //if (this.getGetPropertySystem()) {
             String user = System.getProperty(LogsJBProperties.LogsJBDBUSER.getProperty());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(user)) {
@@ -305,8 +302,7 @@ public class LogsJBDB extends JBSqlUtils {
                 }
             }
             return user;
-        }
-        return null;
+        //}
     }
 
 
@@ -320,7 +316,7 @@ public class LogsJBDB extends JBSqlUtils {
      *                               esta excepción, poder manejarla.
      */
     private String setearBD() throws PropertiesDBUndefined {
-        if (this.getGetPropertySystem()) {
+        //if (this.getGetPropertySystem()) {
             String DB = System.getProperty(LogsJBProperties.LogsJBDBNAME.getProperty());
             //System.out.println("BD seteada en system property: " + DB);
             if (stringIsNullOrEmpty(DB)) {
@@ -329,8 +325,7 @@ public class LogsJBDB extends JBSqlUtils {
             }
             return DB;
 
-        }
-        return null;
+        //}
     }
 
     /**
@@ -341,7 +336,7 @@ public class LogsJBDB extends JBSqlUtils {
      *                               se conectara a la BD's
      */
     private String setearPassword() throws PropertiesDBUndefined, DataBaseUndefind {
-        if (this.getGetPropertySystem()) {
+        //if (this.getGetPropertySystem()) {
             String password = System.getProperty(LogsJBProperties.LogsJBDBPASSWORD.getProperty());
             if (this.getDataBaseType() != DataBase.SQLite) {
                 if (stringIsNullOrEmpty(password)) {
@@ -351,8 +346,7 @@ public class LogsJBDB extends JBSqlUtils {
                 }
             }
             return password;
-        }
-        return null;
+        //}
     }
 
     /**
@@ -361,11 +355,11 @@ public class LogsJBDB extends JBSqlUtils {
      * @return Las propiedades de la url para la conexión a la BD's obtenida de las variables del sistema
      */
     private String setearPropertisUrl() {
-        if (this.getGetPropertySystem()) {
+        //if (this.getGetPropertySystem()) {
             String property = System.getProperty(LogsJBProperties.LogsJBDBPROPERTIESURL.getProperty());
             return property;
-        }
-        return null;
+        //}
+
     }
 
 

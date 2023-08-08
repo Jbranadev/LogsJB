@@ -28,6 +28,7 @@ import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
@@ -124,7 +125,7 @@ class Execute {
                     System.out.println("Creara la tabla: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     try {
-                        LogsJBDB log = new LogsJBDB(false);
+                        LogsJBDB log = new LogsJBDB();
                         if(log.crateTable()){
                             LogsJB.setTableDBExists(true);
                         }else{
@@ -242,7 +243,7 @@ class Execute {
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     //LogsJBDB log = new LogsJBDB();
                     if(log==null){
-                        log= new LogsJBDB(false);
+                        log= new LogsJBDB();
                     }
                     //Asignamos los valores a almacenar
                     log.getNivelLog().setValor(logtemporal.name());
@@ -252,9 +253,8 @@ class Execute {
                     log.getFecha().setValor(fecha);
                     //Guardamos el modelo
                     log.save();
-                    while(!log.getTaskIsReady()){
-
-                    }
+                    log.waitOperationComplete();
+                    log.setModelExist(false);
                     //System.out.println("Guardo el registro en BD's: ");
                 }catch (Exception e) {
                     com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado d crear el objeto que escribira" +
@@ -264,8 +264,6 @@ class Execute {
                     com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
                     com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                 }
-
-
     }
 
 
@@ -283,7 +281,6 @@ class Execute {
             //System.out.println("NivelLog 2: "+logtemporal);
             //System.out.println("Texto 2: "+Mensaje);
             //System.out.println("Temporal: "+temporal);
-
             JsonObject json=new JsonObject();
             json.addProperty("nivelLog", logtemporal.name());
             json.addProperty("texto", Mensaje);
@@ -293,7 +290,7 @@ class Execute {
 
             //System.out.println("Tipo de autenticación seteada en RestApi: "+LogsJB.getTipeautentication());
             RestApi rest= new RestApi(LogsJB.getTipeautentication(), contentType.JSON);
-            //System.out.println("Json a envíar: "+json.toString());
+            System.out.println("Json a envíar: "+json.toString());
             String respuesta=rest.Post(getUrlLogRest(), json.toString(), getKeyLogRest());
             requestCode codigorespuesta=rest.getCodigorespuesta();
             System.out.println("Respuesta: "+respuesta);
@@ -305,18 +302,17 @@ class Execute {
                         "Logs" +
                         separador +
                         "LogsJB.db");
-                LogsJBDB.setDataBaseGlobal(BDSqlite);
-                LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
-
                 //Verificara si hay Logs por obtener y envíar al servidor
                 LogsJBDB log = new LogsJBDB(false);
+                log.setDataBaseType(DataBase.SQLite);
+                log.setBD(BDSqlite);
                 List<LogsJBDB> logs = new ArrayList<LogsJBDB>();
                 logs=log.getAll();
-                while(!log.getTaskIsReady()){
-
-                }
+                log.waitOperationComplete();
                 if(!logs.isEmpty()){
-                    logs.forEach(temp->{
+                    Iterator<LogsJBDB> iteradorLogs=logs.iterator();
+                    while(iteradorLogs.hasNext()){
+                        LogsJBDB temp= iteradorLogs.next();
                         //Por cada objeto creo un Json y lo envío
                         JsonObject jsontemp=new JsonObject();
                         jsontemp.addProperty("nivelLog", temp.getNivelLog().getValor());
@@ -324,15 +320,17 @@ class Execute {
                         jsontemp.addProperty("clase", temp.getClase().getValor());
                         jsontemp.addProperty("metodo", temp.getTexto().getValor());
                         jsontemp.addProperty("fecha", temp.getFecha().getValor());
-
                         RestApi resttemp= new RestApi(LogsJB.getTipeautentication(), contentType.JSON);
                         resttemp.Post(getUrlLogRest(), jsontemp.toString(), getKeyLogRest());
                         requestCode codigorespuestatemp=resttemp.getCodigorespuesta();
                         //Si logro envíar el Log, elimina el modelo en Bd's
                         if((codigorespuestatemp==requestCode.CREATED)||(codigorespuestatemp==requestCode.OK)){
                             temp.delete();
+                            temp.waitOperationComplete();
+                            iteradorLogs.remove();
                         }
-                    });
+
+                    }
                 }
             }else{
                 //Si el RestApi no esta habilitado, almacenara temporalmente en BD's el Log
@@ -341,7 +339,6 @@ class Execute {
                         "Logs" +
                         separador +
                         "LogsJB.db");
-
                 LogsJBDB log = new LogsJBDB(false);
                 log.setDataBaseType(DataBase.SQLite);
                 log.setBD(BDSqlite);
@@ -349,7 +346,6 @@ class Execute {
                     System.out.println("Creara la tabla: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     try {
-
                         if(log.crateTable()){
                             LogsJB.setTableDBExists(true);
                         }else{
@@ -365,17 +361,15 @@ class Execute {
                         com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
                     }
                 }
-
                 //Asignamos los valores a almacenar
                 log.getNivelLog().setValor(logtemporal.name());
                 log.getTexto().setValor(Mensaje);
                 log.getClase().setValor(Clase);
                 log.getMetodo().setValor(Metodo);
                 log.getFecha().setValor(fecha);
-
                 //Guardamos el modelo
                 log.save();
-
+                log.waitOperationComplete();
             }
 
         } catch (Exception e) {

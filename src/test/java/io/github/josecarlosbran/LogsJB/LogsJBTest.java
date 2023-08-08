@@ -135,7 +135,7 @@ public class LogsJBTest {
             //com.josebran.LogsJB.LogsJB.setGradeLog(com.josebran.LogsJB.Numeracion.NivelLog.WARNING);
             //LogsJB.debug( "Primer comentario grado Debug");
             Integer i=0;
-            while(i<600){
+            while(i<6000){
                 i+=6;
                 //Comentario grado Trace
                 trace( "Primer comentario grado Trace " +i);
@@ -157,16 +157,13 @@ public class LogsJBTest {
     }
 
 
-    @Test(testName = "Write Log DB",
-            dependsOnMethods = "writeLogDB")
+    @Test(testName = "Write Log DB")
     public void writeLogRestAPI() {
         try{
             LogsJB.setWriteTxt(false);
             LogsJB.setWriteDB(false);
             LogsJB.setWriteRestAPI(true);
-
-            LogsJB.setWriteRestAPI(false);
-            LogsJB.setKeyLogRest("");
+            LogsJB.setKeyLogRest("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKb3NlIENhcmxvcyBBbGZyZWRvIEJyYW4gQWd1aXJyZSIsImlzcyI6ImxvY2FsaG9zdDo4MDgwIiwiaWF0IjoxNjkxNDUzMjkyLCJleHAiOjE2OTE0NTQxOTJ9.oCQ0krmifGh_mKmrpVuJMoU5bqMKqr3gesX3RAjFP7D74MU79qZbqKtkMXFCC6TK7_O0iOKv3w3A3mm7qCrOfg");
             LogsJB.setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
             LogsJB.setTipeautentication(typeAutentication.BEARER);
             LogsJB.setGradeLog(NivelLog.TRACE);

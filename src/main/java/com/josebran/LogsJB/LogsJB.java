@@ -65,7 +65,7 @@ public  class LogsJB {
             field.set(null, Ruta);
             System.setProperty(LogsJBProperties.LogsJBRutaLog.getProperty(), Ruta);
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
+            System.err.println("Excepcion capturada al tratar de setear la ruta del log " +Ruta);
         }
     }
 
@@ -88,12 +88,12 @@ public  class LogsJB {
             field.set(null, isAndroid);
             System.setProperty(LogsJBProperties.LogsJBIsAndroid.getProperty(), String.valueOf(isAndroid));
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el contador de las veces que se a escrito en " +
+            System.err.println("Excepcion capturada al tratar de setear el contador de las veces que se a escrito en " +
                     "el log " +isAndroid);
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
     }
 
@@ -134,7 +134,7 @@ public  class LogsJB {
             System.setProperty(LogsJBProperties.LogsJBNivelLog.getProperty(), GradeLog.name());
             //Methods.metodo = metodo;
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
+            System.err.println("Excepcion capturada al tratar de setear el GradeLog de la aplicación " +GradeLog);
         }
     }
 
@@ -166,7 +166,7 @@ public  class LogsJB {
             System.setProperty(LogsJBProperties.LogsJBSizeLog.getProperty(), SizeLog.name());
             //Methods.metodo = metodo;
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
+            System.err.println("Excepcion capturada al tratar de setear el Tamaño del archivo Log " +SizeLog);
         }
     }
 
@@ -189,11 +189,11 @@ public  class LogsJB {
             field.setAccessible(true);
             field.set(null, Usuario);
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Excepcion capturada al tratar de setear el usuario del entorno actual "+Usuario);
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
     }
@@ -246,13 +246,13 @@ public  class LogsJB {
                 //Thread.sleep(2);
             }
         }catch (Exception e){
-            System.out.println("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
+            System.err.println("Excepcion capturada al Executor encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue\n" +
                     "     * de ejecutar los ejecutores de log's en subprocesos, diferentes al programa principal");
-            System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Exepcion capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
 

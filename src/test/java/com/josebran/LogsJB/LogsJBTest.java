@@ -17,17 +17,18 @@ public class LogsJBTest {
         //LogsJB.debug( "Primer comentario grado Debug");
         Integer i=0;
         while(i<6000){
+
+            trace( i+" comentario grado Trace");
+
             debug( i+" comentario grado Debug");
+
+            info( i+" comentario grado Info");
+
+            warning( i+" comentario grado Warning");
 
             error( i+" comentario grado Error");
 
             fatal( i+" comentario grado Fatal");
-
-            info( i+" comentario grado Info");
-
-            trace( i+" comentario grado Trace");
-
-            warning( i+" comentario grado Warning");
 
             i=i+6;
         }
@@ -36,7 +37,7 @@ public class LogsJBTest {
 
 
     }catch (Exception e){
-        System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+        System.err.println("Excepcion capturada en el metodo main: "+e.getMessage());
     }
 }
 

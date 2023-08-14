@@ -197,11 +197,11 @@ class MethodsTxt {
             DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss SSS");
             temp=formater.format(LocalDateTime.now());
         }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo Metodo que Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Exepcion capturada en el metodo Metodo que Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS");
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
         return temp;
     }
@@ -218,11 +218,11 @@ class MethodsTxt {
             temp=formater.format(LocalDateTime.now());
 
         }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo Metodo que Obtiene la fecha en el formato indicado");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Exepcion capturada en el metodo Metodo que Obtiene la fecha en el formato indicado");
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
         return temp;
@@ -282,12 +282,12 @@ class MethodsTxt {
 
             }
         }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo Metodo que retorna la cantidad de tabulaciones para el siguiente texto en la misma linea conforme\n" +
+            System.err.println("Exepcion capturada en el metodo Metodo que retorna la cantidad de tabulaciones para el siguiente texto en la misma linea conforme\n" +
                     "     * al la longitud de la cadena actual:");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
         return result;
@@ -323,7 +323,7 @@ class MethodsTxt {
 
                     //System.out.println( "La fecha y hora de creación del archivo es: " + fechaformateada );
                 }catch(IOException exception) {
-                    System.out.println("Exception handled when trying to get file " + "attributes: " + exception.getMessage());
+                    System.err.println("Exception handled when trying to get file " + "attributes: " + exception.getMessage());
                 }
 
                 //SimpleDateFormat  formatofecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -341,11 +341,11 @@ class MethodsTxt {
                 }
             }
         }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se verifica el tamaño del archivo: " +getRuta());
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Exepcion capturada en el metodo Metodo por medio del cual se verifica el tamaño del archivo: " +getRuta());
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
     }
 
@@ -366,7 +366,11 @@ class MethodsTxt {
             setLogtext(getLogtext()+1);
             if(getIsAndroid()){
                 System.out.println("\n");
-                System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                if(nivelLog.getGradeLog()>=NivelLog.ERROR.getGradeLog()){
+                    System.err.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                }else{
+                    System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                }
             }else{
                 //System.out.println("clase: " + Clase + " metodo: " + Metodo);
                 //Rutas de archivos
@@ -401,7 +405,11 @@ class MethodsTxt {
                     System.out.println("*"+ "\n");
                     System.out.println("*"+ "\n");
                     System.out.println("*"+ "\n");
-                    System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    if(nivelLog.getGradeLog()>=NivelLog.ERROR.getGradeLog()){
+                        System.err.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    }{
+                        System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    }
                 }else{
                     if(getLogtext()==1){
                         BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
@@ -419,7 +427,11 @@ class MethodsTxt {
                         //System.out.println("*"+ "\n");
                         //System.out.println("*"+ "\n");
                         System.out.println("\n");
-                        System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                        if(nivelLog.getGradeLog()>=NivelLog.ERROR.getGradeLog()){
+                            System.err.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                        }else{
+                            System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                        }
                     }else{
                         //Agrega en el fichero el Log
                         BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
@@ -427,14 +439,18 @@ class MethodsTxt {
                         bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                         bw.close();
                         System.out.println("\n");
-                        System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                        if(nivelLog.getGradeLog()>=NivelLog.ERROR.getGradeLog()){
+                            System.err.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                        }else{
+                            System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                        }
                     }
                 }
             }
         }catch (Exception e){
-            System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se escribir el log del Text");
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Exepcion capturada en el metodo Metodo por medio del cual se escribir el log del Text");
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
             System.out.println("Mensaje de la Exepción : "+e.getMessage());
             System.out.println("Trace de la Exepción : "+e.getStackTrace());
         }

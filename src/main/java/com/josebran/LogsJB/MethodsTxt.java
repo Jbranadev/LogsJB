@@ -59,7 +59,7 @@ class MethodsTxt {
     /***
      * Obtiene el usuario actual del sistema operativo
      */
-    static String usuario=System.getProperty("user.name");
+    protected static String usuario=System.getProperty("user.name");
 
     /***
      * Contador que expresa la cantidad de veces que se a escrito en la ejecución actual de la aplicación
@@ -87,11 +87,6 @@ class MethodsTxt {
      */
     protected static SizeLog sizeLog=SizeLog.Little_Little;
 
-    /*MethodsTxt(){
-        setearRuta();
-        setearNivelLog();
-        setearSizelLog();
-    }*/
 
     /***
      * Setea el NivelLog configurado en las propiedades del sistema, de no estar
@@ -199,12 +194,8 @@ class MethodsTxt {
     protected static String convertir_fecha(){
         String temp=null;
         try{
-            //DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            //DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss SSS");
-            //convertir_fecha()
             temp=formater.format(LocalDateTime.now());
-
         }catch (Exception e){
             System.out.println("Exepcion capturada en el metodo Metodo que Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS");
             System.out.println("Tipo de Excepción : "+e.getClass());
@@ -220,8 +211,7 @@ class MethodsTxt {
      * @param formato Formato que se desea obtener la fecha
      * @return Retorna una cadena de texto con la fecha obtenida en el formato especificado.
      */
-    public static String convertir_fecha(String formato){
-
+    protected static String convertir_fecha(String formato){
         String temp=null;
         try{
             DateTimeFormatter formater = DateTimeFormatter.ofPattern(formato);
@@ -247,7 +237,7 @@ class MethodsTxt {
      * @param cadena Texto a evaluar para obtener la separcion de tabulaciones de acuerdo al algoritmo definido.
      * @return Retorna un string con la cantidad de tabulaciones respecto al siguiente texto en la misma linea.
      */
-    public static String getTabs(String cadena) {
+    protected static String getTabs(String cadena) {
         //Reglas del negocio, maximas tabulaciones son 4
         //Minima tabulacion es una
         String result = "";
@@ -263,39 +253,33 @@ class MethodsTxt {
         try{
             //Si la cadena es menor a 13, retornara 7 tabs
             if(tamaño<13){
-                for(int i=0;i<7;i++){
-                    result=result+tab;
-                }
+                    result=result+tab.repeat(7);
+
                 //Si la cadena es menor a 17, retornara 6 tabs
             }else if(tamaño<17){
-                for(int i=0;i<6;i++){
-                    result=result+tab;
-                }
+                    result=result+tab.repeat(6);
+
                 //Si la cadena es menor a 25, retornara 5 tabs
             }else if(tamaño<25){
-                for(int i=0;i<5;i++){
-                    result=result+tab;
-                }
+                    result=result+tab.repeat(5);
+
                 //Si la cadena es menor a 29, retornara 4 tabs
             }else if(tamaño<29){
-                for(int i=0;i<4;i++){
-                    result=result+tab;
-                }
+
+                    result=result+tab.repeat(4);
+
                 //Si la cadena es menor a 33, retornara 3 tabs
             }else if(tamaño<33){
-                for(int i=0;i<3;i++){
-                    result=result+tab;
-                }
+                    result=result+tab.repeat(3);
+
                 //Si la cadena es menor a 37, retornara 2 tabs
             }else if(tamaño<37){
-                for(int i=0;i<2;i++){
-                    result=result+tab;
-                }
+                    result=result+tab.repeat(2);
+
                 //Si la cadena es mayor a 36, retornara 2 tabs
             }else if(tamaño>36){
-                for(int i=0;i<2;i++){
-                    result=result+tab;
-                }
+                    result=result+tab.repeat(2);
+
             }
         }catch (Exception e){
             System.out.println("Exepcion capturada en el metodo Metodo que retorna la cantidad de tabulaciones para el siguiente texto en la misma linea conforme\n" +
@@ -356,7 +340,6 @@ class MethodsTxt {
                     System.out.println(logactual.toPath()+" No se pudo renombrar el archivo: " +newrute);
                 }
             }
-
         }catch (Exception e){
             System.out.println("Exepcion capturada en el metodo Metodo por medio del cual se verifica el tamaño del archivo: " +getRuta());
             System.out.println("Tipo de Excepción : "+e.getClass());
@@ -386,11 +369,9 @@ class MethodsTxt {
                 System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
             }else{
                 //System.out.println("clase: " + Clase + " metodo: " + Metodo);
-
                 //Rutas de archivos
                 File fichero = new File(getRuta());
                 //System.out.println("Ruta del log: " + fichero.getAbsolutePath());
-
                 //Verifica si existe la carpeta Logs, si no existe, la Crea
                 File directorio = new File(fichero.getParent());
                 if (!directorio.exists()) {

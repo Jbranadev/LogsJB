@@ -29,7 +29,6 @@ public class LogsJBTest {
 
             warning( i+" comentario grado Warning");
 
-
             i=i+6;
         }
 

@@ -14,7 +14,7 @@
  * limitaciones bajo la Licencia.
  */
 
-package com.josebran.LogsJB.Mensajes;
+package com.josebran.LogsJB;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,14 +24,18 @@ import java.util.List;
  * Esta clase sirve como acople entre el proceso de ejecución principal que se encarga de agregar un mensaje
  * por escribir a la lista, mientras que el proceso de ejecución secundario se encarga de escribir los mensajes.
  */
-public class ListaMensajes {
+class ListaMensajes {
     private List<MensajeWrite> mensajes=new LinkedList<>();
+
+    protected  ListaMensajes(){
+
+    }
 
     /***
      * Agrega un mensaje a la lista para que este luego sea escrito.
      * @param dato Mensaje que se desea agregar a la lista.
      */
-    public synchronized void addDato(MensajeWrite dato)
+    protected synchronized void addDato(MensajeWrite dato)
     {
         //System.out.println("Agrega el msj a la lista: "+dato.getTexto()+" "+dato.getNivelLog());
         this.mensajes.add(dato);
@@ -45,7 +49,7 @@ public class ListaMensajes {
      * @return Restorna el proximo mensaje en la cola a ser escrito, basado en el algoritmo FIFO, si no hay mensajes
      * retorna null.
      */
-    public synchronized MensajeWrite getDato()  {
+    protected synchronized MensajeWrite getDato()  {
         try{
             if (this.mensajes.size()==0){
                 return null;
@@ -65,7 +69,7 @@ public class ListaMensajes {
      * Retorna la cantidad de mensajes que tiene la lista actualmente.
      * @return Retorna un entero que representa la cantidad de mensajes que actualmente tiene la lista.
      */
-    public synchronized int getSize(){
+    protected synchronized int getSize(){
         return this.mensajes.size();
     }
 

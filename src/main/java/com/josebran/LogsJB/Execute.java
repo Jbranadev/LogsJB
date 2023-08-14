@@ -17,8 +17,6 @@
 package com.josebran.LogsJB;
 
 
-import com.josebran.LogsJB.Mensajes.ListaMensajes;
-import com.josebran.LogsJB.Mensajes.MensajeWrite;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
 import java.util.Objects;
@@ -173,7 +171,7 @@ class Execute {
      * Obtiene la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
      * @return True si esta libre, false si actualmente esta trabajando
      */
-    public synchronized Boolean getTaskisReady() {
+    protected synchronized Boolean getTaskisReady() {
         return TaskisReady;
     }
 
@@ -181,7 +179,7 @@ class Execute {
      * Setea la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
      * @param taskisReady True si esta libre, false si actualmente esta trabajando
      */
-    public synchronized void setTaskisReady(Boolean taskisReady) {
+    protected synchronized void setTaskisReady(Boolean taskisReady) {
         TaskisReady = taskisReady;
     }
 

@@ -13,75 +13,6 @@ import static io.github.josecarlosbran.LogsJB.LogsJB.*;
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class LogsJBTest {
 
-    /*
-    public static void main(String[] args) {
-        try{
-            int archivos=0;
-            //File archivo = new File(getRuta());
-            //while(archivos<3){
-            int i=0;
-
-            setWriteDB(true);
-
-            String separador = System.getProperty("file.separator");
-            String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
-                    "Logs" +
-                    separador +
-                    "LogsJB.db");
-            LogsJBDB.setDataBaseGlobal(BDSqlite);
-            LogsJBDB.setDataBaseTypeGlobal(DataBase.SQLite);
-            LogsJBDB.setHostGlobal("Host");
-            LogsJBDB.setUserGlobal("User");
-            LogsJBDB.setPortGlobal("Port");
-            LogsJBDB.setPropertisUrlConexionGlobal("PropetiesURLConexión");
-
-
-            setWriteTxt(true);
-
-
-            setWriteRestAPI(false);
-            setKeyLogRest("sdfasf");
-            setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
-            setTipeautentication(typeAutentication.BEARER);
-
-
-            LogsJB.setGradeLog(NivelLog.TRACE);
-
-            while(i<96){
-                try{
-
-
-                    debug( i+" comentario grado Debug");
-
-                    error( i+" comentario grado Error");
-
-                    fatal( i+" comentario grado Fatal");
-
-                    info( i+" comentario grado Info");
-
-                    trace( i+" comentario grado Trace");
-
-                    warning( i+" comentario grado Warning");
-
-
-                    i=i+6;
-
-                }catch (Exception e){
-                    System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
-                }
-
-
-            }
-            System.out.println("Salio del While: "+archivos);
-        }catch (Exception e){
-            System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
-        }
-
-
-    }
-*/
-
-
     @Test(testName = "Write Log Txt")
     public void writeLogTxt() {
         try{
@@ -157,7 +88,7 @@ public class LogsJBTest {
     }
 
 
-    @Test(testName = "Write Log DB")
+    @Test(testName = "Write Log RestAPI")
     public void writeLogRestAPI() {
         try{
             LogsJB.setWriteTxt(false);

@@ -14,7 +14,7 @@
  * limitaciones bajo la Licencia.
  */
 
-package io.github.josecarlosbran.LogsJB.Mensajes;
+package io.github.josecarlosbran.LogsJB;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,29 +24,27 @@ import java.util.List;
  * Esta clase sirve como acople entre el proceso de ejecución principal que se encarga de agregar un mensaje
  * por escribir a la lista, mientras que el proceso de ejecución secundario se encarga de escribir los mensajes.
  */
-public class ListaMensajes {
+class ListaMensajes {
     /**
      * Lista de mensajes a escribir
      */
-    private List<io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite> mensajes;
+    private List<MensajeWrite> mensajes;
+
+
 
     /**
      * Constructor por default
      */
-    public ListaMensajes(){
-        this.mensajes=new LinkedList<io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite>();
+    protected ListaMensajes(){
+        this.mensajes=new LinkedList<MensajeWrite>();
     }
 
     /***
      * Agrega un mensaje a la lista para que este luego sea escrito.
      * @param dato Mensaje que se desea agregar a la lista.
      */
-    public synchronized void addDato(io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite dato)
-    {
-        //System.out.println("Agrega el msj a la lista: "+dato.getTexto()+" "+dato.getNivelLog());
+    protected synchronized void addDato(MensajeWrite dato) {
         this.mensajes.add(dato);
-        //notify();
-
     }
 
     /***
@@ -55,14 +53,13 @@ public class ListaMensajes {
      * @return Restorna el proximo mensaje en la cola a ser escrito, basado en el algoritmo FIFO, si no hay mensajes
      * retorna null.
      */
-    public synchronized io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite getDato()  {
+    protected synchronized MensajeWrite getDato()  {
         try{
             if (this.mensajes.size()==0){
                 return null;
             }else{
                 MensajeWrite dato = mensajes.get(0);
                 this.mensajes.remove(0);
-                //System.out.println("Quita el msj a la lista: "+dato.getTexto()+" "+dato.getNivelLog());
                 return dato;
             }
         }catch (Exception e){
@@ -79,7 +76,7 @@ public class ListaMensajes {
      * Retorna la cantidad de mensajes que tiene la lista actualmente.
      * @return Retorna un entero que representa la cantidad de mensajes que actualmente tiene la lista.
      */
-    public synchronized int getSize(){
+    protected synchronized int getSize(){
         return this.mensajes.size();
     }
 

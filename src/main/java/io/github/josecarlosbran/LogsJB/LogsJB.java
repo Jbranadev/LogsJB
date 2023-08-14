@@ -18,7 +18,6 @@ package io.github.josecarlosbran.LogsJB;
 
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
-import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
@@ -67,8 +66,7 @@ public  class LogsJB {
     /**
      * Constructor por default de la clase
      */
-    public LogsJB(){
-
+    protected LogsJB(){
     }
 
     /***
@@ -197,14 +195,12 @@ public  class LogsJB {
 
 
 
-
-
     /**
      * Obtiene la bandera que indica si no existe alguna tarea pendiente de realizar por parte LogsJB
      * @return True si la LogsJB se encuentra libre, si esta ocupado retorna False
      */
     public static Boolean getTaskIsReady(){
-        return getInstance().getTaskisReady();
+        return io.github.josecarlosbran.LogsJB.Execute.getInstance().getTaskisReady();
     }
 
     /**
@@ -214,7 +210,7 @@ public  class LogsJB {
         while(!io.github.josecarlosbran.LogsJB.Execute.getInstance().getTaskisReady()){
 
         }
-        System.out.println("Completo de escribir los Logs");
+        com.josebran.LogsJB.LogsJB.info("Completo de escribir los Logs");
     }
 
 

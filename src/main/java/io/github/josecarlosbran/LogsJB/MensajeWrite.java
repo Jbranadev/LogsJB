@@ -15,7 +15,7 @@
  */
 
 
-package io.github.josecarlosbran.LogsJB.Mensajes;
+package io.github.josecarlosbran.LogsJB;
 
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
@@ -28,7 +28,7 @@ import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
  *  Un String Clase que representa la clase en la cual se mando a llamar la escritura del Log.
  *  Un String Metodo que representa el metodo desde el cual se llama la escritura del Log.
  */
-public class MensajeWrite {
+class MensajeWrite {
     private String Texto;
     private NivelLog nivelLog;
 
@@ -41,7 +41,7 @@ public class MensajeWrite {
     /**
      * Constructor por default de la clase escritora
      */
-    public MensajeWrite(){
+    protected MensajeWrite(){
 
     }
 
@@ -49,7 +49,7 @@ public class MensajeWrite {
      * Obtiene el texto del cuerpo del Mensaje
      * @return Retorna un String que representa el mensaje que deseamos sea escrito.
      */
-    public String getTexto() {
+    protected String getTexto() {
         return Texto;
     }
 
@@ -57,7 +57,7 @@ public class MensajeWrite {
      * Setea el texto del Mensaje.
      * @param texto String que representa el mensaje que deseamos sea escrito.
      */
-    public void setTexto(String texto) {
+    protected void setTexto(String texto) {
         Texto = texto;
     }
 
@@ -66,7 +66,7 @@ public class MensajeWrite {
      * Obtiene el NivelLog del Mensaje.
      * @return Retorna un NivelLog que representa el grado de log del mensaje.
      */
-    public NivelLog getNivelLog() {
+    protected NivelLog getNivelLog() {
         return nivelLog;
     }
 
@@ -74,35 +74,35 @@ public class MensajeWrite {
      * Setea el NivelLog del Mensaje.
      * @param nivelLog NivelLog que representa el grado de log del mensaje.
      */
-    public void setNivelLog(NivelLog nivelLog) {
+    protected void setNivelLog(NivelLog nivelLog) {
         this.nivelLog = nivelLog;
     }
     /***
      * Obtiene el nombre de la clase que actualmente esta llamando al Log
      * @return Retorna el nombre de la clase que esta invocando la escritura del Log
      */
-    public String getClase() {
+    protected String getClase() {
         return Clase;
     }
     /***
      * Setea el nombre de la clase que esta haciendo el llamado al metodo que escribe el Log.
      * @param clase Nombre de la clase que llama al metodo que escribe el Log.
      */
-    public void setClase(String clase) {
+    protected void setClase(String clase) {
         Clase = clase;
     }
     /**
      * Obtiene el nombre del metodo que actualmente esta llamando al Log
      * @return Retorna el nombre del metodo que esta invocando la escritura del Log
      */
-    public String getMetodo() {
+    protected String getMetodo() {
         return Metodo;
     }
     /**
      * Setea el nombre del metodo que esta haciendo el llamado al metodo que escribe el Log.
      * @param metodo Nombre del metodo que llama al metodo que escribe el Log.
      */
-    public void setMetodo(String metodo) {
+    protected void setMetodo(String metodo) {
         Metodo = metodo;
     }
 
@@ -110,7 +110,7 @@ public class MensajeWrite {
      * Obtiene la fecha de escritura del Log.
      * @return Retorna un string con la fecha de escritura del Log.
      */
-    public String getFecha() {
+    protected String getFecha() {
         return fecha;
     }
 
@@ -118,7 +118,7 @@ public class MensajeWrite {
      * Setea la fecha de escritura del Log.
      * @param fecha String que representa el momento en el que fue mandado a llamar el Log.
      */
-    public void setFecha(String fecha) {
+    protected void setFecha(String fecha) {
         this.fecha = fecha;
     }
 }

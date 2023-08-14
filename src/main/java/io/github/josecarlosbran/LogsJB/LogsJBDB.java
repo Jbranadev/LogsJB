@@ -1,14 +1,13 @@
 package io.github.josecarlosbran.LogsJB;
 
 
-import io.github.josecarlosbran.JBSqlUtils.Column;
+import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Exceptions.ValorUndefined;
-import io.github.josecarlosbran.JBSqlUtils.JBSqlUtils;
+import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +28,6 @@ public class LogsJBDB extends JBSqlUtils {
     public static void setDataBaseGlobal(String BD) {
         try {
             System.setProperty(LogsJBProperties.LogsJBDBNAME.getProperty(), BD);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBaseBD"));
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el nombre de la Base de Datos global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -47,7 +45,6 @@ public class LogsJBDB extends JBSqlUtils {
     public static void setPasswordGlobal(String password) {
         try {
             System.setProperty(LogsJBProperties.LogsJBDBPASSWORD.getProperty(), password);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBasePassword"));
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea la contraseña del usuario de BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -65,8 +62,6 @@ public class LogsJBDB extends JBSqlUtils {
     public static void setUserGlobal(String user) {
         try {
             System.setProperty(LogsJBProperties.LogsJBDBUSER.getProperty(), user);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBaseUser"));
-
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el usuario de BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -84,8 +79,6 @@ public class LogsJBDB extends JBSqlUtils {
     public static void setPortGlobal(String port) {
         try {
             System.setProperty(LogsJBProperties.LogsJBDBPORT.getProperty(), port);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBasePort"));
-
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Puerto de BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -103,7 +96,6 @@ public class LogsJBDB extends JBSqlUtils {
     public static void setHostGlobal(String host) {
         try {
             System.setProperty(LogsJBProperties.LogsJBDBHOST.getProperty(), host);
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBaseHost"));
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Host de la BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -126,7 +118,6 @@ public class LogsJBDB extends JBSqlUtils {
     public static void setDataBaseTypeGlobal(DataBase dataBase) {
         try {
             System.setProperty(LogsJBProperties.LogsJBDBTYPE.getProperty(), dataBase.name());
-            //System.out.println("SystemProperty Seteada: "+System.getProperty("DataBase"));
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Tipo de BD's global: " + e.toString());
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
@@ -355,11 +346,8 @@ public class LogsJBDB extends JBSqlUtils {
      * @return Las propiedades de la url para la conexión a la BD's obtenida de las variables del sistema
      */
     private String setearPropertisUrl() {
-        //if (this.getGetPropertySystem()) {
             String property = System.getProperty(LogsJBProperties.LogsJBDBPROPERTIESURL.getProperty());
             return property;
-        //}
-
     }
 
 

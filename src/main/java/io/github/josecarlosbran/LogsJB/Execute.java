@@ -22,8 +22,6 @@ import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.RestApi;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
-import io.github.josecarlosbran.LogsJB.Mensajes.ListaMensajes;
-import io.github.josecarlosbran.LogsJB.Mensajes.MensajeWrite;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 
 import java.nio.file.Paths;
@@ -142,7 +140,6 @@ class Execute {
                     }
                 }
             }
-
             Runnable EscritorPrincipal = () -> {
                 String temporal = "";
                 boolean band = true;
@@ -153,51 +150,29 @@ class Execute {
                         i=0;
                     }
                     i++;
-                    NivelLog nivel = LogsJB.getGradeLog();
                     //String Mensaje=Execute.getInstance().getTexto();
                     //NivelLog logtemporal=Execute.getInstance().getNivelLog();
                     MensajeWrite mensajetemp = null;
                     mensajetemp = getListado().getDato();
                     //System.out.println("Mensaje en Execute: "+mensajetemp.getTexto()+" "+mensajetemp.getNivelLog());
-                    if (Objects.isNull(mensajetemp)) {
-                        band = false;
-                        break;
-                        //return;
-                    }
+
                     String Mensaje = mensajetemp.getTexto();
                     NivelLog logtemporal = mensajetemp.getNivelLog();
                     String Clase = mensajetemp.getClase();
                     String Metodo = mensajetemp.getMetodo();
                     String fecha = mensajetemp.getFecha();
 
-                    //System.out.println("NivelLog definido: "+nivelaplicación);
-                    //System.out.println("NivelLog temporal: "+intniveltemporal);
-                    //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
-                    //Verifica que el nivel de Log a escribir sea igual o mayor al nivel predefinido.
-                    /*if(logtemporal.getGradeLog()>=nivel.getGradeLog()){
-
-                    }*/
-                    if (!temporal.equals(Mensaje)) {
-                        //verificarSizeFichero();
-                        //writeLog(logtemporal, Mensaje, Clase, Metodo);
-                        //Decide si escribe o no en el TXT
-                        if(LogsJB.getWriteTxt()){
-                            writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
-                        }
-                        //Decide si escribe o no en la BD's
-                        if(LogsJB.getWriteDB()){
-                            writeBD(logtemporal, Mensaje, Clase, Metodo, fecha);
-                        }
-                        //Decide si envía los Logs al RestAPI
-                        if(LogsJB.getWriteRestAPI()){
-                            writeRestAPI(logtemporal, Mensaje, Clase, Metodo, fecha);
-                        }
-
-                    } else {
-
+                    if(LogsJB.getWriteTxt()){
+                        writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
                     }
-                    temporal = Mensaje;
-
+                    //Decide si escribe o no en la BD's
+                    if(LogsJB.getWriteDB()){
+                        writeBD(logtemporal, Mensaje, Clase, Metodo, fecha);
+                    }
+                    //Decide si envía los Logs al RestAPI
+                    if(LogsJB.getWriteRestAPI()){
+                        writeRestAPI(logtemporal, Mensaje, Clase, Metodo, fecha);
+                    }
 
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListado().getSize());
                     if (getListado().getSize() == 0) {
@@ -232,16 +207,8 @@ class Execute {
      * @param fecha fecha y hora de la escritura del Log.
      */
     private void writeBD(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
-        /*try {
-            Runnable writeDB = () -> {*/
                 try{
-                    /*System.out.println("NivelLog 2: "+logtemporal);
-                    System.out.println("Texto 2: "+Mensaje);
-                    System.out.println("Clase: "+Clase);
-                    System.out.println("Clase: "+Metodo);
-                    System.out.println("Clase: "+fecha);*/
-                    //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
-                    //LogsJBDB log = new LogsJBDB();
+
                     if(log==null){
                         log= new LogsJBDB();
                     }
@@ -277,10 +244,7 @@ class Execute {
      */
     private void writeRestAPI(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
         try {
-            //System.out.println("El valor es igual o mayor al nivel de la aplicación: "+intniveltemporal);
-            //System.out.println("NivelLog 2: "+logtemporal);
-            //System.out.println("Texto 2: "+Mensaje);
-            //System.out.println("Temporal: "+temporal);
+            LogsJBDB log = new LogsJBDB(false);
             JsonObject json=new JsonObject();
             json.addProperty("nivelLog", logtemporal.name());
             json.addProperty("texto", Mensaje);
@@ -303,7 +267,6 @@ class Execute {
                         separador +
                         "LogsJB.db");
                 //Verificara si hay Logs por obtener y envíar al servidor
-                LogsJBDB log = new LogsJBDB(false);
                 log.setDataBaseType(DataBase.SQLite);
                 log.setBD(BDSqlite);
                 List<LogsJBDB> logs = new ArrayList<LogsJBDB>();
@@ -329,7 +292,6 @@ class Execute {
                             temp.waitOperationComplete();
                             iteradorLogs.remove();
                         }
-
                     }
                 }
             }else{
@@ -339,7 +301,6 @@ class Execute {
                         "Logs" +
                         separador +
                         "LogsJB.db");
-                LogsJBDB log = new LogsJBDB(false);
                 log.setDataBaseType(DataBase.SQLite);
                 log.setBD(BDSqlite);
                 if(!LogsJB.getTableDBExists()){
@@ -370,8 +331,8 @@ class Execute {
                 //Guardamos el modelo
                 log.save();
                 log.waitOperationComplete();
+                log.setModelExist(false);
             }
-
         } catch (Exception e) {
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de" +
                     " envíar el Log al RestApi: "+getUrlLogRest());
@@ -386,7 +347,7 @@ class Execute {
      * Obtiene la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
      * @return True si esta libre, false si actualmente esta trabajando
      */
-    public synchronized Boolean getTaskisReady() {
+    protected synchronized Boolean getTaskisReady() {
         return TaskisReady;
     }
 
@@ -394,7 +355,7 @@ class Execute {
      * Setea la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
      * @param taskisReady True si esta libre, false si actualmente esta trabajando
      */
-    public synchronized void setTaskisReady(Boolean taskisReady) {
+    protected synchronized void setTaskisReady(Boolean taskisReady) {
         TaskisReady = taskisReady;
     }
 }

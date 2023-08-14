@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="LogsJB"
-           tests="1"
+           tests="3"
            failures="0"
            errors="0"
            skipped="0"
-           time="703.596">
+           time="105.387">
   <properties />
   
   
-            <testcase name="writeLogRestAPI" time="703.596" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+            <testcase name="writeLogRestAPI" time="0.561" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+                <testcase name="writeLogTxt" time="4.986" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+                <testcase name="writeLogDB" time="99.840" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
       
 </testsuite>

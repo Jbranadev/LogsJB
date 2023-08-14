@@ -60,7 +60,7 @@ class ListaMensajes {
                 return dato;
             }
         }catch (Exception e){
-            System.out.println("Excepcion capturada al obtener el mensaje: "+Thread.currentThread().getName());
+            System.err.println("Excepcion capturada al obtener el mensaje: "+Thread.currentThread().getName());
         }
         return null;
     }

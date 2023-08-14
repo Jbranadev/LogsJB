@@ -19,7 +19,6 @@ package com.josebran.LogsJB;
 
 import com.josebran.LogsJB.Numeracion.NivelLog;
 
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -106,42 +105,21 @@ class Execute {
                         i=0;
                     }
                     i++;
-                    NivelLog nivel=LogsJB.getGradeLog();
                     //String Mensaje=Execute.getInstance().getTexto();
                     //NivelLog logtemporal=Execute.getInstance().getNivelLog();
                     MensajeWrite mensajetemp=null;
                     mensajetemp=getListado().getDato();
                     //System.out.println("Mensaje en Execute: "+mensajetemp.getTexto()+" "+mensajetemp.getNivelLog());
-                    if(Objects.isNull(mensajetemp)){
-                        band=false;
-                        break;
-                        //return;
-                    }
                     String Mensaje=mensajetemp.getTexto();
                     NivelLog logtemporal=mensajetemp.getNivelLog();
                     String Clase= mensajetemp.getClase();
                     String Metodo= mensajetemp.getMetodo();
                     String fecha= mensajetemp.getFecha();
-
-
                     //System.out.println("NivelLog definido: "+nivelaplicación);
                     //System.out.println("NivelLog temporal: "+intniveltemporal);
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListaTxt().getSize());
                     //Verifica que el nivel de Log a escribir sea igual o mayor al nivel predefinido.
-                    /*if(logtemporal.getGradeLog()>=nivel.getGradeLog()){
-
-                    }*/
-                    if(!temporal.equals(Mensaje)){
-                        //verificarSizeFichero();
-                        //writeLog(logtemporal, Mensaje, Clase, Metodo);
-                        writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
-                    }else{
-
-                    }
-                    temporal=Mensaje;
-
-
-                    //System.out.println("Cantidad de mensajes Por limpiar: "+getListado().getSize());
+                    writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
                     if(getListado().getSize()==0){
                         band=false;
                         getInstance().setTaskisReady(true);
@@ -160,7 +138,6 @@ class Execute {
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
             System.err.println("Trace de la Exepción : "+e.getStackTrace());
-
         }
     }
 

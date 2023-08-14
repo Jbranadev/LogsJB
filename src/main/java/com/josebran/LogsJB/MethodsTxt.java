@@ -35,8 +35,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static com.josebran.LogsJB.LogsJB.*;
 
@@ -418,14 +416,8 @@ class MethodsTxt {
                         bw.write("*"+ "\n");
                         bw.write("*"+ "\n");
                         bw.write("*"+ "\n");
-                        //bw.write("\n");
                         bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                         bw.close();
-                        //System.out.println("*"+ "\n");
-                        //System.out.println("*"+ "\n");
-                        //System.out.println("*"+ "\n");
-                        //System.out.println("*"+ "\n");
-                        //System.out.println("*"+ "\n");
                         System.out.println("\n");
                         if(nivelLog.getGradeLog()>=NivelLog.ERROR.getGradeLog()){
                             System.err.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
@@ -451,47 +443,10 @@ class MethodsTxt {
             System.err.println("Exepcion capturada en el metodo Metodo por medio del cual se escribir el log del Text");
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
-    }
-
-
-    /****
-     * Reporta al log del sistema
-     * @param nivelLog NivelLog del texto que se desea reportar
-     * @param Texto Texto que se desea Reportar
-     * @param NameClass Nombre de la clase que llama al metodo encargado de escribir el Log
-     */
-    private static void writeLogRegistrador(NivelLog nivelLog, String Texto, String NameClass){
-        // Create a Logger
-        Logger logger = Logger.getLogger(NameClass);
-
-        // log messages using log(Level level, String msg)
-        if(nivelLog==NivelLog.TRACE){
-            //La salida mas detallada voluminosamente posible
-            logger.log(Level.FINEST, Texto);
-        }
-
-        //Salida no tan detallada
-        if(nivelLog==NivelLog.DEBUG){
-            logger.log(Level.FINE, Texto);
-        }
-
-        if(nivelLog==NivelLog.INFO){
-            logger.log(Level.INFO, Texto);
-        }
-
-        if(nivelLog==NivelLog.WARNING){
-            logger.log(Level.WARNING, Texto);
-        }
-        if(nivelLog==NivelLog.ERROR){
-            logger.log(Level.SEVERE, Texto);
-        }
-        if(nivelLog==NivelLog.FATAL){
-            logger.log(Level.SEVERE, Texto);
-        }
     }
 
 
@@ -514,12 +469,12 @@ class MethodsTxt {
             field.set(null, Logtext);
             //logtext = logtext;
         }catch (Exception e){
-            System.out.println("Excepcion capturada al tratar de setear el contador de las veces que se a escrito en " +
+            System.err.println("Excepcion capturada al tratar; de setear el contador de las veces que se a escrito en " +
                     "el log " +Logtext);
-            System.out.println("Tipo de Excepción : "+e.getClass());
-            System.out.println("Causa de la Exepción : "+e.getCause());
-            System.out.println("Mensaje de la Exepción : "+e.getMessage());
-            System.out.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Tipo de Excepción : "+e.getClass());
+            System.err.println("Causa de la Exepción : "+e.getCause());
+            System.err.println("Mensaje de la Exepción : "+e.getMessage());
+            System.err.println("Trace de la Exepción : "+e.getStackTrace());
         }
 
     }

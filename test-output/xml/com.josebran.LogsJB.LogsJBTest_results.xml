@@ -4,10 +4,10 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="5.294">
+           time="5.036">
   <properties />
   
   
-            <testcase name="writeLog" time="5.294" classname="com.josebran.LogsJB.LogsJBTest" />
+            <testcase name="writeLog" time="5.036" classname="com.josebran.LogsJB.LogsJBTest" />
       
 </testsuite>

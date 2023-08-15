@@ -28,12 +28,7 @@
   <developers>
     <developer>
       <name>Jose Carlos Bran</name>
-      <email>josecarlosbran16@gmail.com</email>
-      <organization>JoseBran</organization>
-    </developer>
-    <developer>
-      <name>Daniel Quiñonez</name>
-      <email>danielquinonez764@gmail.com</email>
+      <email>jbranadev@gmail.com</email>
       <organization>JoseBran</organization>
     </developer>
   </developers>
@@ -47,10 +42,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-    <gpg.skip>true</gpg.skip> -->
-
   </properties>
 
   <dependencies>
@@ -59,19 +50,21 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>7.6.1</version>
+      <scope>test</scope>
     </dependency>
     <!-- Dependencia para ReporteTestNG-->
     <dependency>
       <groupId>com.github.sdrss</groupId>
       <artifactId>reportng</artifactId>
       <version>2.7.0</version>
+      <scope>test</scope>
     </dependency>
 
     <!-- Dependencia Log Interno -->
     <dependency>
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>LogsJBSupport</artifactId>
-      <version>0.5.4</version>
+      <version>0.5.5</version>
       <scope>compile</scope>
     </dependency>
 
@@ -79,7 +72,7 @@
     <dependency>
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>JBSqlUtils</artifactId>
-      <version>1.1.5.6</version>
+      <version>1.1.5.7</version>
       <scope>compile</scope>
     </dependency>
 
@@ -170,8 +163,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>11</source>
-          <target>11</target>
+          <source>17</source>
+          <target>17</target>
         </configuration>
       </plugin>
 

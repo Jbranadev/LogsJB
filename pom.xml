@@ -6,7 +6,7 @@
 
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>LogsJBSupport</artifactId>
-  <version>0.5.4</version>
+  <version>0.5.5</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>LogsJB es una librería java que permite la gestión de
@@ -15,7 +15,7 @@
     que exigen grandes niveles de rendimiento. Para mayor
   información, consultar el siguiente enlace https://github.com/JoseCarlosBran/LogsJB/blob/master/Readme.md</description>
   <!-- FIXME change it to the project's website -->
-  <url>https://github.com/Jbranadev/LogsJB/blob/master/Readme.md</url>
+  <url>https://github.com/Jbranadev/LogsJB/tree/support_version</url>
 
 
   <licenses>
@@ -28,30 +28,21 @@
   <developers>
     <developer>
       <name>Jose Carlos Bran</name>
-      <email>josecarlosbran16@gmail.com</email>
+      <email>jbranadev@gmail.com</email>
       <organization>JoseBran</organization>
     </developer>
-    <developer>
-      <name>Daniel Quiñonez</name>
-      <email>danielquinonez764@gmail.com</email>
-      <organization>JoseBran</organization>
-    </developer>
+
   </developers>
 
   <scm>
     <connection>scm:git:git://github.com/Jbranadev/LogsJB.git</connection>
     <developerConnection>scm:git:ssh://github.com/Jbranadev/LogsJB.git</developerConnection>
-    <url>https://github.com/Jbranadev/LogsJB/tree/master</url>
+    <url>https://github.com/Jbranadev/LogsJB/tree/support_version</url>
   </scm>
 
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!--
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-     <gpg.skip>true</gpg.skip> -->
-
   </properties>
 
   <dependencies>
@@ -198,8 +189,6 @@
           </execution>
         </executions>
       </plugin>
-
-
     </plugins>
   </build>
 </project>

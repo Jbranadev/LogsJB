@@ -3,6 +3,10 @@ LogsJBSupport es una librería java que permite la gestión de
 registros de un programa en paralelo a la ejecución 
 del programa, lo cual la hace una potente herramienta para programas empresariales y personales 
 que exigen grandes niveles de rendimiento. 
+
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/LogsJBSupport.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=&namespace=io.github.josecarlosbran&name=LogsJBSupport)
+[![License](https://img.shields.io/github/license/spotify/dockerfile-maven.svg)](LICENSE.md)
+
 * * *
 ## Estado del Proyecto :atom:  
 LogsJBSupport actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 
@@ -175,17 +179,19 @@ Maven
 <dependency>
     <groupId>io.github.josecarlosbran</groupId>
     <artifactId>LogsJBSupport</artifactId>
-    <version>0.5.4</version>
+    <version>0.5.5</version>
 </dependency>
 ~~~
 
+
 Gradle
 ~~~
-implementation 'io.github.josecarlosbran:LogsJBSupport:0.5.4'
+implementation 'io.github.josecarlosbran:LogsJBSupport:0.5.5'
 ~~~
 
 Para mayor información sobre como descargar LogsJBSupport desde otros 
 administradores de paquetes, puedes ir al siguiente Link
+
 <https://search.maven.org/artifact/io.github.josecarlosbran/LogsJBSupport>
 
 ***

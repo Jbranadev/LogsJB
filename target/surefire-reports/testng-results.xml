@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-08-14T05:55:15 CST" name="Surefire suite" finished-at="2023-08-14T05:55:20 CST" duration-ms="4677">
+  <suite started-at="2023-08-14T19:58:09 CST" name="Surefire suite" finished-at="2023-08-14T19:58:14 CST" duration-ms="4909">
     <groups>
     </groups>
-    <test started-at="2023-08-14T05:55:15 CST" name="Surefire test" finished-at="2023-08-14T05:55:20 CST" duration-ms="4677">
+    <test started-at="2023-08-14T19:58:09 CST" name="Surefire test" finished-at="2023-08-14T19:58:14 CST" duration-ms="4909">
       <class name="com.josebran.LogsJB.LogsJBTest">
-        <test-method signature="writeLog()[pri:0, instance:com.josebran.LogsJB.LogsJBTest@2357d90a]" started-at="2023-08-14T05:55:15 CST" name="writeLog" finished-at="2023-08-14T05:55:20 CST" duration-ms="4628" status="PASS">
+        <test-method signature="writeLog()[pri:0, instance:com.josebran.LogsJB.LogsJBTest@2357d90a]" started-at="2023-08-14T19:58:09 CST" name="writeLog" finished-at="2023-08-14T19:58:14 CST" duration-ms="4855" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- writeLog -->

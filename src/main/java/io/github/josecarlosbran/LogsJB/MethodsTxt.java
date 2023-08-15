@@ -18,6 +18,7 @@ package io.github.josecarlosbran.LogsJB;
 
 
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
+import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
 
@@ -48,10 +49,15 @@ import static io.github.josecarlosbran.LogsJB.LogsJB.*;
  */
 class MethodsTxt {
 
+    /**
+     * Separador que utiliza el sistema de archivos por default
+     */
+    private static String separador = System.getProperty("file.separator");
+
     /***
      * Obtiene el usuario actual del sistema operativo
      */
-    static String usuario=System.getProperty("user.name");
+    protected static String usuario=System.getProperty("user.name");
 
     /***
      * Contador que expresa la cantidad de veces que se a escrito en la ejecución actual de la aplicación
@@ -63,7 +69,7 @@ class MethodsTxt {
      * Ruta donde se estara escribiendo el log por default, la cual sería:
      *  ContexAplicación/Logs/fecha_hoy/Log.txt
      */
-    protected static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+    protected static String ruta= (Paths.get("").toAbsolutePath().normalize().toString()+separador+"Logs"+separador+convertir_fecha("dd-MM-YYYY") +separador+ "Log.txt");
 
 
     /****
@@ -86,7 +92,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a NivelLog, setea el nivel por default.
      */
     protected static void setearNivelLog(){
-        String nivelLog=System.getProperty("NivelLog");
+        String nivelLog=System.getProperty(LogsJBProperties.LogsJBNivelLog.getProperty());
         if(Objects.isNull(nivelLog)){
                 //Si la propiedad del sistema no esta definida, setea el nivel por default
             setGradeLog(NivelLog.INFO);
@@ -110,7 +116,6 @@ class MethodsTxt {
                 setGradeLog(NivelLog.FATAL);
             }
         }
-        //System.out.println("SystemProperty Seteada: "+System.getProperty("NivelLog"));
     }
 
     /***
@@ -118,16 +123,15 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a RutaLog, setea la ruta por default.
      */
     protected static void setearRuta(){
-        String rutaLog=System.getProperty("RutaLog");
+        String rutaLog=System.getProperty(LogsJBProperties.LogsJBRutaLog.getProperty());
         if(Objects.isNull(rutaLog)){
             //Si la propiedad del sistema no esta definida, setea la ruta por default
-            String ruta=(Paths.get("").toAbsolutePath().normalize().toString()+"/Logs/"+
-                    convertir_fecha("dd-MM-YYYY") + "/Log.txt").replace("\\","/");
+            String ruta=(Paths.get("").toAbsolutePath().normalize().toString()+separador+"Logs"+separador+
+                    convertir_fecha("dd-MM-YYYY") + separador+"Log.txt");
             setRuta(ruta);
         }else{
             setRuta(rutaLog);
         }
-        //System.out.println("SystemProperty Seteada: "+System.getProperty("RutaLog"));
     }
 
 
@@ -136,7 +140,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a SizeLog, setea el SizeLog por default.
      */
     protected static void setearSizelLog(){
-        String sizeLog=System.getProperty("SizeLog");
+        String sizeLog=System.getProperty(LogsJBProperties.LogsJBSizeLog.getProperty());
         if(Objects.isNull(sizeLog)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setSizeLog(SizeLog.Little_Little);
@@ -168,7 +172,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a writeTxt, setea el writeTxt por default.
      */
     protected static void setearWriteTxt(){
-        String writeTxt=System.getProperty("writeTxt");
+        String writeTxt=System.getProperty(LogsJBProperties.LogsJBWriteTxt.getProperty());
         if(Objects.isNull(writeTxt)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteTxt(true);
@@ -182,7 +186,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a writeDB, setea el writeDB por default.
      */
     protected static void setearWriteDB(){
-        String writeDB=System.getProperty("writeDB");
+        String writeDB=System.getProperty(LogsJBProperties.LogsJBWriteDB.getProperty());
         if(Objects.isNull(writeDB)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteDB(false);
@@ -196,7 +200,7 @@ class MethodsTxt {
      * configurada la propiedad correspondiente a writeRestAPI, setea el writeRestAPI por default.
      */
     protected static void setearWriteRestAPI(){
-        String writeRestAPI=System.getProperty("writeRestAPI");
+        String writeRestAPI=System.getProperty(LogsJBProperties.LogsJBWriteRestApi.getProperty());
         if(Objects.isNull(writeRestAPI)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);
@@ -212,7 +216,7 @@ class MethodsTxt {
      * entre las variables del sitema, setea la propiedad writeRestAPI en false.
      */
     protected static void setearTipeAutenticación(){
-        String tipeautentication=System.getProperty("tipeautentication");
+        String tipeautentication=System.getProperty(LogsJBProperties.LogsJBTypeAutenticatiosRest.getProperty());
         if(Objects.isNull(tipeautentication)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);
@@ -220,18 +224,15 @@ class MethodsTxt {
             if(tipeautentication.equalsIgnoreCase(typeAutentication.BEARER.name())){
                 setTipeautentication(typeAutentication.BEARER);
             }
-
             if(tipeautentication.equalsIgnoreCase(typeAutentication.APIKEY.name())){
                 setTipeautentication(typeAutentication.APIKEY);
             }
-
             if(tipeautentication.equalsIgnoreCase(typeAutentication.BASIC.name())){
                 setTipeautentication(typeAutentication.BASIC);
             }
             if(tipeautentication.equalsIgnoreCase(typeAutentication.DIGEST.name())){
                 setTipeautentication(typeAutentication.DIGEST);
             }
-
         }
     }
 
@@ -241,7 +242,7 @@ class MethodsTxt {
      * entre las variables del sitema, setea la propiedad writeRestAPI en false.
      */
     protected static void setearKeyLogRest(){
-        String keyLogRest=System.getProperty("keyLogRest");
+        String keyLogRest=System.getProperty(LogsJBProperties.LogsJBKeyLogRest.getProperty());
         if(Objects.isNull(keyLogRest)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);
@@ -256,7 +257,7 @@ class MethodsTxt {
      * entre las variables del sitema, setea la propiedad writeRestAPI en false.
      */
     protected static void setearUrlLogRest(){
-        String urlLogRest=System.getProperty("urlLogRest");
+        String urlLogRest=System.getProperty(LogsJBProperties.LogsJBUrlLogRest.getProperty());
         if(Objects.isNull(urlLogRest)){
             //Si la propiedad del sistema no esta definida, setea el nivel por default
             setWriteRestAPI(false);
@@ -276,10 +277,7 @@ class MethodsTxt {
     protected static String convertir_fecha(){
         String temp=null;
         try{
-            //DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            //DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss SSS");
-            //convertir_fecha()
             temp=formater.format(LocalDateTime.now());
 
         }catch (Exception e){
@@ -302,7 +300,6 @@ class MethodsTxt {
         try{
             DateTimeFormatter formater = DateTimeFormatter.ofPattern(formato);
             temp=formater.format(LocalDateTime.now());
-
         }catch (Exception e){
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo que Obtiene la fecha en el formato indicado");
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
@@ -310,7 +307,6 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
             com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
         }
-
         return temp;
     }
 
@@ -323,7 +319,7 @@ class MethodsTxt {
      * @param cadena Texto a evaluar para obtener la separcion de tabulaciones de acuerdo al algoritmo definido.
      * @return Retorna un string con la cantidad de tabulaciones respecto al siguiente texto en la misma linea.
      */
-    public static String getTabs(String cadena) {
+    protected static String getTabs(String cadena) {
         //Reglas del negocio, maximas tabulaciones son 4
         //Minima tabulacion es una
         String result = "";
@@ -339,39 +335,33 @@ class MethodsTxt {
         try{
             //Si la cadena es menor a 13, retornara 7 tabs
             if(tamaño<13){
-                for(int i=0;i<7;i++){
-                    result=result+tab;
-                }
+                result=result+tab.repeat(7);
+
                 //Si la cadena es menor a 17, retornara 6 tabs
             }else if(tamaño<17){
-                for(int i=0;i<6;i++){
-                    result=result+tab;
-                }
+                result=result+tab.repeat(6);
+
                 //Si la cadena es menor a 25, retornara 5 tabs
             }else if(tamaño<25){
-                for(int i=0;i<5;i++){
-                    result=result+tab;
-                }
+                result=result+tab.repeat(5);
+
                 //Si la cadena es menor a 29, retornara 4 tabs
             }else if(tamaño<29){
-                for(int i=0;i<4;i++){
-                    result=result+tab;
-                }
+
+                result=result+tab.repeat(4);
+
                 //Si la cadena es menor a 33, retornara 3 tabs
             }else if(tamaño<33){
-                for(int i=0;i<3;i++){
-                    result=result+tab;
-                }
+                result=result+tab.repeat(3);
+
                 //Si la cadena es menor a 37, retornara 2 tabs
             }else if(tamaño<37){
-                for(int i=0;i<2;i++){
-                    result=result+tab;
-                }
-                //Si la cadena es mayor a 36, retornara 1 tabs
+                result=result+tab.repeat(2);
+
+                //Si la cadena es mayor a 36, retornara 2 tabs
             }else if(tamaño>36){
-                for(int i=0;i<2;i++){
-                    result=result+tab;
-                }
+                result=result+tab.repeat(2);
+
             }
 
         }catch (Exception e){
@@ -398,7 +388,6 @@ class MethodsTxt {
             long sizeFichero=((logactual.length())/1024)/1024;
             //long sizeFichero=((logactual.length())/1024);
             //System.out.println("Tamaño del archivo en Kb: " +sizeFichero);
-
             if(sizeFichero>getSizeLog().getSizeLog()){
                 BasicFileAttributes attributes = null;
                 String fechaformateada="";
@@ -411,9 +400,7 @@ class MethodsTxt {
                     String pattern = "dd-MM-yyyy HH:mm:ss SS";
                     numeroaleatorio = (int) Math.floor(Math.random()*(9-0+1)+0);
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
                     fechaformateada = simpleDateFormat.format( new Date( time.toMillis() ) );
-
                     //System.out.println( "La fecha y hora de creación del archivo es: " + fechaformateada );
                 }catch(IOException exception) {
                     com.josebran.LogsJB.LogsJB.fatal("Excepción capturada " + "attributes: " + exception.getMessage());
@@ -463,7 +450,6 @@ class MethodsTxt {
             //System.out.println("clase: " + Clase + " metodo: " + Metodo);
             //Rutas de archivos
             File fichero = new File(getRuta());
-
             //Verifica si existe la carpeta Logs, si no existe, la Crea
             File directorio = new File(fichero.getParent());
             if (!directorio.exists()) {
@@ -474,7 +460,6 @@ class MethodsTxt {
             
             /////Esta seccion se encarga de Crear y escribir en el Log/////
             //verificarSizeFichero();
-
             /*Si es un nuevo Test se ejecuta el siguiente codigo, tomando en cuenta que sea el primer
              * TestCase del Test actual*/
 
@@ -493,7 +478,11 @@ class MethodsTxt {
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
                 System.out.println("*"+ "\n");
-                System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                if(nivelLog.getGradeLog()>=NivelLog.ERROR.getGradeLog()){
+                    System.err.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                }else{
+                    System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                }
             }else{
                 if(getLogtext()==1){
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
@@ -511,7 +500,11 @@ class MethodsTxt {
                     //System.out.println("*"+ "\n");
                     //System.out.println("*"+ "\n");
                     System.out.println("\n");
-                    System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    if(nivelLog.getGradeLog()>=NivelLog.ERROR.getGradeLog()){
+                        System.err.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    }else{
+                        System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    }
                 }else{
                     //Agrega en el fichero el Log
                     BufferedWriter bw = new BufferedWriter(new FileWriter(fichero.getAbsoluteFile(), true));
@@ -519,8 +512,11 @@ class MethodsTxt {
                     bw.write(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
                     bw.close();
                     System.out.println("\n");
-                    System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
-
+                    if(nivelLog.getGradeLog()>=NivelLog.ERROR.getGradeLog()){
+                        System.err.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    }else{
+                        System.out.println(fecha+getTabs(fecha)+getUsuario()+getTabs(getUsuario())+ Clase +getTabs(Clase)+ Metodo +getTabs(Metodo)+nivelLog+getTabs(nivelLog.toString())+Texto+ "\n");
+                    }
                 }
             }
         }catch (Exception e){
@@ -529,44 +525,6 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
             com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
-        }
-
-    }
-
-
-    /****
-     * Reporta al log del sistema
-     * @param nivelLog NivelLog del texto que se desea reportar
-     * @param Texto Texto que se desea Reportar
-     * @param NameClass Nombre de la clase que llama al metodo encargado de escribir el Log
-     */
-    private static void writeLogRegistrador(NivelLog nivelLog, String Texto, String NameClass){
-        // Create a Logger
-        Logger logger = Logger.getLogger(NameClass);
-
-        // log messages using log(Level level, String msg)
-        if(nivelLog==NivelLog.TRACE){
-            //La salida mas detallada voluminosamente posible
-            logger.log(Level.FINEST, Texto);
-        }
-
-        //Salida no tan detallada
-        if(nivelLog==NivelLog.DEBUG){
-            logger.log(Level.FINE, Texto);
-        }
-
-        if(nivelLog==NivelLog.INFO){
-            logger.log(Level.INFO, Texto);
-        }
-
-        if(nivelLog==NivelLog.WARNING){
-            logger.log(Level.WARNING, Texto);
-        }
-        if(nivelLog==NivelLog.ERROR){
-            logger.log(Level.SEVERE, Texto);
-        }
-        if(nivelLog==NivelLog.FATAL){
-            logger.log(Level.SEVERE, Texto);
         }
     }
 

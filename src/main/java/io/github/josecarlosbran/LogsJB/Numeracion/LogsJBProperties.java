@@ -1,6 +1,11 @@
 package io.github.josecarlosbran.LogsJB.Numeracion;
 
+/****
+ * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
+ * Numeración que sirve para indicar las propiedades de conexión.
+ */
 public enum LogsJBProperties {
+
     /**
      * Tipo de BD's a la cual se conectara.
      */
@@ -27,7 +32,7 @@ public enum LogsJBProperties {
 
     /**
      * Propiedades extra para la url de conexión a BD's por ejemplo
-     * ?autoReconnect=true&useSSL=false
+     * autoReconnect=true
      */
     LogsJBDBPROPERTIESURL("LogsJBDBpropertisUrl"),
 

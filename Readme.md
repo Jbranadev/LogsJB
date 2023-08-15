@@ -4,9 +4,8 @@ registros de un programa en paralelo a la ejecución
 del programa, lo cual la hace una potente herramienta para programas empresariales y personales 
 que exigen grandes niveles de rendimiento. 
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/LogsJBSupport.svg?label=Maven%20Central)](https://central.sonatype.com/search?q=&namespace=io.github.josecarlosbran&name=LogsJBSupport)
-[![License](https://img.shields.io/github/license/spotify/dockerfile-maven.svg)](LICENSE.md)
-
+![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/LogsJBSupport?logo=apachemaven&logoColor=%23C71A36&color=blue&link=https%3A%2F%2Fcentral.sonatype.com%2Fsearch%3Fq%3D%26namespace%3Dio.github.josecarlosbran%26name%3DLogsJBSupport)
+[![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](https://github.com/Jbranadev/LogsJB/tree/support_version/LICENSE.txt)
 * * *
 ## Estado del Proyecto :atom:  
 LogsJBSupport actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 

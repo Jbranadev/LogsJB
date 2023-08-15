@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Surefire test"
+           tests="3"
+           failures="0"
+           errors="0"
+           skipped="0"
+           time="1.264">
+  <properties />
+  
+  
+            <testcase name="writeLogTxt" time="0.074" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+                <testcase name="writeLogDB" time="0.710" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+                <testcase name="writeLogRestAPI" time="0.480" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+      
+</testsuite>

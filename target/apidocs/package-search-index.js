@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"io.github.josecarlosbran.LogsJB"},{"l":"io.github.josecarlosbran.LogsJB.Mensajes"},{"l":"io.github.josecarlosbran.LogsJB.Numeracion"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"io.github.josecarlosbran.LogsJB"},{"l":"io.github.josecarlosbran.LogsJB.Numeracion"}];updateSearchResults();

@@ -44,19 +44,77 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <!-- Dependencia para TestNG-->
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.6.1</version>
+        <scope>test</scope>
+      </dependency>
+      <!-- Dependencia para ReporteTestNG-->
+      <dependency>
+        <groupId>com.github.sdrss</groupId>
+        <artifactId>reportng</artifactId>
+        <version>2.7.0</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- Dependencia Log Interno -->
+      <dependency>
+        <groupId>io.github.josecarlosbran</groupId>
+        <artifactId>LogsJBSupport</artifactId>
+        <version>0.5.5</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <!-- Dependencia Para almacenar en BD's -->
+      <dependency>
+        <groupId>io.github.josecarlosbran</groupId>
+        <artifactId>JBSqlUtils</artifactId>
+        <version>1.1.6</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <!-- Dependencia Para enviar los logs a un RestAPI -->
+      <dependency>
+        <groupId>io.github.josecarlosbran</groupId>
+        <artifactId>JBRestAPI</artifactId>
+        <version>0.2</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <!-- Dependencia Para enviar crear JSON -->
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <!-- Dependencia para Setter and Getter-->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.28</version>
+        <scope>compile</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
   <dependencies>
     <!-- Dependencia para TestNG-->
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.6.1</version>
       <scope>test</scope>
     </dependency>
     <!-- Dependencia para ReporteTestNG-->
     <dependency>
       <groupId>com.github.sdrss</groupId>
       <artifactId>reportng</artifactId>
-      <version>2.7.0</version>
       <scope>test</scope>
     </dependency>
 
@@ -64,7 +122,6 @@
     <dependency>
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>LogsJBSupport</artifactId>
-      <version>0.5.5</version>
       <scope>compile</scope>
     </dependency>
 
@@ -72,7 +129,6 @@
     <dependency>
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>JBSqlUtils</artifactId>
-      <version>1.1.5.8</version>
       <scope>compile</scope>
     </dependency>
 
@@ -80,7 +136,6 @@
     <dependency>
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>JBRestAPI</artifactId>
-      <version>0.2</version>
       <scope>compile</scope>
     </dependency>
 
@@ -88,7 +143,6 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <version>2.10.1</version>
       <scope>compile</scope>
     </dependency>
 
@@ -96,11 +150,10 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.28</version>
+      <scope>compile</scope>
     </dependency>
-
-
   </dependencies>
+
 
   <distributionManagement>
     <snapshotRepository>

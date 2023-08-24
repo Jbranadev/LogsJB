@@ -20,6 +20,7 @@ package com.josebran.LogsJB;
 import com.josebran.LogsJB.Numeracion.LogsJBProperties;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.josebran.LogsJB.Numeracion.SizeLog;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -199,7 +200,7 @@ class MethodsTxt {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ExceptionUtils.getStackTrace(e));
         }
         return temp;
     }
@@ -220,7 +221,7 @@ class MethodsTxt {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ExceptionUtils.getStackTrace(e));
         }
 
         return temp;
@@ -285,7 +286,7 @@ class MethodsTxt {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ExceptionUtils.getStackTrace(e).toString());
         }
 
         return result;
@@ -343,7 +344,7 @@ class MethodsTxt {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -444,7 +445,7 @@ class MethodsTxt {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ExceptionUtils.getStackTrace(e));
         }
 
     }
@@ -474,7 +475,7 @@ class MethodsTxt {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ExceptionUtils.getStackTrace(e));
         }
 
     }

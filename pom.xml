@@ -61,6 +61,15 @@
         <version>2.7.0</version>
         <scope>test</scope>
       </dependency>
+
+      <!-- Dependencia para Extender funcionalidades de lenguaje Java-->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.13.0</version>
+        <scope>compile</scope>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
@@ -76,6 +85,12 @@
       <groupId>com.github.sdrss</groupId>
       <artifactId>reportng</artifactId>
       <scope>test</scope>
+    </dependency>
+    <!-- Dependencia para Extender funcionalidades de lenguaje Java-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 

@@ -20,6 +20,7 @@ package com.josebran.LogsJB;
 import com.josebran.LogsJB.Numeracion.LogsJBProperties;
 import com.josebran.LogsJB.Numeracion.NivelLog;
 import com.josebran.LogsJB.Numeracion.SizeLog;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.lang.reflect.Field;
 
@@ -93,7 +94,7 @@ public  class LogsJB {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -193,7 +194,7 @@ public  class LogsJB {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ExceptionUtils.getStackTrace(e));
         }
 
     }
@@ -215,17 +216,17 @@ public  class LogsJB {
             String metodo = null;
             try{
                 clase = elements[3].getClassName();
-                metodo = elements[3].getMethodName();
+                metodo = elements[3].getMethodName()+" => "+elements[3].getLineNumber();
                 if(getIsAndroid()){
                     clase = elements[4].getClassName();
-                    metodo = elements[4].getMethodName();
+                    metodo = elements[4].getMethodName()+" => "+elements[4].getLineNumber();
                 }
             }catch (Exception ex){
                 clase = elements[2].getClassName();
-                metodo = elements[2].getMethodName();
+                metodo = elements[2].getMethodName()+" => "+elements[2].getLineNumber();
                 if(getIsAndroid()){
                     clase = elements[3].getClassName();
-                    metodo = elements[3].getMethodName();
+                    metodo = elements[3].getMethodName()+" => "+elements[3].getLineNumber();
                 }
             }
 
@@ -252,7 +253,7 @@ public  class LogsJB {
             System.err.println("Tipo de Excepción : "+e.getClass());
             System.err.println("Causa de la Exepción : "+e.getCause());
             System.err.println("Mensaje de la Exepción : "+e.getMessage());
-            System.err.println("Trace de la Exepción : "+e.getStackTrace());
+            System.err.println("Trace de la Exepción : "+ExceptionUtils.getStackTrace(e));
         }
 
 

@@ -16,6 +16,8 @@
 
 package io.github.josecarlosbran.LogsJB;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -67,7 +69,7 @@ class ListaMensajes {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ ExceptionUtils.getStackTrace(e));
         }
         return null;
     }

@@ -11,6 +11,7 @@ import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIsNullOrEmpty;
 
@@ -33,7 +34,7 @@ public class LogsJBDB extends JBSqlUtils {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -50,7 +51,7 @@ public class LogsJBDB extends JBSqlUtils {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -67,7 +68,7 @@ public class LogsJBDB extends JBSqlUtils {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -84,7 +85,7 @@ public class LogsJBDB extends JBSqlUtils {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -101,7 +102,7 @@ public class LogsJBDB extends JBSqlUtils {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
     }
@@ -123,7 +124,7 @@ public class LogsJBDB extends JBSqlUtils {
             LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
 
     }
@@ -142,7 +143,7 @@ public class LogsJBDB extends JBSqlUtils {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 

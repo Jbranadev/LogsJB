@@ -21,6 +21,7 @@ import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.lang.reflect.Field;
 
@@ -188,7 +189,7 @@ public  class LogsJB {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ ExceptionUtils.getStackTrace(e));
         }
 
     }
@@ -229,10 +230,10 @@ public  class LogsJB {
             String metodo = null;
             try{
                 clase = elements[3].getClassName();
-                metodo = elements[3].getMethodName();
+                metodo = elements[3].getMethodName()+" => "+elements[3].getLineNumber();
             }catch (Exception ex){
                 clase = elements[2].getClassName();
-                metodo = elements[2].getMethodName();
+                metodo = elements[2].getMethodName()+" => "+elements[2].getLineNumber();
             }
 
             if(nivelLog.getGradeLog()>= getGradeLog().getGradeLog()){
@@ -258,7 +259,7 @@ public  class LogsJB {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -447,7 +448,7 @@ public  class LogsJB {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -478,7 +479,7 @@ public  class LogsJB {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
         
     }
@@ -508,7 +509,7 @@ public  class LogsJB {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
         //LogsJB.urlLogRest = urlLogRest;
     }

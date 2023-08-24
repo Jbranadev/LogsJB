@@ -21,6 +21,7 @@ import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
 import io.github.josecarlosbran.LogsJB.Numeracion.SizeLog;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -36,8 +37,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static io.github.josecarlosbran.LogsJB.LogsJB.*;
 
@@ -285,7 +284,7 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ ExceptionUtils.getStackTrace(e));
         }
         return temp;
     }
@@ -305,7 +304,7 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
         return temp;
     }
@@ -370,7 +369,7 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
@@ -428,7 +427,7 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -524,7 +523,7 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -553,7 +552,7 @@ class MethodsTxt {
             com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
             com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
             com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+e.getStackTrace());
+            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ExceptionUtils.getStackTrace(e));
         }
 
     }

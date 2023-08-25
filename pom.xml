@@ -6,7 +6,7 @@
 
   <groupId>io.github.josecarlosbran</groupId>
   <artifactId>LogsJB</artifactId>
-  <version>0.6.2</version>
+  <version>0.6.3</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>LogsJB es una librería java que permite la gestión de
@@ -65,7 +65,7 @@
       <dependency>
         <groupId>io.github.josecarlosbran</groupId>
         <artifactId>LogsJBSupport</artifactId>
-        <version>0.5.5</version>
+        <version>0.5.6</version>
         <scope>compile</scope>
       </dependency>
 
@@ -73,7 +73,15 @@
       <dependency>
         <groupId>io.github.josecarlosbran</groupId>
         <artifactId>JBSqlUtils</artifactId>
-        <version>1.1.6</version>
+        <version>1.1.7</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <!-- Dependencia para el uso de JDBC SQLite, Log Interno-->
+      <dependency>
+        <groupId>org.xerial</groupId>
+        <artifactId>sqlite-jdbc</artifactId>
+        <version>3.42.0.0</version>
         <scope>compile</scope>
       </dependency>
 
@@ -84,6 +92,7 @@
         <version>0.2</version>
         <scope>compile</scope>
       </dependency>
+
 
       <!-- Dependencia Para enviar crear JSON -->
       <dependency>
@@ -136,6 +145,13 @@
     <dependency>
       <groupId>io.github.josecarlosbran</groupId>
       <artifactId>JBSqlUtils</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- Dependencia para el uso de JDBC SQLite, Log Interno-->
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
       <scope>compile</scope>
     </dependency>
 

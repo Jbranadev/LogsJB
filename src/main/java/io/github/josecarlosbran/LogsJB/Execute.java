@@ -17,18 +17,22 @@
 package io.github.josecarlosbran.LogsJB;
 
 
-import com.google.gson.JsonObject;
-import io.github.josecarlosbran.JBRestAPI.Enumeraciones.contentType;
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
-import io.github.josecarlosbran.JBRestAPI.RestApi;
+import io.github.josecarlosbran.JBRestAPI.JBRestAPI;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MultivaluedHashMap;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -43,8 +47,11 @@ import static io.github.josecarlosbran.LogsJB.MethodsTxt.*;
  */
 class Execute {
 
+    private JBRestAPI clienteJB;
 
     private LogsJBDB log ;
+
+    private Log logPojo=new Log();
 
     private Boolean TaskisReady=true;
 
@@ -244,23 +251,24 @@ class Execute {
      */
     private void writeRestAPI(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
         try {
-            LogsJBDB log = new LogsJBDB(false);
-            JsonObject json=new JsonObject();
-            json.addProperty("nivelLog", logtemporal.name());
-            json.addProperty("texto", Mensaje);
-            json.addProperty("clase", Clase);
-            json.addProperty("metodo", Metodo);
-            json.addProperty("fecha", fecha);
+            if(Objects.isNull(this.clienteJB)){
+                MultivaluedMap<String, Object> myHeaders= new MultivaluedHashMap<>();
+                myHeaders.add("Authorization", LogsJB.getTipeautentication()+getKeyLogRest());
+                this.clienteJB=JBRestAPI.builder().Url(getUrlLogRest()).
+                        MediaType(MediaType.APPLICATION_JSON_TYPE).
+                        Headers(myHeaders).newClient();
+            }
+            this.logPojo.setNivelLog(logtemporal.name());
+            this.logPojo.setTexto(Mensaje);
+            this.logPojo.setClase(Clase);
+            this.logPojo.setMetodo(Metodo);
+            this.logPojo.setFecha(fecha);
+            Response respuesta= this.clienteJB.post(Entity.entity(this.logPojo, MediaType.APPLICATION_JSON_TYPE));
+            com.josebran.LogsJB.LogsJB.info("Resultado de enviar el Log al Endpoint es: " + respuesta);
 
-            //System.out.println("Tipo de autenticación seteada en RestApi: "+LogsJB.getTipeautentication());
-            RestApi rest= new RestApi(LogsJB.getTipeautentication(), contentType.JSON);
-            System.out.println("Json a envíar: "+json.toString());
-            String respuesta=rest.Post(getUrlLogRest(), json.toString(), getKeyLogRest());
-            requestCode codigorespuesta=rest.getCodigorespuesta();
-            System.out.println("Respuesta: "+respuesta);
-            System.out.println("Codigo de Respuesta: "+codigorespuesta);
-
-            if((codigorespuesta==requestCode.CREATED)||(codigorespuesta==requestCode.OK)){
+            int codigorespuesta=respuesta.getStatus();
+            if((codigorespuesta==requestCode.CREATED.getCodigo())||(codigorespuesta==requestCode.OK.getCodigo())){
+                LogsJBDB log = new LogsJBDB(false);
                 String separador = System.getProperty("file.separator");
                 String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
                         "Logs" +
@@ -276,25 +284,25 @@ class Execute {
                     Iterator<LogsJBDB> iteradorLogs=logs.iterator();
                     while(iteradorLogs.hasNext()){
                         LogsJBDB temp= iteradorLogs.next();
-                        //Por cada objeto creo un Json y lo envío
-                        JsonObject jsontemp=new JsonObject();
-                        jsontemp.addProperty("nivelLog", temp.getNivelLog().getValor());
-                        jsontemp.addProperty("texto", temp.getTexto().getValor());
-                        jsontemp.addProperty("clase", temp.getClase().getValor());
-                        jsontemp.addProperty("metodo", temp.getTexto().getValor());
-                        jsontemp.addProperty("fecha", temp.getFecha().getValor());
-                        RestApi resttemp= new RestApi(LogsJB.getTipeautentication(), contentType.JSON);
-                        resttemp.Post(getUrlLogRest(), jsontemp.toString(), getKeyLogRest());
-                        requestCode codigorespuestatemp=resttemp.getCodigorespuesta();
+                        temp.llenarControlador(this.logPojo, temp);
+                        this.logPojo.setId(null);
+                        Response respuestatemp= this.clienteJB.post(Entity.entity(this.logPojo, MediaType.APPLICATION_JSON_TYPE));
+                        com.josebran.LogsJB.LogsJB.info("Resultado de enviar el Log al Endpoint es: " + respuesta);
+
                         //Si logro envíar el Log, elimina el modelo en Bd's
-                        if((codigorespuestatemp==requestCode.CREATED)||(codigorespuestatemp==requestCode.OK)){
+                        int codigorespuestatemp=respuestatemp.getStatus();
+                        if((codigorespuestatemp==requestCode.CREATED.getCodigo())||(codigorespuestatemp==requestCode.OK.getCodigo())){
                             temp.delete();
                             temp.waitOperationComplete();
                             iteradorLogs.remove();
+                        }else{
+                            this.clienteJB=null;
                         }
                     }
                 }
             }else{
+                this.clienteJB=null;
+                LogsJBDB log = new LogsJBDB(false);
                 //Si el RestApi no esta habilitado, almacenara temporalmente en BD's el Log
                 String separador = System.getProperty("file.separator");
                 String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +

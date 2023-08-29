@@ -6,4 +6,5 @@ io\github\josecarlosbran\LogsJB\Numeracion\NivelLog.class
 io\github\josecarlosbran\LogsJB\MensajeWrite.class
 io\github\josecarlosbran\LogsJB\ListaMensajes.class
 io\github\josecarlosbran\LogsJB\Numeracion\SizeLog.class
+io\github\josecarlosbran\LogsJB\Log.class
 io\github\josecarlosbran\LogsJB\LogsJBDB.class

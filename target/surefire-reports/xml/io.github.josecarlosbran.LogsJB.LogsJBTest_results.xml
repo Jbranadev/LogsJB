@@ -4,12 +4,12 @@
            failures="0"
            errors="0"
            skipped="0"
-           time="1.590">
+           time="5.640">
   <properties />
   
   
-            <testcase name="writeLogDB" time="0.922" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
-                <testcase name="writeLogTxt" time="0.121" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
-                <testcase name="writeLogRestAPI" time="0.547" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+            <testcase name="writeLogTxt" time="0.085" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+                <testcase name="writeLogDB" time="0.937" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
+                <testcase name="writeLogRestAPI" time="4.618" classname="io.github.josecarlosbran.LogsJB.LogsJBTest" />
       
 </testsuite>

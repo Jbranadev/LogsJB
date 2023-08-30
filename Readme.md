@@ -4,7 +4,8 @@ registros de un programa en paralelo a la ejecución
 del programa, lo cual la hace una potente herramienta para programas empresariales y personales 
 que exigen grandes niveles de rendimiento. 
 
-![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/LogsJB?logo=apachemaven&logoColor=%23C71A36&color=blue&link=https%3A%2F%2Fcentral.sonatype.com%2Fsearch%3Fq%3D%26namespace%3Dio.github.josecarlosbran%26name%3DLogsJB)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/LogsJB?logo=apachemaven&logoColor=%23C71A36&color=blue&link=https%3A%2F%2Fcentral.sonatype.com%2Fsearch%3Fq%3D%26namespace%3Dio.github.josecarlosbran%26name%3DLogsJB)](https://central.sonatype.com/artifact/io.github.josecarlosbran/LogsJB)
+[![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/LogsJB/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/LogsJB)
 [![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](LICENSE.txt)
 * * *
 ## Estado del Proyecto :atom:  

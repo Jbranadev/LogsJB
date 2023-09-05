@@ -10,44 +10,45 @@ import org.testng.annotations.Test;
 import java.nio.file.Paths;
 
 import static io.github.josecarlosbran.LogsJB.LogsJB.*;
+
 @Listeners({org.uncommons.reportng.HTMLReporter.class, org.uncommons.reportng.JUnitXMLReporter.class})
 public class LogsJBTest {
 
     @Test(testName = "Write Log Txt")
     public void writeLogTxt() {
-        try{
+        try {
             LogsJB.setWriteTxt(true);
             LogsJB.setWriteDB(false);
             LogsJB.setWriteRestAPI(false);
             LogsJB.setGradeLog(NivelLog.TRACE);
             //LogsJB.debug( "Primer comentario grado Debug");
-            Integer i=0;
-            while(i<6){
-                i+=6;
+            Integer i = 0;
+            while (i < 6) {
+                i += 6;
                 //Comentario grado Trace
-                trace( "Primer comentario grado Trace " +i);
+                trace("Primer comentario grado Trace " + i);
                 //Comentario grado Debug
-                debug( "Primer comentario grado Debug "+i);
+                debug("Primer comentario grado Debug " + i);
                 //Comentario grado Info
-                info( "Primer comentario grado Info "+i);
+                info("Primer comentario grado Info " + i);
                 //Comentario grado Warning
-                warning( "Primer comentario grado Warning "+i);
+                warning("Primer comentario grado Warning " + i);
                 //Comentario grado Error
-                error( "Primer comentario grado Error "+i);
+                error("Primer comentario grado Error " + i);
                 //Comentario grado Fatal
-                fatal( "Primer comentario grado Fatal "+i);
+                fatal("Primer comentario grado Fatal " + i);
             }
             LogsJB.waitForOperationComplete();
-        }catch (Exception e){
-            System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Excepcion capturada en el metodo main: " + e.getMessage());
         }
     }
 
 
     @Test(testName = "Write Log DB",
-    dependsOnMethods = "writeLogTxt")
+            dependsOnMethods = "writeLogTxt")
     public void writeLogDB() {
-        try{
+        try {
             LogsJB.setWriteTxt(false);
             LogsJB.setWriteDB(true);
             LogsJB.setWriteRestAPI(false);
@@ -65,25 +66,25 @@ public class LogsJBTest {
             LogsJB.setGradeLog(NivelLog.TRACE);
             //com.josebran.LogsJB.LogsJB.setGradeLog(com.josebran.LogsJB.Numeracion.NivelLog.WARNING);
             //LogsJB.debug( "Primer comentario grado Debug");
-            Integer i=0;
-            while(i<6){
-                i+=6;
+            Integer i = 0;
+            while (i < 6) {
+                i += 6;
                 //Comentario grado Trace
-                trace( "Primer comentario grado Trace " +i);
+                trace("Primer comentario grado Trace " + i);
                 //Comentario grado Debug
-                debug( "Primer comentario grado Debug "+i);
+                debug("Primer comentario grado Debug " + i);
                 //Comentario grado Info
-                info( "Primer comentario grado Info "+i);
+                info("Primer comentario grado Info " + i);
                 //Comentario grado Warning
-                warning( "Primer comentario grado Warning "+i);
+                warning("Primer comentario grado Warning " + i);
                 //Comentario grado Error
-                error( "Primer comentario grado Error "+i);
+                error("Primer comentario grado Error " + i);
                 //Comentario grado Fatal
-                fatal( "Primer comentario grado Fatal "+i);
+                fatal("Primer comentario grado Fatal " + i);
             }
             LogsJB.waitForOperationComplete();
-        }catch (Exception e){
-            System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Excepcion capturada en el metodo main: " + e.getMessage());
         }
     }
 
@@ -91,35 +92,35 @@ public class LogsJBTest {
     @Test(testName = "Write Log RestAPI",
             dependsOnMethods = "writeLogDB")
     public void writeLogRestAPI() {
-        try{
+        try {
             LogsJB.setWriteTxt(false);
             LogsJB.setWriteDB(false);
             LogsJB.setWriteRestAPI(true);
-            LogsJB.setKeyLogRest("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKb3NlIENhcmxvcyBBbGZyZWRvIEJyYW4gQWd1aXJyZSIsImlzcyI6ImxvY2FsaG9zdDo4MDgwIiwiaWF0IjoxNjkyMTI0MjExLCJleHAiOjE2OTIxMjUxMTF9.NfF4xMxMVAUPjvp3IvHLFIYw3xGAAnuilrPbQ1XU53IhZX7yMJe6QOhG-zOGWRqrbnUh011z7NUTqWPybI7N7g");
+            LogsJB.setKeyLogRest("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKb3NlIENhcmxvcyBBbGZyZWRvIEJyYW4gQWd1aXJyZSIsImlzcyI6ImxvY2FsaG9zdDo4MDgwIiwiaWF0IjoxNjkzMjg1NDU2LCJleHAiOjE2OTMyODYzNTZ9.8E_XPxXYfXU_cWyWt5momm33PISmOziToJGk6GKQ02iv6AR_syh_AyFzyev2Yh64L886Ntr0jxuCm6JpvwYnsg");
             LogsJB.setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
             LogsJB.setTipeautentication(typeAutentication.BEARER);
             LogsJB.setGradeLog(NivelLog.TRACE);
             //com.josebran.LogsJB.LogsJB.setGradeLog(com.josebran.LogsJB.Numeracion.NivelLog.WARNING);
             //LogsJB.debug( "Primer comentario grado Debug");
-            Integer i=0;
-            while(i<6){
-                i+=6;
+            Integer i = 0;
+            while (i < 6) {
+                i += 6;
                 //Comentario grado Trace
-                trace( "Primer comentario grado Trace " +i);
+                trace("Primer comentario grado Trace " + i);
                 //Comentario grado Debug
-                debug( "Primer comentario grado Debug "+i);
+                debug("Primer comentario grado Debug " + i);
                 //Comentario grado Info
-                info( "Primer comentario grado Info "+i);
+                info("Primer comentario grado Info " + i);
                 //Comentario grado Warning
-                warning( "Primer comentario grado Warning "+i);
+                warning("Primer comentario grado Warning " + i);
                 //Comentario grado Error
-                error( "Primer comentario grado Error "+i);
+                error("Primer comentario grado Error " + i);
                 //Comentario grado Fatal
-                fatal( "Primer comentario grado Fatal "+i);
+                fatal("Primer comentario grado Fatal " + i);
             }
             LogsJB.waitForOperationComplete();
-        }catch (Exception e){
-            System.out.println("Excepcion capturada en el metodo main: "+e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Excepcion capturada en el metodo main: " + e.getMessage());
         }
     }
 

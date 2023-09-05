@@ -8,6 +8,7 @@
   <artifactId>logsjb</artifactId>
   <version>0.6.3</version>
 
+
   <name>${project.groupId}:${project.artifactId}</name>
   <description>LogsJB es una librería java que permite la gestión de
     registros de un programa en paralelo a la ejecución
@@ -87,18 +88,10 @@
       <dependency>
         <groupId>io.github.josecarlosbran</groupId>
         <artifactId>JBRestAPI</artifactId>
-        <version>0.2</version>
+        <version>0.2.3</version>
         <scope>compile</scope>
       </dependency>
 
-
-      <!-- Dependencia Para enviar crear JSON -->
-      <dependency>
-        <groupId>com.google.code.gson</groupId>
-        <artifactId>gson</artifactId>
-        <version>2.10.1</version>
-        <scope>compile</scope>
-      </dependency>
 
       <!-- Dependencia para Setter and Getter-->
       <dependency>
@@ -159,12 +152,6 @@
       <scope>compile</scope>
     </dependency>
 
-    <!-- Dependencia Para enviar crear JSON -->
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <scope>compile</scope>
-    </dependency>
 
     <!-- Dependencia para Setter and Getter-->
     <dependency>

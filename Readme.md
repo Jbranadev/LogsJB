@@ -242,19 +242,19 @@ Maven
 ~~~
 <dependency>
     <groupId>io.github.josecarlosbran</groupId>
-    <artifactId>LogsJB</artifactId>
+    <artifactId>logsjb</artifactId>
     <version>0.6.3</version>
 </dependency>
 ~~~
 
 Gradle
 ~~~
-implementation 'io.github.josecarlosbran:LogsJB:0.6.3'
+implementation 'io.github.josecarlosbran:logsjb:0.6.3'
 ~~~
 
 Para mayor información sobre como descargar LogsJB desde otros 
 administradores de paquetes, puedes ir al siguiente Link
-<https://search.maven.org/artifact/io.github.josecarlosbran/LogsJB>
+[LogsJB](https://search.maven.org/artifact/io.github.josecarlosbran/logsjb)
 
 ***
 

@@ -68,6 +68,11 @@ class Execute {
      */
     private static Execute instance = new Execute();
 
+    /**
+     * Ejecutor de Tareas asincronas
+     */
+    private ExecutorService executorPrincipal = Executors.newCachedThreadPool();
+
     private Execute() {
         setearRuta();
         setearNivelLog();
@@ -189,9 +194,8 @@ class Execute {
                     }
                 }
             };
-            ExecutorService executorPrincipal = Executors.newFixedThreadPool(1);
-            executorPrincipal.submit(EscritorPrincipal);
-            executorPrincipal.shutdown();
+            this.executorPrincipal.submit(EscritorPrincipal);
+            this.executorPrincipal.shutdown();
         } catch (Exception e) {
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Escritor principal, es el que maneja la logica de la aplicación la cual decide si el log se almacena en una BD's,\n" +
                     "     * un Txt Ó si se envía a un RestAPI.");

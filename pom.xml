@@ -359,7 +359,7 @@
         <!-- Compilar y Publicar en Maven -->
         <repository>
           <id>github</id>
-          <url>https://maven.pkg.github.com/Jbranadev/LogsJBSupport</url>
+          <url>https://maven.pkg.github.com/Jbranadev/LogsJB</url>
           <snapshots>
             <enabled>true</enabled>
           </snapshots>

@@ -7,6 +7,9 @@ que exigen grandes niveles de rendimiento.
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/LogsJB?logo=apachemaven&logoColor=%23C71A36&color=blue&link=https%3A%2F%2Fcentral.sonatype.com%2Fsearch%3Fq%3D%26namespace%3Dio.github.josecarlosbran%26name%3DLogsJB)](https://central.sonatype.com/artifact/io.github.josecarlosbran/LogsJB)
 [![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/LogsJB/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/LogsJB)
 [![License](https://img.shields.io/badge/Licence-Apache%202.0-blue.svg)](LICENSE.md)
+[![CodeQL](https://github.com/Jbranadev/LogsJB/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/Jbranadev/LogsJB/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/Jbranadev/LogsJB/badge)](https://securityscorecards.dev/viewer/?uri=github.com/Jbranadev/LogsJB)
+
 * * *
 ## Estado del Proyecto :atom:  
 LogsJB actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 

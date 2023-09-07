@@ -23,7 +23,7 @@ public class LogsJBTest {
             LogsJB.setGradeLog(NivelLog.TRACE);
             //LogsJB.debug( "Primer comentario grado Debug");
             Integer i = 0;
-            while (i < 6) {
+            while (i < 1200) {
                 i += 6;
                 //Comentario grado Trace
                 trace("Primer comentario grado Trace " + i);
@@ -67,7 +67,7 @@ public class LogsJBTest {
             //com.josebran.LogsJB.LogsJB.setGradeLog(com.josebran.LogsJB.Numeracion.NivelLog.WARNING);
             //LogsJB.debug( "Primer comentario grado Debug");
             Integer i = 0;
-            while (i < 6) {
+            while (i < 1200) {
                 i += 6;
                 //Comentario grado Trace
                 trace("Primer comentario grado Trace " + i);
@@ -103,7 +103,7 @@ public class LogsJBTest {
             //com.josebran.LogsJB.LogsJB.setGradeLog(com.josebran.LogsJB.Numeracion.NivelLog.WARNING);
             //LogsJB.debug( "Primer comentario grado Debug");
             Integer i = 0;
-            while (i < 6) {
+            while (i < 600) {
                 i += 6;
                 //Comentario grado Trace
                 trace("Primer comentario grado Trace " + i);

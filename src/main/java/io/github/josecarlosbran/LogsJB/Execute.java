@@ -195,7 +195,6 @@ class Execute {
                 }
             };
             this.executorPrincipal.submit(EscritorPrincipal);
-            this.executorPrincipal.shutdown();
         } catch (Exception e) {
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Escritor principal, es el que maneja la logica de la aplicación la cual decide si el log se almacena en una BD's,\n" +
                     "     * un Txt Ó si se envía a un RestAPI.");

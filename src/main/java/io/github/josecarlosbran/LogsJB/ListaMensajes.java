@@ -16,8 +16,6 @@
 
 package io.github.josecarlosbran.LogsJB;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,12 +31,11 @@ class ListaMensajes {
     private List<MensajeWrite> mensajes;
 
 
-
     /**
      * Constructor por default
      */
-    protected ListaMensajes(){
-        this.mensajes=new LinkedList<MensajeWrite>();
+    protected ListaMensajes() {
+        this.mensajes = new LinkedList<MensajeWrite>();
     }
 
     /***
@@ -55,30 +52,19 @@ class ListaMensajes {
      * @return Restorna el proximo mensaje en la cola a ser escrito, basado en el algoritmo FIFO, si no hay mensajes
      * retorna null.
      */
-    protected synchronized MensajeWrite getDato()  {
-        try{
-            if (this.mensajes.size()==0){
-                return null;
-            }else{
-                MensajeWrite dato = mensajes.get(0);
-                this.mensajes.remove(0);
-                return dato;
-            }
-        }catch (Exception e){
-            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al obtener el mensaje: "+Thread.currentThread().getName());
-            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : "+e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : "+e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : "+e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : "+ ExceptionUtils.getStackTrace(e));
-        }
-        return null;
+    protected synchronized MensajeWrite getDato() {
+
+        MensajeWrite dato = mensajes.get(0);
+        this.mensajes.remove(0);
+        return dato;
+
     }
 
     /***
      * Retorna la cantidad de mensajes que tiene la lista actualmente.
      * @return Retorna un entero que representa la cantidad de mensajes que actualmente tiene la lista.
      */
-    protected synchronized int getSize(){
+    protected synchronized int getSize() {
         return this.mensajes.size();
     }
 

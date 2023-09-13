@@ -90,9 +90,6 @@ public enum LogsJBProperties {
     LogsJBRutaLog("LogsJBRutaLog");
 
 
-
-
-
     /**
      * Setea la propiedad de la numeración
      *
@@ -104,6 +101,7 @@ public enum LogsJBProperties {
 
     /**
      * Obtiene la propiedad que posee la numeración
+     *
      * @return Propiedad que posee la numeración
      */
     public String getProperty() {
@@ -115,7 +113,7 @@ public enum LogsJBProperties {
      */
     private String property;
 
-    private LogsJBProperties(String property){
+    private LogsJBProperties(String property) {
         this.setProperty(property);
     }
 

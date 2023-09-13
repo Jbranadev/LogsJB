@@ -41,7 +41,7 @@ class MensajeWrite {
     /**
      * Constructor por default de la clase escritora
      */
-    protected MensajeWrite(){
+    protected MensajeWrite() {
 
     }
 
@@ -77,6 +77,7 @@ class MensajeWrite {
     protected void setNivelLog(NivelLog nivelLog) {
         this.nivelLog = nivelLog;
     }
+
     /***
      * Obtiene el nombre de la clase que actualmente esta llamando al Log
      * @return Retorna el nombre de la clase que esta invocando la escritura del Log
@@ -84,6 +85,7 @@ class MensajeWrite {
     protected String getClase() {
         return Clase;
     }
+
     /***
      * Setea el nombre de la clase que esta haciendo el llamado al metodo que escribe el Log.
      * @param clase Nombre de la clase que llama al metodo que escribe el Log.
@@ -91,15 +93,19 @@ class MensajeWrite {
     protected void setClase(String clase) {
         Clase = clase;
     }
+
     /**
      * Obtiene el nombre del metodo que actualmente esta llamando al Log
+     *
      * @return Retorna el nombre del metodo que esta invocando la escritura del Log
      */
     protected String getMetodo() {
         return Metodo;
     }
+
     /**
      * Setea el nombre del metodo que esta haciendo el llamado al metodo que escribe el Log.
+     *
      * @param metodo Nombre del metodo que llama al metodo que escribe el Log.
      */
     protected void setMetodo(String metodo) {
@@ -116,6 +122,7 @@ class MensajeWrite {
 
     /**
      * Setea la fecha de escritura del Log.
+     *
      * @param fecha String que representa el momento en el que fue mandado a llamar el Log.
      */
     protected void setFecha(String fecha) {

@@ -1,0 +1,6 @@
+                                           logsjb
+                                        Version 1.0.0
+                                        Release Notes
+
+Publicación de Librería Acorde a los estandares de Maven
+

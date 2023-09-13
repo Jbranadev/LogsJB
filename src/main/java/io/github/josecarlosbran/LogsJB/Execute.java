@@ -49,11 +49,11 @@ class Execute {
 
     private JBRestAPI clienteJB;
 
-    private LogsJBDB log ;
+    private LogsJBDB log;
 
-    private Log logPojo=new Log();
+    private Log logPojo = new Log();
 
-    private Boolean TaskisReady=true;
+    private Boolean TaskisReady = true;
 
 
     /***
@@ -66,7 +66,7 @@ class Execute {
      * Se utiliza el patron Singleton, para asegurarnos que sea una unica instancia la que se encargue de
      * Llevar el control de los Logs
      */
-    private static Execute instance = new Execute();
+    private static Execute instance = null;
 
     /**
      * Ejecutor de Tareas asincronas
@@ -85,14 +85,29 @@ class Execute {
         setearUrlLogRest();
     }
 
+    /**
+     * Recuperara las propiedades de LogsJB seteadas en las propiedades del sistema
+     */
+    protected void getLogsJBProperties() {
+        setearRuta();
+        setearNivelLog();
+        setearSizelLog();
+        setearWriteTxt();
+        setearWriteDB();
+        setearWriteRestAPI();
+        setearTipeAutenticación();
+        setearKeyLogRest();
+        setearUrlLogRest();
+    }
+
     /***
      * Proporciona la instancia de la clase encargada de ejecutar las acciónes en segundo Plano.
      * @return Retorna la instancia de la Clase Execute, que estara trabajando las peticiones de la aplicación
      * en segundo plano.
      */
     protected static Execute getInstance() {
-        if(instance==null){
-            instance= new Execute();
+        if (instance == null) {
+            instance = new Execute();
         }
         return instance;
     }
@@ -110,15 +125,7 @@ class Execute {
      * Metodo por medio del cual se llama la escritura de los logs
      */
     protected void run() {
-        try {
-            writePrincipal();
-        } catch (Exception e) {
-            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Metodo por medio del cual se llama la escritura de los logs");
-            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-        }
+        writePrincipal();
     }
 
     /***
@@ -130,36 +137,24 @@ class Execute {
             getInstance().setTaskisReady(false);
             //Decide si escribe o no en la BD's
             //System.out.println("Valor de escritura BD's: "+ LogsJB.getWriteDB());
-            if(LogsJB.getWriteDB()){
-                if(!LogsJB.getTableDBExists()){
-                    System.out.println("Creara la tabla: ");
+            if (LogsJB.getWriteDB()) {
+                if (!LogsJB.getTableDBExists()) {
+                    com.josebran.LogsJB.LogsJB.debug("Creara la tabla de Logs: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
-                    try {
-                        LogsJBDB log = new LogsJBDB();
-                        if(log.crateTable()){
-                            LogsJB.setTableDBExists(true);
-                        }else{
-                            LogsJB.setTableDBExists(true);
-                        }
-                        System.out.println("Creo la tabla: ");
-                    }catch (Exception e) {
-                        com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de crear " +
-                                "la tabla de Log en BD's");
-                        com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                        com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                        com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                        com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                    }
+                    LogsJBDB log = new LogsJBDB();
+                    log.crateTable();
+                    LogsJB.setTableDBExists(true);
+                    com.josebran.LogsJB.LogsJB.debug("Creo la tabla: "+log.getTableName());
                 }
             }
             Runnable EscritorPrincipal = () -> {
                 String temporal = "";
                 boolean band = true;
-                Integer i=0;
-                while(band){
-                    if(i>5000){
+                Integer i = 0;
+                while (band) {
+                    if (i > 5000) {
                         verificarSizeFichero();
-                        i=0;
+                        i = 0;
                     }
                     i++;
                     //String Mensaje=Execute.getInstance().getTexto();
@@ -174,15 +169,15 @@ class Execute {
                     String Metodo = mensajetemp.getMetodo();
                     String fecha = mensajetemp.getFecha();
 
-                    if(LogsJB.getWriteTxt()){
+                    if (LogsJB.getWriteTxt()) {
                         writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
                     }
                     //Decide si escribe o no en la BD's
-                    if(LogsJB.getWriteDB()){
+                    if (LogsJB.getWriteDB()) {
                         writeBD(logtemporal, Mensaje, Clase, Metodo, fecha);
                     }
                     //Decide si envía los Logs al RestAPI
-                    if(LogsJB.getWriteRestAPI()){
+                    if (LogsJB.getWriteRestAPI()) {
                         writeRestAPI(logtemporal, Mensaje, Clase, Metodo, fecha);
                     }
 
@@ -197,67 +192,59 @@ class Execute {
             this.executorPrincipal.submit(EscritorPrincipal);
         } catch (Exception e) {
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo Escritor principal, es el que maneja la logica de la aplicación la cual decide si el log se almacena en una BD's,\n" +
-                    "     * un Txt Ó si se envía a un RestAPI.");
-            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-
+                    "     * un Txt Ó si se envía a un RestAPI." + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
 
 
-
     /**
      * Metodo encargado de almacenar los Logs en Bd's
+     *
      * @param logtemporal Nivel de Log especificado para el texto que se escribira.
-     * @param Mensaje Texto que se desea escribir en el Log.
-     * @param Clase Clase a la que pertenece el metodo el cual inicia el proceso de registro del Log.
-     * @param Metodo Metodo desde que se manda a llamar el Log.
-     * @param fecha fecha y hora de la escritura del Log.
+     * @param Mensaje     Texto que se desea escribir en el Log.
+     * @param Clase       Clase a la que pertenece el metodo el cual inicia el proceso de registro del Log.
+     * @param Metodo      Metodo desde que se manda a llamar el Log.
+     * @param fecha       fecha y hora de la escritura del Log.
      */
     private void writeBD(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
-                try{
+        try {
 
-                    if(log==null){
-                        log= new LogsJBDB();
-                    }
-                    //Asignamos los valores a almacenar
-                    log.getNivelLog().setValor(logtemporal.name());
-                    log.getTexto().setValor(Mensaje);
-                    log.getClase().setValor(Clase);
-                    log.getMetodo().setValor(Metodo);
-                    log.getFecha().setValor(fecha);
-                    //Guardamos el modelo
-                    log.save();
-                    log.waitOperationComplete();
-                    log.setModelExist(false);
-                    //System.out.println("Guardo el registro en BD's: ");
-                }catch (Exception e) {
-                    com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado d crear el objeto que escribira" +
-                            "el Log en BD's");
-                    com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                    com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                    com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                    com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-                }
+            if (log == null) {
+                log = new LogsJBDB();
+            }
+            //Asignamos los valores a almacenar
+            log.getNivelLog().setValor(logtemporal.name());
+            log.getTexto().setValor(Mensaje);
+            log.getClase().setValor(Clase);
+            log.getMetodo().setValor(Metodo);
+            log.getFecha().setValor(fecha);
+            //Guardamos el modelo
+            log.save();
+            log.waitOperationComplete();
+            log.setModelExist(false);
+            //System.out.println("Guardo el registro en BD's: ");
+        } catch (Exception e) {
+            com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado d crear el objeto que escribira" +
+                    "el Log en BD's" + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+        }
     }
 
 
     /**
      * Metodo encargado de almacenar los Logs en Bd's
+     *
      * @param logtemporal Nivel de Log especificado para el texto que se escribira.
-     * @param Mensaje Texto que se desea escribir en el Log.
-     * @param Clase Clase a la que pertenece el metodo el cual inicia el proceso de registro del Log.
-     * @param Metodo Metodo desde que se manda a llamar el Log.
-     * @param fecha fecha y hora de la escritura del Log.
+     * @param Mensaje     Texto que se desea escribir en el Log.
+     * @param Clase       Clase a la que pertenece el metodo el cual inicia el proceso de registro del Log.
+     * @param Metodo      Metodo desde que se manda a llamar el Log.
+     * @param fecha       fecha y hora de la escritura del Log.
      */
     private void writeRestAPI(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
         try {
-            if(Objects.isNull(this.clienteJB)){
-                MultivaluedMap<String, Object> myHeaders= new MultivaluedHashMap<>();
-                myHeaders.add("Authorization", LogsJB.getTipeautentication()+getKeyLogRest());
-                this.clienteJB=JBRestAPI.builder().Url(getUrlLogRest()).
+            if (Objects.isNull(this.clienteJB)) {
+                MultivaluedMap<String, Object> myHeaders = new MultivaluedHashMap<>();
+                myHeaders.add("Authorization", LogsJB.getTipeautentication() + getKeyLogRest());
+                this.clienteJB = JBRestAPI.builder().Url(getUrlLogRest()).
                         MediaType(MediaType.APPLICATION_JSON_TYPE).
                         Headers(myHeaders).newClient();
             }
@@ -266,11 +253,10 @@ class Execute {
             this.logPojo.setClase(Clase);
             this.logPojo.setMetodo(Metodo);
             this.logPojo.setFecha(fecha);
-            Response respuesta= this.clienteJB.post(Entity.entity(this.logPojo, MediaType.APPLICATION_JSON_TYPE));
+            Response respuesta = this.clienteJB.post(Entity.entity(this.logPojo, MediaType.APPLICATION_JSON_TYPE));
             com.josebran.LogsJB.LogsJB.info("Resultado de enviar el Log al Endpoint es: " + respuesta);
-
-            int codigorespuesta=respuesta.getStatus();
-            if((codigorespuesta==requestCode.CREATED.getCodigo())||(codigorespuesta==requestCode.OK.getCodigo())){
+            int codigorespuesta = respuesta.getStatus();
+            if ((codigorespuesta == requestCode.CREATED.getCodigo()) || (codigorespuesta == requestCode.OK.getCodigo())) {
                 LogsJBDB log = new LogsJBDB(false);
                 String separador = System.getProperty("file.separator");
                 String BDSqlite = (Paths.get("").toAbsolutePath().normalize().toString() + separador +
@@ -281,30 +267,29 @@ class Execute {
                 log.setDataBaseType(DataBase.SQLite);
                 log.setBD(BDSqlite);
                 List<LogsJBDB> logs = new ArrayList<LogsJBDB>();
-                logs=log.getAll();
+                logs = log.getAll();
                 log.waitOperationComplete();
-                if(!logs.isEmpty()){
-                    Iterator<LogsJBDB> iteradorLogs=logs.iterator();
-                    while(iteradorLogs.hasNext()){
-                        LogsJBDB temp= iteradorLogs.next();
+                if (!logs.isEmpty()) {
+                    Iterator<LogsJBDB> iteradorLogs = logs.iterator();
+                    while (iteradorLogs.hasNext()) {
+                        LogsJBDB temp = iteradorLogs.next();
                         temp.llenarControlador(this.logPojo, temp);
                         this.logPojo.setId(null);
-                        Response respuestatemp= this.clienteJB.post(Entity.entity(this.logPojo, MediaType.APPLICATION_JSON_TYPE));
+                        Response respuestatemp = this.clienteJB.post(Entity.entity(this.logPojo, MediaType.APPLICATION_JSON_TYPE));
                         com.josebran.LogsJB.LogsJB.info("Resultado de enviar el Log al Endpoint es: " + respuesta);
-
                         //Si logro envíar el Log, elimina el modelo en Bd's
-                        int codigorespuestatemp=respuestatemp.getStatus();
-                        if((codigorespuestatemp==requestCode.CREATED.getCodigo())||(codigorespuestatemp==requestCode.OK.getCodigo())){
+                        int codigorespuestatemp = respuestatemp.getStatus();
+                        if ((codigorespuestatemp == requestCode.CREATED.getCodigo()) || (codigorespuestatemp == requestCode.OK.getCodigo())) {
                             temp.delete();
                             temp.waitOperationComplete();
                             iteradorLogs.remove();
-                        }else{
-                            this.clienteJB=null;
+                        } else {
+                            this.clienteJB = null;
                         }
                     }
                 }
-            }else{
-                this.clienteJB=null;
+            } else {
+                this.clienteJB = null;
                 LogsJBDB log = new LogsJBDB(false);
                 //Si el RestApi no esta habilitado, almacenara temporalmente en BD's el Log
                 String separador = System.getProperty("file.separator");
@@ -314,23 +299,20 @@ class Execute {
                         "LogsJB.db");
                 log.setDataBaseType(DataBase.SQLite);
                 log.setBD(BDSqlite);
-                if(!LogsJB.getTableDBExists()){
+                if (!LogsJB.getTableDBExists()) {
                     System.out.println("Creara la tabla: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     try {
-                        if(log.crateTable()){
+                        if (log.crateTable()) {
                             LogsJB.setTableDBExists(true);
-                        }else{
+                        } else {
                             LogsJB.setTableDBExists(true);
                         }
                         System.out.println("Creo la tabla: ");
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de crear " +
-                                "la tabla de Log en BD's");
-                        com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-                        com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-                        com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-                        com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                                "la tabla de Log en BD's" + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+
                     }
                 }
                 //Asignamos los valores a almacenar
@@ -346,16 +328,14 @@ class Execute {
             }
         } catch (Exception e) {
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de" +
-                    " envíar el Log al RestApi: "+getUrlLogRest());
-            com.josebran.LogsJB.LogsJB.fatal("Tipo de Excepción : " + e.getClass());
-            com.josebran.LogsJB.LogsJB.fatal("Causa de la Excepción : " + e.getCause());
-            com.josebran.LogsJB.LogsJB.fatal("Mensaje de la Excepción : " + e.getMessage());
-            com.josebran.LogsJB.LogsJB.fatal("Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+                    " envíar el Log al RestApi: " + getUrlLogRest() + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
+
         }
     }
 
     /**
      * Obtiene la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
+     *
      * @return True si esta libre, false si actualmente esta trabajando
      */
     protected synchronized Boolean getTaskisReady() {
@@ -364,6 +344,7 @@ class Execute {
 
     /**
      * Setea la bandera que indica si actualmente esta trabajando la clase Execute o si ya no esta trabajando
+     *
      * @param taskisReady True si esta libre, false si actualmente esta trabajando
      */
     protected synchronized void setTaskisReady(Boolean taskisReady) {

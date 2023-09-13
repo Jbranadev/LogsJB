@@ -3,6 +3,9 @@ package io.github.josecarlosbran.LogsJB;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Clase que cumple la función de un POJO para el envío de los Logs a un RestAPI
+ */
 public class Log {
 
     @Getter

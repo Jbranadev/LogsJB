@@ -1,6 +1,7 @@
 package io.github.josecarlosbran.LogsJB;
 
 
+import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
@@ -328,22 +329,34 @@ public class LogsJBDB extends JBSqlUtils {
 
     @Getter
     @Setter
-    private Column<Integer> Id = new Column<>(DataType.INTEGER, Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY);
+    @ColumnDefined(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY})
+    private Integer Id ;
+
     @Getter
     @Setter
-    private Column<String> Texto = new Column<>(DataType.VARCHAR);
+    @ColumnDefined(name = "Texto", dataTypeSQL = DataType.VARCHAR)
+    private String Texto ;
+
     @Getter
     @Setter
-    private Column<String> NivelLog = new Column<>(DataType.VARCHAR);
+    @ColumnDefined(name = "NivelLog", dataTypeSQL = DataType.VARCHAR)
+    private String NivelLog ;
+
     @Getter
     @Setter
-    private Column<String> Clase = new Column<>(DataType.VARCHAR);
+    @ColumnDefined(name = "Clase", dataTypeSQL = DataType.VARCHAR)
+    private String Clase ;
+
+
     @Getter
     @Setter
-    private Column<String> Metodo = new Column<>(DataType.VARCHAR);
+    @ColumnDefined(name = "Metodo", dataTypeSQL = DataType.VARCHAR)
+    private String Metodo ;
+
     @Getter
     @Setter
-    private Column<String> Fecha = new Column<>(DataType.VARCHAR);
+    @ColumnDefined(name = "Fecha", dataTypeSQL = DataType.VARCHAR)
+    private String Fecha ;
 
 
 }

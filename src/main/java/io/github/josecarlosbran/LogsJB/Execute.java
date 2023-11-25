@@ -51,7 +51,7 @@ class Execute {
 
     private LogsJBDB log;
 
-    private Log logPojo = new Log();
+    private LogsJBDB logPojo ;
 
     private Boolean TaskisReady = true;
 
@@ -142,7 +142,7 @@ class Execute {
                     com.josebran.LogsJB.LogsJB.debug("Creara la tabla de Logs: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     LogsJBDB log = new LogsJBDB();
-                    log.crateTable();
+                    log.createTable();
                     LogsJB.setTableDBExists(true);
                     com.josebran.LogsJB.LogsJB.debug("Creo la tabla: "+log.getTableName());
                 }
@@ -213,11 +213,11 @@ class Execute {
                 log = new LogsJBDB();
             }
             //Asignamos los valores a almacenar
-            log.getNivelLog().setValor(logtemporal.name());
-            log.getTexto().setValor(Mensaje);
-            log.getClase().setValor(Clase);
-            log.getMetodo().setValor(Metodo);
-            log.getFecha().setValor(fecha);
+            log.setNivelLog(logtemporal.name());
+            log.setTexto(Mensaje);
+            log.setClase(Clase);
+            log.setMetodo(Metodo);
+            log.setFecha(fecha);
             //Guardamos el modelo
             log.save();
             log.waitOperationComplete();
@@ -241,6 +241,7 @@ class Execute {
      */
     private void writeRestAPI(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
         try {
+            this.logPojo=this.log.obtenerInstanciaOfModel(this.log);
             if (Objects.isNull(this.clienteJB)) {
                 MultivaluedMap<String, Object> myHeaders = new MultivaluedHashMap<>();
                 myHeaders.add("Authorization", LogsJB.getTipeautentication() + getKeyLogRest());
@@ -273,9 +274,8 @@ class Execute {
                     Iterator<LogsJBDB> iteradorLogs = logs.iterator();
                     while (iteradorLogs.hasNext()) {
                         LogsJBDB temp = iteradorLogs.next();
-                        temp.llenarControlador(this.logPojo, temp);
-                        this.logPojo.setId(null);
-                        Response respuestatemp = this.clienteJB.post(Entity.entity(this.logPojo, MediaType.APPLICATION_JSON_TYPE));
+                        temp.setId(null);
+                        Response respuestatemp = this.clienteJB.post(Entity.entity(temp, MediaType.APPLICATION_JSON_TYPE));
                         com.josebran.LogsJB.LogsJB.info("Resultado de enviar el Log al Endpoint es: " + respuesta);
                         //Si logro envíar el Log, elimina el modelo en Bd's
                         int codigorespuestatemp = respuestatemp.getStatus();
@@ -303,7 +303,7 @@ class Execute {
                     System.out.println("Creara la tabla: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     try {
-                        if (log.crateTable()) {
+                        if (log.createTable()) {
                             LogsJB.setTableDBExists(true);
                         } else {
                             LogsJB.setTableDBExists(true);
@@ -316,12 +316,11 @@ class Execute {
                     }
                 }
                 //Asignamos los valores a almacenar
-                log.getNivelLog().setValor(logtemporal.name());
-                log.getTexto().setValor(Mensaje);
-                log.getClase().setValor(Clase);
-                log.getMetodo().setValor(Metodo);
-                log.getFecha().setValor(fecha);
-                //Guardamos el modelo
+                log.setNivelLog(logtemporal.name());
+                log.setTexto(Mensaje);
+                log.setClase(Clase);
+                log.setMetodo(Metodo);
+                log.setFecha(fecha);
                 log.save();
                 log.waitOperationComplete();
                 log.setModelExist(false);

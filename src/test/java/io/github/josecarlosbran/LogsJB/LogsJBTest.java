@@ -299,8 +299,8 @@ public class LogsJBTest {
     }
 
 
-    @Test(testName = "Write Log DB"//,
-            /*dependsOnMethods = "writeLogSegundaOcasionMayorTreintaYSeis"*/)
+    @Test(testName = "Write Log DB",
+            dependsOnMethods = "writeLogSegundaOcasionMayorTreintaYSeis")
     public void writeLogDB() {
         try {
             LogsJB.setWriteTxt(false);

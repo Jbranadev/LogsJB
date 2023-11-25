@@ -142,7 +142,7 @@ class Execute {
                     com.josebran.LogsJB.LogsJB.debug("Creara la tabla de Logs: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     LogsJBDB log = new LogsJBDB();
-                    log.crateTable();
+                    log.createTable();
                     LogsJB.setTableDBExists(true);
                     com.josebran.LogsJB.LogsJB.debug("Creo la tabla: "+log.getTableName());
                 }
@@ -303,7 +303,7 @@ class Execute {
                     System.out.println("Creara la tabla: ");
                     //Creamos el modelo con las caracteristicas de conexión de la Maquina Virtual
                     try {
-                        if (log.crateTable()) {
+                        if (log.createTable()) {
                             LogsJB.setTableDBExists(true);
                         } else {
                             LogsJB.setTableDBExists(true);

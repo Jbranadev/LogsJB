@@ -1,5 +1,6 @@
 package io.github.josecarlosbran.LogsJB;
 
+import io.github.josecarlosbran.JBSqlUtils.Adaptadores.VisibilitySerializableModel;
 import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;

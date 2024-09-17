@@ -16,7 +16,6 @@
 
 package io.github.josecarlosbran.LogsJB;
 
-
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
@@ -55,11 +54,9 @@ public class LogsJB {
 
     private static Boolean writeRestAPI = false;
 
-
     private static String keyLogRest = "";
 
     private static String urlLogRest = "";
-
 
     private static Boolean tableDBExists = false;
 
@@ -94,7 +91,6 @@ public class LogsJB {
         }
     }
 
-
     /***
      * Obtiene el grado del log, sobre el cual se estara realizando el seguimiento de los mensajes que se
      * escriben en las bitacoras de Log de la aplicación actual.
@@ -110,7 +106,6 @@ public class LogsJB {
     public static NivelLog getGradeLog() {
         return io.github.josecarlosbran.LogsJB.MethodsTxt.gradeLog;
     }
-
 
     /***
      * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
@@ -167,7 +162,6 @@ public class LogsJB {
         }
     }
 
-
     /***
      * Obtiene el usuario del sistema sobre el cual corre la aplicación
      * @return Retorna un String con el nombre del usuario actual.
@@ -190,9 +184,7 @@ public class LogsJB {
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada al tratar de setear el usuario del entorno actual "
                     + Usuario + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
-
 
     /**
      * Obtiene la bandera que indica si no existe alguna tarea pendiente de realizar por parte LogsJB
@@ -208,11 +200,9 @@ public class LogsJB {
      */
     public static void waitForOperationComplete() {
         while (!io.github.josecarlosbran.LogsJB.Execute.getInstance().getTaskisReady()) {
-
         }
         com.josebran.LogsJB.LogsJB.info("Completo de escribir los Logs");
     }
-
 
     /***
      * Metodo encargado de hacer la llamada al ejecutor en un hilo de ejecución aparte, para que este se encargue
@@ -233,7 +223,6 @@ public class LogsJB {
                 clase = elements[2].getClassName();
                 metodo = elements[2].getMethodName() + " => " + elements[2].getLineNumber();
             }
-
             if (nivelLog.getGradeLog() >= getGradeLog().getGradeLog()) {
                 MensajeWrite mensaje = new MensajeWrite();
                 mensaje.setTexto(Texto);
@@ -257,14 +246,12 @@ public class LogsJB {
         }
     }
 
-
     /**
      * Recuperara las propiedades de LogsJB seteadas en las propiedades del sistema
      */
     public static void getLogsJBProperties() {
         getInstance().getLogsJBProperties();
     }
-
 
     /***
      * Escribe en el Log el mensaje especificado índicando que pertenece a la categoria de Informacion.
@@ -313,7 +300,6 @@ public class LogsJB {
     public static void error(String Texto) {
         executor(NivelLog.ERROR, Texto);
     }
-
 
     /**
      * Obtiene la bandera que índica a LogsJB si se escribirá el log en el archivo TXT
@@ -432,7 +418,6 @@ public class LogsJB {
         }
     }
 
-
     /***
      * Obtiene el tipo de autenticación que se índica para consumir el RestAPI
      * @return Retorna un objeto typeAutentication con el tipo de autenticación índicada para
@@ -441,7 +426,6 @@ public class LogsJB {
     public static typeAutentication getTipeautentication() {
         return tipeautentication;
     }
-
 
     /***
      * Setea el tipo de autenticación que estaremos utilizando para consumir el RestAPI
@@ -459,7 +443,6 @@ public class LogsJB {
                     " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
-
 
     /**
      * Obtiene la clave con la cual se debera de autenticar para envíar los Logs a un RestAPI
@@ -486,7 +469,6 @@ public class LogsJB {
                     "Se autenticara en el RestAPI: " + keyLogRest +
                     " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
 
     /**
@@ -495,7 +477,6 @@ public class LogsJB {
      * @return Url donde estara escuchando las solicitudes el servidor
      */
     public static String getUrlLogRest() {
-
         return urlLogRest;
     }
 

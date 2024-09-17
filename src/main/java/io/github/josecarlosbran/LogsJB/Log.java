@@ -10,22 +10,15 @@ import lombok.Setter;
 @Setter
 public class Log {
 
-
     private Integer Id;
-
 
     private String Texto;
 
-
     private String NivelLog;
-
 
     private String Clase;
 
-
     private String Metodo;
 
-
     private String Fecha;
-
 }

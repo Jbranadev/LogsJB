@@ -16,7 +16,6 @@
 
 package io.github.josecarlosbran.LogsJB;
 
-
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.typeAutentication;
 import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
@@ -39,49 +38,41 @@ import java.util.Objects;
 
 import static io.github.josecarlosbran.LogsJB.LogsJB.*;
 
-
 /****
  * Copyright (C) 2022 El proyecto de código abierto LogsJB de José Bran
  * Clase que almacena los metodos necesarios para poder escribir el LogTxt
  */
 class MethodsTxt {
 
-    /**
-     * Separador que utiliza el sistema de archivos por default
-     */
-    private static String separador = System.getProperty("file.separator");
-
     /***
      * Obtiene el usuario actual del sistema operativo
      */
     protected static String usuario = System.getProperty("user.name");
-
-    /***
-     * Contador que expresa la cantidad de veces que se a escrito en la ejecución actual de la aplicación
-     *
-     */
-    private static long logtext = 0;
-
-    /***
-     * Ruta donde se estara escribiendo el log por default, la cual sería:
-     *  ContexAplicación/Logs/fecha_hoy/Log.txt
-     */
-    protected static String ruta = (Paths.get("").toAbsolutePath().normalize().toString() + separador + "Logs" + separador + convertir_fecha("dd-MM-YYYY") + separador + "Log.txt");
-
-
     /****
      * NivelLog desde el grado configurado hacía arriba se estara escribiendo el Log
      * El NivelLog por default es INFO.
      */
     protected static NivelLog gradeLog = NivelLog.INFO;
-
     /****
      * Tamaño maximo del archivo LogTxt diario que se estara escribiendo, si se supera el tamaño se modificara
      * el nombre del archivo a LOG_dd-MM-YYYY_HH-MM-SSS.txt, e iniciara la escritura del archivo Log.txt
      * con el nuevo registro.
      */
     protected static SizeLog sizeLog = SizeLog.Little_Little;
-
+    /**
+     * Separador que utiliza el sistema de archivos por default
+     */
+    private static String separador = System.getProperty("file.separator");
+    /***
+     * Ruta donde se estara escribiendo el log por default, la cual sería:
+     *  ContexAplicación/Logs/fecha_hoy/Log.txt
+     */
+    protected static String ruta = (Paths.get("").toAbsolutePath().normalize().toString() + separador + "Logs" + separador + convertir_fecha("dd-MM-YYYY") + separador + "Log.txt");
+    /***
+     * Contador que expresa la cantidad de veces que se a escrito en la ejecución actual de la aplicación
+     *
+     */
+    private static long logtext = 0;
 
     /***
      * Setea el NivelLog configurado en las propiedades del sistema, de no estar
@@ -129,7 +120,6 @@ class MethodsTxt {
             setRuta(rutaLog);
         }
     }
-
 
     /***
      * Setea el SizeLog configurado en las propiedades del sistema, de no estar
@@ -262,19 +252,14 @@ class MethodsTxt {
         }
     }
 
-
     /***
      * Obtiene la fecha actual en formato dd/MM/YYYY HH:MM:SS
      * @return Retorna una cadena de texto con la fecha obtenida
      */
     protected static String convertir_fecha() {
-
-
         DateTimeFormatter formater = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss SSS");
         String temp = formater.format(LocalDateTime.now());
         return temp;
-
-
     }
 
     /***
@@ -283,11 +268,8 @@ class MethodsTxt {
      * @return Retorna una cadena de texto con la fecha obtenida en el formato especificado.
      */
     private static String convertir_fecha(String formato) {
-
-
         DateTimeFormatter formater = DateTimeFormatter.ofPattern(formato);
         String temp = formater.format(LocalDateTime.now());
-
         return temp;
     }
 
@@ -317,38 +299,27 @@ class MethodsTxt {
         //Si la cadena es menor a 13, retornara 7 tabs
         if (tamaño < 13) {
             result = result + tab.repeat(7);
-
             //Si la cadena es menor a 17, retornara 6 tabs
         } else if (tamaño < 17) {
             result = result + tab.repeat(6);
-
             //Si la cadena es menor a 25, retornara 5 tabs
         } else if (tamaño < 25) {
             result = result + tab.repeat(5);
-
             //Si la cadena es menor a 29, retornara 4 tabs
         } else if (tamaño < 29) {
-
             result = result + tab.repeat(4);
-
             //Si la cadena es menor a 33, retornara 3 tabs
         } else if (tamaño < 33) {
             result = result + tab.repeat(3);
-
             //Si la cadena es menor a 37, retornara 2 tabs
         } else if (tamaño < 37) {
             result = result + tab.repeat(2);
-
             //Si la cadena es mayor a 36, retornara 2 tabs
         } else if (tamaño > 36) {
             result = result + tab.repeat(2);
-
         }
-
-
         return result;
     }
-
 
     /***
      * Verifica el tamaño del fichero de log actual, cuando este alcance los 5MB le asignara el nombre
@@ -366,18 +337,14 @@ class MethodsTxt {
                 BasicFileAttributes attributes = null;
                 String fechaformateada = "";
                 int numeroaleatorio = 0;
-
                 attributes = Files.readAttributes(logactual.toPath(), BasicFileAttributes.class);
                 //FileTime time = attributes.creationTime();
                 FileTime time = attributes.lastModifiedTime();
-
                 String pattern = "dd-MM-yyyy HH:mm:ss SS";
                 numeroaleatorio = (int) Math.floor(Math.random() * (9 - 0 + 1) + 0);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                 fechaformateada = simpleDateFormat.format(new Date(time.toMillis()));
                 //System.out.println( "La fecha y hora de creación del archivo es: " + fechaformateada );
-
-
                 //SimpleDateFormat  formatofecha = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                 //String fechalog=(formatofecha.format(logactual.lastModified())).replace(":","-").replace(" ", "_");
                 String fechalog = fechaformateada.replace(":", "-").replace(" ", "_") + numeroaleatorio;
@@ -422,12 +389,10 @@ class MethodsTxt {
                     com.josebran.LogsJB.LogsJB.debug("Crea el directorio donde almacenara el Log de la prueba: " + fichero.getParent());
                 }
             }
-
             /////Esta seccion se encarga de Crear y escribir en el Log/////
             //verificarSizeFichero();
             /*Si es un nuevo Test se ejecuta el siguiente codigo, tomando en cuenta que sea el primer
              * TestCase del Test actual*/
-
             //Si el fichero no Existe, lo creara y agregara el siguiente texto
             if (!fichero.exists()) {
                 BufferedWriter bw = new BufferedWriter(new FileWriter(fichero));
@@ -490,7 +455,6 @@ class MethodsTxt {
         }
     }
 
-
     /***
      * Obtiene la cantidad de veces que se a escrito en el Txt En la ejecución actual
      * @return Retorna la cantidad de veces que se a escrito en el Log.
@@ -514,8 +478,5 @@ class MethodsTxt {
                     "el log " + Logtext +
                     " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
-
-
 }

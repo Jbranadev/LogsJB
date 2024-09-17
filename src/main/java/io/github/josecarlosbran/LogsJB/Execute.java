@@ -16,7 +16,6 @@
 
 package io.github.josecarlosbran.LogsJB;
 
-
 import io.github.josecarlosbran.JBRestAPI.Enumeraciones.requestCode;
 import io.github.josecarlosbran.JBRestAPI.JBRestAPI;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
@@ -27,6 +26,7 @@ import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.json.JSONObject;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -47,48 +47,25 @@ import static io.github.josecarlosbran.LogsJB.MethodsTxt.*;
  */
 class Execute {
 
-    private JBRestAPI clienteJB;
-
-    private LogsJBDB log;
-
-    private LogsJBDB logPojo ;
-
-    private Boolean TaskisReady = true;
-
-
     /***
      * Lista que funciona como la cola de peticiones que llegan al Ejecutor
      */
     private static ListaMensajes listado = new ListaMensajes();
-
-
     /***
      * Se utiliza el patron Singleton, para asegurarnos que sea una unica instancia la que se encargue de
      * Llevar el control de los Logs
      */
     private static Execute instance = null;
-
+    private JBRestAPI clienteJB;
+    private LogsJBDB log;
+    private LogsJBDB logPojo;
+    private Boolean TaskisReady = true;
     /**
      * Ejecutor de Tareas asincronas
      */
     private ExecutorService executorPrincipal = Executors.newCachedThreadPool();
 
     private Execute() {
-        setearRuta();
-        setearNivelLog();
-        setearSizelLog();
-        setearWriteTxt();
-        setearWriteDB();
-        setearWriteRestAPI();
-        setearTipeAutenticación();
-        setearKeyLogRest();
-        setearUrlLogRest();
-    }
-
-    /**
-     * Recuperara las propiedades de LogsJB seteadas en las propiedades del sistema
-     */
-    protected void getLogsJBProperties() {
         setearRuta();
         setearNivelLog();
         setearSizelLog();
@@ -112,13 +89,27 @@ class Execute {
         return instance;
     }
 
-
     /***
      * Proporciona el acceso a la lista que sirve como cola de las peticiones
      * @return Retorna una lista de MensajeWrite, la cual lleva la información que se desea registrar en los Logs
      */
     protected static ListaMensajes getListado() {
         return listado;
+    }
+
+    /**
+     * Recuperara las propiedades de LogsJB seteadas en las propiedades del sistema
+     */
+    protected void getLogsJBProperties() {
+        setearRuta();
+        setearNivelLog();
+        setearSizelLog();
+        setearWriteTxt();
+        setearWriteDB();
+        setearWriteRestAPI();
+        setearTipeAutenticación();
+        setearKeyLogRest();
+        setearUrlLogRest();
     }
 
     /***
@@ -144,7 +135,7 @@ class Execute {
                     LogsJBDB log = new LogsJBDB();
                     log.createTable();
                     LogsJB.setTableDBExists(true);
-                    com.josebran.LogsJB.LogsJB.debug("Creo la tabla: "+log.getTableName());
+                    com.josebran.LogsJB.LogsJB.debug("Creo la tabla: " + log.getTableName());
                 }
             }
             Runnable EscritorPrincipal = () -> {
@@ -162,13 +153,11 @@ class Execute {
                     MensajeWrite mensajetemp = null;
                     mensajetemp = getListado().getDato();
                     //System.out.println("Mensaje en Execute: "+mensajetemp.getTexto()+" "+mensajetemp.getNivelLog());
-
                     String Mensaje = mensajetemp.getTexto();
                     NivelLog logtemporal = mensajetemp.getNivelLog();
                     String Clase = mensajetemp.getClase();
                     String Metodo = mensajetemp.getMetodo();
                     String fecha = mensajetemp.getFecha();
-
                     if (LogsJB.getWriteTxt()) {
                         writeLog(logtemporal, Mensaje, Clase, Metodo, fecha);
                     }
@@ -180,7 +169,6 @@ class Execute {
                     if (LogsJB.getWriteRestAPI()) {
                         writeRestAPI(logtemporal, Mensaje, Clase, Metodo, fecha);
                     }
-
                     //System.out.println("Cantidad de mensajes Por limpiar: "+getListado().getSize());
                     if (getListado().getSize() == 0) {
                         band = false;
@@ -196,7 +184,6 @@ class Execute {
         }
     }
 
-
     /**
      * Metodo encargado de almacenar los Logs en Bd's
      *
@@ -208,7 +195,6 @@ class Execute {
      */
     private void writeBD(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
         try {
-
             if (log == null) {
                 log = new LogsJBDB();
             }
@@ -229,7 +215,6 @@ class Execute {
         }
     }
 
-
     /**
      * Metodo encargado de almacenar los Logs en Bd's
      *
@@ -241,7 +226,7 @@ class Execute {
      */
     private void writeRestAPI(NivelLog logtemporal, String Mensaje, String Clase, String Metodo, String fecha) {
         try {
-            this.logPojo=this.log.obtenerInstanciaOfModel(this.log);
+            this.logPojo = this.log.obtenerInstanciaOfModel(this.log);
             if (Objects.isNull(this.clienteJB)) {
                 MultivaluedMap<String, Object> myHeaders = new MultivaluedHashMap<>();
                 myHeaders.add("Authorization", LogsJB.getTipeautentication() + getKeyLogRest());
@@ -254,6 +239,8 @@ class Execute {
             this.logPojo.setClase(Clase);
             this.logPojo.setMetodo(Metodo);
             this.logPojo.setFecha(fecha);
+            JSONObject object = new JSONObject(this.logPojo);
+            String jsonstring = object.toString();
             Response respuesta = this.clienteJB.post(Entity.entity(this.logPojo, MediaType.APPLICATION_JSON_TYPE));
             com.josebran.LogsJB.LogsJB.info("Resultado de enviar el Log al Endpoint es: " + respuesta);
             int codigorespuesta = respuesta.getStatus();
@@ -312,7 +299,6 @@ class Execute {
                     } catch (Exception e) {
                         com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de crear " +
                                 "la tabla de Log en BD's" + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-
                     }
                 }
                 //Asignamos los valores a almacenar
@@ -328,7 +314,6 @@ class Execute {
         } catch (Exception e) {
             com.josebran.LogsJB.LogsJB.fatal("Excepción capturada en el metodo encargado de" +
                     " envíar el Log al RestApi: " + getUrlLogRest() + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
-
         }
     }
 

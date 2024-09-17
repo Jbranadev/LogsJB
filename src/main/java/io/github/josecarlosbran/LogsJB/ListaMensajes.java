@@ -30,7 +30,6 @@ class ListaMensajes {
      */
     private List<MensajeWrite> mensajes;
 
-
     /**
      * Constructor por default
      */
@@ -53,11 +52,9 @@ class ListaMensajes {
      * retorna null.
      */
     protected synchronized MensajeWrite getDato() {
-
         MensajeWrite dato = mensajes.get(0);
         this.mensajes.remove(0);
         return dato;
-
     }
 
     /***
@@ -67,5 +64,4 @@ class ListaMensajes {
     protected synchronized int getSize() {
         return this.mensajes.size();
     }
-
 }

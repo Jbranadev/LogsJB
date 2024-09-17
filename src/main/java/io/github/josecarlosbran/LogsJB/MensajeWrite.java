@@ -14,7 +14,6 @@
  * limitaciones bajo la Licencia.
  */
 
-
 package io.github.josecarlosbran.LogsJB;
 
 import io.github.josecarlosbran.LogsJB.Numeracion.NivelLog;
@@ -42,7 +41,6 @@ class MensajeWrite {
      * Constructor por default de la clase escritora
      */
     protected MensajeWrite() {
-
     }
 
     /***
@@ -60,7 +58,6 @@ class MensajeWrite {
     protected void setTexto(String texto) {
         Texto = texto;
     }
-
 
     /***
      * Obtiene el NivelLog del Mensaje.

@@ -1,6 +1,5 @@
 package io.github.josecarlosbran.LogsJB;
 
-
 import io.github.josecarlosbran.JBSqlUtils.Anotations.ColumnDefined;
 import io.github.josecarlosbran.JBSqlUtils.DataBase.JBSqlUtils;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.Constraint;
@@ -8,8 +7,9 @@ import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataBase;
 import io.github.josecarlosbran.JBSqlUtils.Enumerations.DataType;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.DataBaseUndefind;
 import io.github.josecarlosbran.JBSqlUtils.Exceptions.PropertiesDBUndefined;
-import io.github.josecarlosbran.JBSqlUtils.Utilities.Column;
 import io.github.josecarlosbran.LogsJB.Numeracion.LogsJBProperties;
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbVisibility;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -19,7 +19,62 @@ import static io.github.josecarlosbran.JBSqlUtils.Utilities.UtilitiesJB.stringIs
 /**
  * Clase que permite el almacenamiento de los Logs en BD's
  */
+@JsonbVisibility(VisibilitySerializableModel.class)
+@Getter
+@Setter
 public class LogsJBDB extends JBSqlUtils {
+
+    @ColumnDefined(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY})
+    private Integer Id;
+    @ColumnDefined(name = "Texto", dataTypeSQL = DataType.VARCHAR)
+    private String Texto;
+    @ColumnDefined(name = "NivelLog", dataTypeSQL = DataType.VARCHAR)
+    private String NivelLog;
+    @ColumnDefined(name = "Clase", dataTypeSQL = DataType.VARCHAR)
+    private String Clase;
+    @JsonbProperty("Metodo")
+    @ColumnDefined(name = "Metodo", dataTypeSQL = DataType.VARCHAR)
+    private String Metodo;
+    @JsonbProperty("Fecha")
+    @ColumnDefined(name = "Fecha", dataTypeSQL = DataType.VARCHAR)
+    private String Fecha;
+
+    /**
+     * Constructor por default de la clase que se encarga de escribir los logs en BD's
+     *
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las propiedades de conexión necesarias para conectarse a la BD's especificada
+     */
+    public LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined {
+        super(false);
+        this.setDataBaseType(setearDBType());
+        this.setBD(setearBD());
+        this.setHost(setearHost());
+        this.setPort(setearPort());
+        this.setUser(setearUser());
+        this.setPassword(setearPassword());
+        this.setPropertisURL(setearPropertisUrl());
+    }
+
+    /**
+     * Constructor por default de la clase que se encarga de escribir los logs en BD's
+     *
+     * @param getPropetySystem Parametro que indica si obtendremos las variables del sistema desde las propiedades de JBSqlUtils
+     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de BD's a la cual se conectara el modelo.
+     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las propiedades de conexión necesarias para conectarse a la BD's especificada
+     */
+    public LogsJBDB(Boolean getPropetySystem) throws DataBaseUndefind, PropertiesDBUndefined {
+        super(false);
+        if (getPropetySystem) {
+            this.setDataBaseType(setearDBType());
+            this.setBD(setearBD());
+            this.setHost(setearHost());
+            this.setPort(setearPort());
+            this.setUser(setearUser());
+            this.setPassword(setearPassword());
+            this.setPropertisURL(setearPropertisUrl());
+        }
+    }
 
     /**
      * Setea el nombre de la Base de Datos global a la que se conectaran los modelos que no tengan una configuración
@@ -85,7 +140,6 @@ public class LogsJBDB extends JBSqlUtils {
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Host de la BD's global: " + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
 
     /**
@@ -103,9 +157,7 @@ public class LogsJBDB extends JBSqlUtils {
         } catch (Exception e) {
             LogsJB.fatal("Excepción disparada en el método que Setea el Tipo de BD's global: " + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
-
     }
-
 
     /**
      * Setea las propiedades extra de conexion url DB que pueden utilizar los modelos para conectarse a BD's
@@ -120,46 +172,6 @@ public class LogsJBDB extends JBSqlUtils {
             com.josebran.LogsJB.LogsJB.fatal("Excepción disparada al setear las propiedades extra de conexión con la cual el modelo se conectara a la BD's: " + " Trace de la Excepción : " + ExceptionUtils.getStackTrace(e));
         }
     }
-
-
-    /**
-     * Constructor por default de la clase que se encarga de escribir los logs en BD's
-     *
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las propiedades de conexión necesarias para conectarse a la BD's especificada
-     */
-    public LogsJBDB() throws DataBaseUndefind, PropertiesDBUndefined {
-        super(false);
-        this.setDataBaseType(setearDBType());
-        this.setBD(setearBD());
-        this.setHost(setearHost());
-        this.setPort(setearPort());
-        this.setUser(setearUser());
-        this.setPassword(setearPassword());
-        this.setPropertisURL(setearPropertisUrl());
-
-    }
-
-    /**
-     * Constructor por default de la clase que se encarga de escribir los logs en BD's
-     *
-     * @param getPropetySystem Parametro que indica si obtendremos las variables del sistema desde las propiedades de JBSqlUtils
-     * @throws DataBaseUndefind      Lanza esta excepción si en las propiedades del sistema no esta definida el tipo de BD's a la cual se conectara el modelo.
-     * @throws PropertiesDBUndefined Lanza esta excepción si en las propiedades del sistema no estan definidas las propiedades de conexión necesarias para conectarse a la BD's especificada
-     */
-    public LogsJBDB(Boolean getPropetySystem) throws DataBaseUndefind, PropertiesDBUndefined {
-        super(false);
-        if (getPropetySystem) {
-            this.setDataBaseType(setearDBType());
-            this.setBD(setearBD());
-            this.setHost(setearHost());
-            this.setPort(setearPort());
-            this.setUser(setearUser());
-            this.setPassword(setearPassword());
-            this.setPropertisURL(setearPropertisUrl());
-        }
-    }
-
 
     /**
      * Setea el tipo de BD's al cual se estara conectando este modelo.
@@ -198,7 +210,6 @@ public class LogsJBDB extends JBSqlUtils {
         return null;
     }
 
-
     /**
      * Setea el Host en el cual se encuentra la BD's a la cual se conectara.
      *
@@ -219,10 +230,8 @@ public class LogsJBDB extends JBSqlUtils {
             }
         }
         return host;
-
         //}
     }
-
 
     /**
      * Setea el Puerto en el cual esta escuchando la BD's a la cual nos vamos a conectar.
@@ -244,10 +253,8 @@ public class LogsJBDB extends JBSqlUtils {
             }
         }
         return port;
-
         //}
     }
-
 
     /**
      * Setea el Usuario de la BD's a la cual nos conectaremos
@@ -272,7 +279,6 @@ public class LogsJBDB extends JBSqlUtils {
         //}
     }
 
-
     /**
      * Setea el Nombre de la BD's a la cual nos conectaremos.
      *
@@ -291,7 +297,6 @@ public class LogsJBDB extends JBSqlUtils {
             throw new PropertiesDBUndefined("No se a seteado la BD's a la cual deseamos se pegue JBSqlUtils");
         }
         return DB;
-
         //}
     }
 
@@ -309,7 +314,6 @@ public class LogsJBDB extends JBSqlUtils {
             if (stringIsNullOrEmpty(password)) {
                 //Si la propiedad del sistema no esta definida, Lanza una Exepción
                 throw new PropertiesDBUndefined("No se a seteado la contraseña del usuario de la BD's a la cual deseamos se pegue JBSqlUtils");
-
             }
         }
         return password;
@@ -325,38 +329,4 @@ public class LogsJBDB extends JBSqlUtils {
         String property = System.getProperty(LogsJBProperties.LogsJBDBPROPERTIESURL.getProperty());
         return property;
     }
-
-
-    @Getter
-    @Setter
-    @ColumnDefined(name = "Id", dataTypeSQL = DataType.INTEGER, constraints = {Constraint.AUTO_INCREMENT, Constraint.PRIMARY_KEY})
-    private Integer Id ;
-
-    @Getter
-    @Setter
-    @ColumnDefined(name = "Texto", dataTypeSQL = DataType.VARCHAR)
-    private String Texto ;
-
-    @Getter
-    @Setter
-    @ColumnDefined(name = "NivelLog", dataTypeSQL = DataType.VARCHAR)
-    private String NivelLog ;
-
-    @Getter
-    @Setter
-    @ColumnDefined(name = "Clase", dataTypeSQL = DataType.VARCHAR)
-    private String Clase ;
-
-
-    @Getter
-    @Setter
-    @ColumnDefined(name = "Metodo", dataTypeSQL = DataType.VARCHAR)
-    private String Metodo ;
-
-    @Getter
-    @Setter
-    @ColumnDefined(name = "Fecha", dataTypeSQL = DataType.VARCHAR)
-    private String Fecha ;
-
-
 }

@@ -1,8 +1,9 @@
-# LogsJB :computer: 
-LogsJB es una librería java que permite la gestión de 
-registros de un programa en paralelo a la ejecución 
-del programa, lo cual la hace una potente herramienta para programas empresariales y personales 
-que exigen grandes niveles de rendimiento. 
+# LogsJB :computer:
+
+LogsJB es una librería java que permite la gestión de
+registros de un programa en paralelo a la ejecución
+del programa, lo cual la hace una potente herramienta para programas empresariales y personales
+que exigen grandes niveles de rendimiento.
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.josecarlosbran/LogsJB?logo=apachemaven&logoColor=%23C71A36&color=blue&link=https%3A%2F%2Fcentral.sonatype.com%2Fsearch%3Fq%3D%26namespace%3Dio.github.josecarlosbran%26name%3DLogsJB)](https://central.sonatype.com/artifact/io.github.josecarlosbran/LogsJB)
 [![javadoc](https://javadoc.io/badge2/io.github.josecarlosbran/LogsJB/javadoc.svg)](https://javadoc.io/doc/io.github.josecarlosbran/LogsJB)
@@ -12,25 +13,29 @@ que exigen grandes niveles de rendimiento.
 [![codecov](https://codecov.io/gh/Jbranadev/LogsJB/graph/badge.svg?token=YUDN4WNIIB)](https://codecov.io/gh/Jbranadev/LogsJB)
 
 * * *
-## Estado del Proyecto :atom:  
-LogsJB actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones, 
+
+## Estado del Proyecto :atom:
+
+LogsJB actualmente está en una etapa de desarrollo continuo, por lo cual sus observaciones y recomendaciones,
 son bienvenidas para mejorar el proyecto.
 ***
 
-## Configuración :gear: 
+## Configuración :gear:
+
 Utilizar LogsJB es muy fácil. LogsJB viene con una configuración por default.
 
 ### Configuración por Default de LogsJB
+
 - Los registros se almacenan en ContextRoute/Logs/fecha_actual/Log.txt
 
 Donde:
 
-ContextRoute es la ruta del programa actual en ejecución. 
+ContextRoute es la ruta del programa actual en ejecución.
 
 Logs es una carpeta creada en el directorio de la aplicación
 En el cual se crea automáticamente una carpeta por cada día en el que se crea un Log.txt.
 
-- El tamaño máximo de un log es de 25Mb 
+- El tamaño máximo de un log es de 25Mb
 
 Al superarse el tamaño máximo por default de Log.txt, se modificará el nombre de este a la siguiente notación
 Log_dd-MM-YYYY_HH-MM-SSS.txt y se seguirán escribiendo los registros en Log.txt
@@ -54,11 +59,12 @@ estas cuatro columnas son:
 | Fecha y Hora | Usuario | Clase | Método |
 |--------------|---------|-------|--------|
 
-Donde: 
+Donde:
 
 Fecha y Hora, es el momento exacto en el que se llamó la escritura del registro.
 
-Usuario, es el usuario actual del programa, la librería por default coloca el usuario del sistema operativo, pero este puede
+Usuario, es el usuario actual del programa, la librería por default coloca el usuario del sistema operativo, pero este
+puede
 ser modificado de acuerdo a la necesidad del usuario de la librería.
 
 Clase, es la dirección completa de la clase a la cual pertenece el método que llamo a la escritura del registro.
@@ -72,7 +78,8 @@ Mientras que las últimas dos columnas indican lo siguiente:
 
 Donde:
 
-Nivel Log, índica el tipo de registro que es. Los tipos de registro disponibles son: **Trace, Debug, Info, Warning, Error y Fatal**.
+Nivel Log, índica el tipo de registro que es. Los tipos de registro disponibles son: **Trace, Debug, Info, Warning,
+Error y Fatal**.
 
 Mensaje, es el Mensaje que el usuario índico que quería registrar.
 ***
@@ -84,6 +91,7 @@ LogsJB puede ser configurada de acuerdo a las necesidades de la implementación 
 - Establecer que el Log se almacene en una BD's.
 
 Usted puede configurar LogsJB para que los registros se almacenen en una tabla de BD's.
+
 ~~~
 /**
  * Setea la bandera que índica a LogsJB si se escribirá el log en BD's
@@ -114,6 +122,7 @@ LogsJBDB.setPropertisUrlConexionGlobal("PropetiesURLConexión");
 - Establecer que el Log se envíe a un RestAPI.
 
 Usted puede configurar LogsJB para que los registros sean enviados a un RestAPI.
+
 ~~~
 /**
  * Setea la bandera que índica si se envíaran los logs a un RestAPI
@@ -132,10 +141,10 @@ setUrlLogRest("http://localhost:8080/WebServicesPrueba/Logs");
 setTipeautentication(typeAutentication.BEARER);
 ~~~
 
-
 - Establecer que el Log se registre en un archivo txt.
 
 Usted puede configurar LogsJB para que los registros sean estampados en un archivo de texto.
+
 ~~~
 /**
  * Setea la bandera que índica a LogsJB si se escribirá el log en el archivo TXT
@@ -145,10 +154,10 @@ Usted puede configurar LogsJB para que los registros sean estampados en un archi
 setWriteTxt(true);
 ~~~
 
-
 - Modificar la ruta de almacenamiento de los registros.
 
 Usted puede modificar la ruta de almacenamiento de los registros de su implementación de la siguiente manera.
+
 ~~~
 /**
  * Setea la ruta en la cual se desea que escriba el Log.
@@ -157,10 +166,10 @@ Usted puede modificar la ruta de almacenamiento de los registros de su implement
 LogsJB.setRuta(Ruta);
 ~~~
 
-
 - Modificar el tamaño máximo que puede tener su archivo de registros.
 
 Usted puede modificar el tamaño que desea que tenga cada archivo de registros de su implementación.
+
 ~~~
 /***
  * Setea el tamaño maximo para el archivo Log de la aplicación actual.
@@ -176,8 +185,8 @@ Usted puede modificar el tamaño que desea que tenga cada archivo de registros d
 LogsJB.setSizeLog(SizeLog.Little_Little);
 ~~~
 
-
 - Modificar el grado de registros que se estarán reportando.
+
 ~~~
 /***
  * Setea el NivelLog desde el cual deseamos se escriba en el Log de la aplicación actual.
@@ -194,6 +203,7 @@ LogsJB.setGradeLog(NivelLog.INFO);
 ~~~
 
 - Modificar el usuario que se graba en el registro.
+
 ~~~
 /***
  * Setea el nombre del usuario del sistema sobre el cual corre la aplicación
@@ -201,11 +211,14 @@ LogsJB.setGradeLog(NivelLog.INFO);
  */
 LogsJB.setUsuario(Usuario);
 ~~~
+
 * * *
 
 ## ¿Cómo usar LogsJB?
+
 Usar LogsJB es más fácil que hacer un llamado a System.out.println(mensaje), ya que al llamar a los métodos de registro
-de LogsJB se escribe el mensaje en la salida de la terminal del programa y en el archivo Log.txt, con menos esfuerzo del necesario
+de LogsJB se escribe el mensaje en la salida de la terminal del programa y en el archivo Log.txt, con menos esfuerzo del
+necesario
 para hacer un System.out.println(mensaje).
 
 ~~~
@@ -240,10 +253,13 @@ Salida en Log.txt
 
 
 * * *
+
 ## ¿Cómo Obtener LogsJB para usarlo en mi proyecto?
+
 Puedes obtener la librería LogsJB de la siguiente manera
 
-Maven 
+Maven
+
 ~~~
 <dependency>
     <groupId>io.github.josecarlosbran</groupId>
@@ -253,22 +269,24 @@ Maven
 ~~~
 
 Gradle
+
 ~~~
 implementation 'io.github.josecarlosbran:logsjb:0.6.3'
 ~~~
 
-Para mayor información sobre como descargar LogsJB desde otros 
+Para mayor información sobre como descargar LogsJB desde otros
 administradores de paquetes, puedes ir al siguiente Link
 [LogsJB](https://search.maven.org/artifact/io.github.josecarlosbran/logsjb)
 
 ***
 
-## Licencia :balance_scale: 
+## Licencia :balance_scale:
+
 LogsJB es una librería open source desarrollada por José Bran, para la administración
 de los registros de un programa, con licencia de Apache License, Versión 2.0;
 
 No puede usar esta librería excepto de conformidad con la Licencia.
-Puede obtener una copia de la Licencia en http://www.apache.org/licenses/LICENSE-2.0 
+Puede obtener una copia de la Licencia en http://www.apache.org/licenses/LICENSE-2.0
 
 A menos que lo exija la ley aplicable o se acuerde por escrito, el software
 distribuido bajo la Licencia se distribuye "TAL CUAL",
